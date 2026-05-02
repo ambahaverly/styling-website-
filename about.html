@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Amba Haverly — Bespoke Personal Styling</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fafaf8;
+      --gold: #c9a84c;
+      --gold-light: #e8d5a3;
+      --gold-dark: #8a6e2f;
+      --grey: #6b6b6b;
+      --light-grey: #f0eeea;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Montserrat', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--black); font-family: var(--font-body); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 48px;
+      background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .nav-logo img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+    .nav-logo-text { display: flex; flex-direction: column; }
+    .nav-logo-name { font-family: var(--font-display); font-size: 16px; font-weight: 400; color: var(--white); letter-spacing: 0.12em; }
+    .nav-logo-sub { font-size: 9px; font-weight: 300; color: var(--gold); letter-spacing: 0.25em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a { font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(250,250,248,0.75); text-decoration: none; transition: color 0.3s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-cta { font-size: 9px !important; font-weight: 600 !important; letter-spacing: 0.22em !important; color: var(--black) !important; background: var(--gold); padding: 10px 22px; text-decoration: none; transition: background 0.3s !important; }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      position: relative; height: 70vh; min-height: 520px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      margin-top: 0;
+    }
+    .page-hero-left {
+      background: var(--black);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 80px 72px;
+      position: relative;
+    }
+    .page-hero-left::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .page-eyebrow {
+      font-size: 9px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+      opacity: 0; animation: fadeUp 0.9s 0.3s forwards;
+    }
+    .page-eyebrow::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold); }
+    .page-title {
+      font-family: var(--font-display); font-size: clamp(44px, 5.5vw, 80px);
+      font-weight: 300; line-height: 1.05; color: var(--white);
+      opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+    }
+    .page-title em { font-style: italic; color: var(--gold-light); }
+    .page-hero-quote {
+      font-family: var(--font-display); font-size: 15px; font-style: italic;
+      font-weight: 300; color: rgba(250,250,248,0.5); line-height: 1.8;
+      max-width: 360px; margin-top: 28px; padding-top: 28px;
+      border-top: 1px solid rgba(201,168,76,0.25);
+      opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
+    }
+    .page-hero-right { position: relative; overflow: hidden; }
+    .page-hero-right img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      transform: scale(1.05); animation: zoomOut 1.8s forwards;
+    }
+    .page-hero-right-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(10,10,10,0.3) 0%, transparent 40%);
+    }
+
+    /* ── INTRO SPLIT ── */
+    .intro-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .intro-split-img {
+      position: relative; overflow: hidden; min-height: 560px;
+    }
+    .intro-split-img img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top;
+      transition: transform 0.8s ease;
+    }
+    .intro-split-img:hover img { transform: scale(1.04); }
+    .intro-split-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.3) 0%, transparent 50%);
+    }
+    .intro-split-content {
+      padding: 88px 72px;
+      background: var(--light-grey);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    .section-label {
+      font-size: 9px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold); }
+    .section-title {
+      font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 300; line-height: 1.15; color: var(--black); margin-bottom: 28px;
+    }
+    .section-title em { font-style: italic; color: var(--gold-dark); }
+    .section-title.light { color: var(--white); }
+    .section-title.light em { color: var(--gold-light); }
+    .body-text {
+      font-size: 12px; font-weight: 300; line-height: 2.1;
+      color: var(--grey); margin-bottom: 18px; letter-spacing: 0.03em;
+    }
+    .body-text.light { color: rgba(250,250,248,0.62); }
+
+    /* ── CREDENTIALS ── */
+    .credentials-section {
+      background: var(--black);
+      padding: 100px 80px;
+    }
+    .credentials-inner {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 100px; align-items: start;
+    }
+    .credentials-left { position: sticky; top: 120px; }
+    .credentials-signature {
+      font-family: var(--font-display); font-size: 52px; font-style: italic;
+      font-weight: 300; color: var(--white); margin-top: 32px;
+      border-top: 1px solid rgba(201,168,76,0.25); padding-top: 28px;
+    }
+    .credentials-sub {
+      font-size: 10px; font-weight: 300; letter-spacing: 0.15em;
+      color: var(--gold); text-transform: uppercase; margin-top: 8px;
+    }
+
+    .cred-list { display: flex; flex-direction: column; gap: 0; }
+    .cred-item {
+      display: grid; grid-template-columns: 80px 1fr;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 32px 0;
+      transition: border-color 0.3s;
+    }
+    .cred-item:hover { border-color: rgba(201,168,76,0.3); }
+    .cred-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .cred-year {
+      font-family: var(--font-display); font-size: 13px; font-weight: 300;
+      color: var(--gold); letter-spacing: 0.05em; padding-top: 4px;
+    }
+    .cred-content {}
+    .cred-title {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.06em;
+      color: var(--white); margin-bottom: 6px; text-transform: uppercase;
+    }
+    .cred-org {
+      font-family: var(--font-display); font-size: 18px; font-style: italic;
+      color: var(--gold-light); margin-bottom: 10px;
+    }
+    .cred-desc {
+      font-size: 11px; font-weight: 300; line-height: 1.9;
+      color: rgba(250,250,248,0.45); letter-spacing: 0.03em;
+    }
+
+    /* ── PHILOSOPHY ── */
+    .philosophy-section {
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .philosophy-content {
+      padding: 88px 72px;
+      background: var(--white);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .philosophy-img {
+      position: relative; overflow: hidden; min-height: 580px;
+    }
+    .philosophy-img img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top;
+      transition: transform 0.8s ease;
+    }
+    .philosophy-img:hover img { transform: scale(1.04); }
+
+    .pull-quote {
+      font-family: var(--font-display); font-size: clamp(22px, 2.5vw, 32px);
+      font-style: italic; font-weight: 300; line-height: 1.5;
+      color: var(--black); margin: 36px 0;
+      padding-left: 24px;
+      border-left: 2px solid var(--gold);
+    }
+
+    /* ── STATS ── */
+    .stats-bar {
+      background: var(--gold);
+      padding: 56px 80px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid rgba(10,10,10,0.15);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-display); font-size: clamp(40px, 5vw, 64px);
+      font-weight: 300; color: var(--black); line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.25em;
+      text-transform: uppercase; color: rgba(10,10,10,0.6);
+    }
+
+    /* ── PERSONAL SECTION ── */
+    .personal-section {
+      background: var(--light-grey);
+      padding: 100px 80px;
+    }
+    .personal-inner {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px;
+      margin-top: 64px;
+    }
+    .personal-card {
+      background: var(--white); padding: 44px 36px;
+      border-top: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .personal-card:hover { border-color: var(--gold); }
+    .personal-icon {
+      font-size: 28px; margin-bottom: 20px; opacity: 0.7;
+    }
+    .personal-title {
+      font-family: var(--font-display); font-size: 22px; font-weight: 400;
+      color: var(--black); margin-bottom: 14px; letter-spacing: 0.03em;
+    }
+    .personal-text {
+      font-size: 11px; font-weight: 300; line-height: 1.95;
+      color: var(--grey); letter-spacing: 0.03em;
+    }
+
+    /* ── FASHION WEEK ── */
+    .fw-section {
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .fw-img {
+      position: relative; overflow: hidden; min-height: 520px;
+    }
+    .fw-img img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top;
+      transition: transform 0.8s ease;
+    }
+    .fw-img:hover img { transform: scale(1.04); }
+    .fw-content {
+      background: var(--black); padding: 80px 72px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+    .tag {
+      font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(201,168,76,0.35); padding: 7px 14px;
+    }
+
+    /* ── CTA ── */
+    .about-cta {
+      position: relative; overflow: hidden;
+      min-height: 460px; display: flex; align-items: center; justify-content: center;
+    }
+    .about-cta-bg { position: absolute; inset: 0; }
+    .about-cta-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .about-cta-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,10,10,0.78);
+    }
+    .about-cta-content {
+      position: relative; z-index: 2;
+      text-align: center; max-width: 600px; padding: 0 40px;
+    }
+    .about-cta-content .section-label { justify-content: center; }
+    .about-cta-content .section-label::before { display: none; }
+    .btn-primary {
+      display: inline-block; font-size: 9px; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--black); background: var(--gold);
+      padding: 16px 36px; text-decoration: none; transition: all 0.3s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-ghost-light {
+      display: inline-block; font-size: 9px; font-weight: 500;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(250,250,248,0.7); border: 1px solid rgba(250,250,248,0.3);
+      padding: 15px 36px; text-decoration: none; transition: all 0.3s; margin-left: 12px;
+    }
+    .btn-ghost-light:hover { background: rgba(250,250,248,0.08); color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black); padding: 64px 80px 40px;
+      border-top: 1px solid rgba(201,168,76,0.2);
+    }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+    .footer-brand p { font-size: 11px; font-weight: 300; line-height: 1.9; color: rgba(250,250,248,0.45); max-width: 280px; }
+    .footer-col h4 { font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .footer-col a, .footer-col p { display: block; font-size: 11px; font-weight: 300; color: rgba(250,250,248,0.5); text-decoration: none; margin-bottom: 10px; transition: color 0.3s; letter-spacing: 0.03em; }
+    .footer-col a:hover { color: var(--gold-light); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .footer-bottom p { font-size: 10px; color: rgba(250,250,248,0.3); letter-spacing: 0.08em; }
+    .footer-bottom-logo img { width: 36px; height: 36px; border-radius: 50%; opacity: 0.6; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes zoomOut { from { transform: scale(1.05); } to { transform: scale(1); } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .page-hero { grid-template-columns: 1fr; height: auto; }
+      .page-hero-left { padding: 120px 32px 60px; }
+      .page-hero-right { height: 55vw; }
+      .intro-split, .philosophy-section, .fw-section { grid-template-columns: 1fr; }
+      .intro-split-img, .philosophy-img, .fw-img { min-height: 55vw; }
+      .intro-split-content, .philosophy-content, .fw-content { padding: 60px 32px; }
+      .credentials-section { padding: 80px 32px; }
+      .credentials-inner { grid-template-columns: 1fr; gap: 48px; }
+      .credentials-left { position: static; }
+      .cred-item { grid-template-columns: 60px 1fr; }
+      .stats-bar { grid-template-columns: 1fr 1fr; gap: 40px; padding: 48px 32px; }
+      .stat-item { border-right: none; }
+      .personal-section { padding: 80px 32px; }
+      .personal-inner { grid-template-columns: 1fr; gap: 3px; }
+      .about-cta-content { padding: 0 24px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      footer { padding: 48px 32px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="/Users/amberhaverly/Downloads/2.jpg" alt="Amba Haverly Logo" />
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">Amba Haverly</span>
+        <span class="nav-logo-sub">Bespoke Personal Styling</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Book a Consultation</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-left">
+      <p class="page-eyebrow">The Stylist</p>
+      <h1 class="page-title">Meet<br><em>Amba Haverly</em></h1>
+      <p class="page-hero-quote">
+        "Fashion is not what you wear — it is how you present yourself to the world. My job is to help you do that with complete intention and confidence."
+      </p>
+    </div>
+    <div class="page-hero-right">
+      <img src="6B3B3D4B-4368-4080-9035-79FC7AF81675.JPG" alt="Amba Haverly" />
+      <div class="page-hero-right-overlay"></div>
+    </div>
+  </section>
+
+  <!-- INTRO SPLIT -->
+  <section class="intro-split">
+    <div class="intro-split-img">
+      <img src="EB16A38A-DF61-45B7-B8D0-415E7BE1629B.JPG" alt="Amba at work" />
+      <div class="intro-split-img-overlay"></div>
+    </div>
+    <div class="intro-split-content">
+      <p class="section-label">The Beginning</p>
+      <h2 class="section-title">A Passion Born<br><em>at Eighteen</em></h2>
+      <p class="body-text">
+        My journey into styling began at just 18, when I took my first role as a stylist's assistant and instantly fell in love — not with fashion as a concept, but with the deeply personal work of transforming how someone sees themselves.
+      </p>
+      <p class="body-text">
+        Working closely with leading brands and collaborating with designers, I developed an obsession with the intersection of colour, form and identity. That early experience ignited a passion that led me to enrol in the prestigious Condé Nast Vogue Fashion Styling intensive — an eight-week course where I trained in both commercial and editorial styling techniques.
+      </p>
+      <p class="body-text">
+        After years assisting a leading London personal stylist and cultivating relationships across fashion weeks in Europe, luxury styling lounges in London and the UAE, I knew it was time to build something entirely my own.
+      </p>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section class="credentials-section">
+    <div class="credentials-inner">
+      <div class="credentials-left">
+        <p class="section-label" style="color: var(--gold);">Experience &amp; Training</p>
+        <h2 class="section-title light">Built on<br><em>Real Expertise</em></h2>
+        <p class="body-text light">
+          Every recommendation I make, every palette I identify, every session I lead — is grounded in formal training, industry experience and an unwavering commitment to getting it right for you.
+        </p>
+        <div class="credentials-signature">Amba Haverly</div>
+        <p class="credentials-sub">Personal Stylist · Chelsea, London</p>
+      </div>
+
+      <div class="cred-list">
+        <div class="cred-item">
+          <span class="cred-year">2018</span>
+          <div class="cred-content">
+            <p class="cred-title">Stylist Assistant</p>
+            <p class="cred-org">Leading London Personal Stylist</p>
+            <p class="cred-desc">Began career assisting a leading London personal stylist — working directly with clients, managing shoots and developing expertise across wardrobe styling, personal shopping and image consultation.</p>
+          </div>
+        </div>
+        <div class="cred-item">
+          <span class="cred-year">Training</span>
+          <div class="cred-content">
+            <p class="cred-title">Fashion Styling Intensive</p>
+            <p class="cred-org">Condé Nast · Vogue</p>
+            <p class="cred-desc">Completed the prestigious Vogue Fashion Styling intensive — an eight-week programme covering commercial and editorial styling, art direction, colour theory and professional styling techniques.</p>
+          </div>
+        </div>
+        <div class="cred-item">
+          <span class="cred-year">Current</span>
+          <div class="cred-content">
+            <p class="cred-title">Member, The Stylist Club</p>
+            <p class="cred-org">Harvey Nichols · London</p>
+            <p class="cred-desc">An active member of the exclusive Harvey Nichols Stylist Club — providing bespoke personal styling services within one of London's most prestigious luxury department stores.</p>
+          </div>
+        </div>
+        <div class="cred-item">
+          <span class="cred-year">Current</span>
+          <div class="cred-content">
+            <p class="cred-title">Freelance Personal Stylist</p>
+            <p class="cred-org">Selfridges · London</p>
+            <p class="cred-desc">Freelance stylist at Selfridges Oxford Street, delivering curated in-store styling sessions within one of the world's most iconic retail destinations.</p>
+          </div>
+        </div>
+        <div class="cred-item">
+          <span class="cred-year">Ongoing</span>
+          <div class="cred-content">
+            <p class="cred-title">Colour &amp; Image Specialist</p>
+            <p class="cred-org">14 Sub-Season Colour Theory</p>
+            <p class="cred-desc">Specialist in seasonal colour analysis across the 14 colour sub-seasons and professional body type analysis — helping clients unlock the palette that makes their complexion luminous and their style effortless.</p>
+          </div>
+        </div>
+        <div class="cred-item">
+          <span class="cred-year">Global</span>
+          <div class="cred-content">
+            <p class="cred-title">International Styling</p>
+            <p class="cred-org">London · Europe · UAE · Worldwide</p>
+            <p class="cred-desc">With contacts cultivated across European fashion weeks and luxury styling lounges in London and the UAE, I work with clients worldwide — both in-person and through bespoke virtual styling sessions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy-section">
+    <div class="philosophy-content">
+      <p class="section-label">My Approach</p>
+      <h2 class="section-title">Style is How You<br><em>Brand Yourself</em></h2>
+      <p class="body-text">
+        I have always believed that fashion is not about following trends — it is about understanding yourself. Your colour season, your body type, your lifestyle, your ambitions. When these things align in what you wear, something remarkable happens. You stop getting dressed and start showing up.
+      </p>
+      <div class="pull-quote">
+        "Knowing your colour palette is the key to understanding your style identity. It changes everything."
+      </div>
+      <p class="body-text">
+        I specialise in modest fashion and colour and image consultancy, because I believe every client deserves to be dressed in a way that feels true to them — not to a trend cycle. Whether we are editing your wardrobe, shopping together at Harvey Nichols, or connecting online from across the world, my approach is always the same: deeply personal, deeply considered, and entirely focused on you.
+      </p>
+    </div>
+    <div class="philosophy-img">
+      <img src="IMG_8757.JPG" alt="Amba Haverly styling" />
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">14</div>
+      <div class="stat-label">Colour Sub-Seasons</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Luxury Retail Partners</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Wardrobes Transformed</div>
+    </div>
+  </div>
+
+  <!-- PERSONAL -->
+  <section class="personal-section">
+    <div style="max-width: 600px;">
+      <p class="section-label">Beyond the Rails</p>
+      <h2 class="section-title">The Person<br><em>Behind the Styling</em></h2>
+    </div>
+    <div class="personal-inner">
+      <div class="personal-card">
+        <div class="personal-icon">✍︎</div>
+        <h3 class="personal-title">The Writer</h3>
+        <p class="personal-text">Long before I was a stylist, I was a writer — or at least, I dreamt of being one. Fashion gives me endless things to say, and one day you might just find me with a column or a podcast. The obsession with clothes and culture never really switches off.</p>
+      </div>
+      <div class="personal-card">
+        <div class="personal-icon">✈︎</div>
+        <h3 class="personal-title">The Traveller</h3>
+        <p class="personal-text">I am endlessly grateful that travel has become a genuine part of my work — from fashion weeks across Europe to styling sessions in the UAE. Every city teaches me something new about how people dress, present themselves and express who they are.</p>
+      </div>
+      <div class="personal-card">
+        <div class="personal-icon">◈</div>
+        <h3 class="personal-title">The Obsessive</h3>
+        <p class="personal-text">Colour theory, body analysis, the relationship between what we wear and how we feel — these are not just my work, they are a genuine obsession. I am always learning, always studying, always asking why certain things make people glow and others simply do not.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FASHION WEEK -->
+  <section class="fw-section">
+    <div class="fw-img">
+      <img src="IMG_0382.jpg" alt="London Fashion Week" onerror="this.src='IMG_2550.jpg'" />
+    </div>
+    <div class="fw-content">
+      <p class="section-label" style="color: var(--gold);">In The Industry</p>
+      <h2 class="section-title light">From Fashion Weeks<br>to <em>Front Rows</em></h2>
+      <p class="body-text light">
+        My career has taken me to fashion weeks across Europe, into the workrooms of designers, and onto the sets of editorial shoots for musical artists and fashion creatives. These experiences are not decorative — they directly inform the quality of work I bring to every single client session.
+      </p>
+      <p class="body-text light">
+        Having styled for artists including Sophie Castillo and worked with editorial clients such as Maddie Lainchbury, I understand both the high-pressure world of creative production and the deeply personal work of one-to-one styling.
+      </p>
+      <div class="tag-list">
+        <span class="tag">London Fashion Week</span>
+        <span class="tag">Editorial</span>
+        <span class="tag">Music Artists</span>
+        <span class="tag">Harvey Nichols</span>
+        <span class="tag">Selfridges</span>
+        <span class="tag">UAE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="about-cta">
+    <div class="about-cta-bg">
+      <img src="IMG_8757.JPG" alt="Amba Haverly" />
+    </div>
+    <div class="about-cta-overlay"></div>
+    <div class="about-cta-content">
+      <p class="section-label">Begin Your Journey</p>
+      <h2 class="section-title light" style="margin-bottom: 20px;">Ready to Work<br><em>Together?</em></h2>
+      <p class="body-text light" style="text-align:center; margin-bottom: 40px;">
+        Whether you're starting from scratch or simply ready for something new — I would love to be part of your style story.
+      </p>
+      <div>
+        <a href="contact.html" class="btn-primary">Book a Consultation</a>
+        <a href="services.html" class="btn-ghost-light">View Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span style="font-family:'Cormorant Garamond',serif; color:#fafaf8; font-size:20px; display:block; margin-bottom:4px;">Amba Haverly</span>
+        <span style="font-size:9px; font-weight:300; color:#c9a84c; letter-spacing:0.25em; text-transform:uppercase; display:block; margin-bottom:20px;">Bespoke Personal Styling</span>
+        <p>Helping individuals discover their true style identity through colour, form and a deeply personal approach to dressing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="services.html#colour-analysis">Colour Analysis</a>
+        <a href="services.html#wardrobe-edit">Wardrobe Edit</a>
+        <a href="services.html#instore-styling">In-Store Styling</a>
+        <a href="services.html#online-consultation">Online Consultation</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>155 Draycott Avenue</p>
+        <p>Chelsea, London</p>
+        <p>Available Worldwide</p>
+        <a href="contact.html" style="color:#c9a84c; margin-top:8px;">Get in Touch →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Amba Haverly. All rights reserved.</p>
+      <div class="footer-bottom-logo"><img src="2.jpeg" alt="AH" /></div>
+      <p>Chelsea, London · Worldwide</p>
+    </div>
+  </footer>
+
+</body>
+</html>

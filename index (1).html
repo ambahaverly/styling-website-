@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amba Haverly | Bespoke Personal Styling</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fafaf8;
+      --gold: #c9a84c;
+      --gold-light: #e8d5a3;
+      --gold-dark: #8a6e2f;
+      --grey: #6b6b6b;
+      --light-grey: #f0eeea;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Montserrat', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 48px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-logo-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.12em;
+    }
+
+    .nav-logo-sub {
+      font-size: 9px;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.75);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black) !important;
+      background: var(--gold);
+      padding: 10px 22px;
+      text-decoration: none;
+      transition: background 0.3s !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      position: relative;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 80px 64px;
+      z-index: 2;
+    }
+
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 5.5vw, 82px);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-desc {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 2;
+      letter-spacing: 0.05em;
+      color: rgba(250,250,248,0.65);
+      max-width: 380px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.7s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.9s forwards;
+    }
+
+    .btn-primary {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      padding: 16px 36px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.7);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201,168,76,0.4);
+      padding-bottom: 3px;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .hero-location {
+      position: absolute;
+      bottom: 40px;
+      left: 64px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.4);
+      opacity: 0;
+      animation: fadeUp 0.9s 1.1s forwards;
+    }
+
+    .hero-location::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transform: scale(1.05);
+      animation: zoomOut 1.8s 0s forwards;
+    }
+
+    .hero-right-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(10,10,10,0.3) 0%, transparent 40%),
+                  linear-gradient(to top, rgba(10,10,10,0.4) 0%, transparent 40%);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      z-index: 3;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 8px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.5);
+      writing-mode: vertical-lr;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--gold);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-inner {
+      display: inline-flex;
+      gap: 0;
+      animation: marquee 28s linear infinite;
+    }
+
+    .marquee-item {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--black);
+      padding: 0 48px;
+    }
+
+    .marquee-dot {
+      color: rgba(10,10,10,0.4);
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+    }
+
+    .intro-images {
+      position: relative;
+      background: var(--light-grey);
+      overflow: hidden;
+    }
+
+    .intro-img-main {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .intro-img-inset {
+      position: absolute;
+      bottom: 40px;
+      right: -20px;
+      width: 220px;
+      height: 290px;
+      object-fit: cover;
+      object-position: top;
+      border: 6px solid var(--white);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+
+    .intro-content {
+      padding: 100px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--white);
+    }
+
+    .section-label {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 3.5vw, 54px);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--black);
+      margin-bottom: 32px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold-dark);
+    }
+
+    .intro-text {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 2;
+      color: var(--grey);
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+    }
+
+    .intro-signature {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-style: italic;
+      color: var(--black);
+      margin-top: 36px;
+      border-top: 1px solid var(--gold-light);
+      padding-top: 24px;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      background: var(--black);
+      padding: 120px 80px;
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .services-header .section-title {
+      color: var(--white);
+    }
+
+    .services-header .section-label {
+      justify-content: center;
+    }
+
+    .services-header .section-label::before { display: none; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 60px;
+    }
+
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.7s ease;
+    }
+
+    .service-card:hover img { transform: scale(1.06); }
+
+    .service-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.2) 60%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 36px 32px;
+      transition: background 0.4s;
+    }
+
+    .service-card:hover .service-overlay {
+      background: linear-gradient(to top, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.5) 60%, rgba(10,10,10,0.1) 100%);
+    }
+
+    .service-num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 300;
+      color: rgba(201,168,76,0.3);
+      line-height: 1;
+      margin-bottom: 12px;
+      transition: color 0.4s;
+    }
+
+    .service-card:hover .service-num { color: rgba(201,168,76,0.6); }
+
+    .service-name {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .service-desc {
+      font-size: 10px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(250,250,248,0.55);
+      letter-spacing: 0.05em;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .service-card:hover .service-desc { max-height: 80px; }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      margin-top: 16px;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .service-card:hover .service-link { opacity: 1; }
+
+    .service-link::after {
+      content: '→';
+      transition: transform 0.3s;
+    }
+
+    .service-link:hover::after { transform: translateX(4px); }
+
+    .services-cta {
+      text-align: center;
+    }
+
+    /* ── GALLERY STRIP ── */
+    .gallery-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 3px;
+      height: 280px;
+    }
+
+    .gallery-strip-item {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-strip-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.6s ease;
+      filter: grayscale(20%);
+    }
+
+    .gallery-strip-item:hover img {
+      transform: scale(1.08);
+      filter: grayscale(0%);
+    }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial-section {
+      padding: 120px 80px;
+      background: var(--light-grey);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .testimonial-left .section-title {
+      font-size: clamp(28px, 3vw, 44px);
+    }
+
+    .testimonial-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      padding: 36px 32px;
+      border-left: 2px solid var(--gold);
+      position: relative;
+    }
+
+    .testimonial-quote {
+      font-family: var(--font-display);
+      font-size: 56px;
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 0.5;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-text {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--grey);
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .testimonial-author {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+
+    /* ── PROCESS ── */
+    .process {
+      padding: 120px 80px;
+      background: var(--white);
+    }
+
+    .process-header {
+      max-width: 600px;
+      margin-bottom: 80px;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(to right, var(--gold-light), var(--gold), var(--gold-light));
+    }
+
+    .process-step {
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--gold);
+      margin: 0 auto 28px;
+      background: var(--white);
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--black);
+      margin-bottom: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .step-text {
+      font-size: 11px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--grey);
+      letter-spacing: 0.03em;
+    }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      position: relative;
+      height: 520px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .final-cta-bg {
+      position: absolute;
+      inset: 0;
+    }
+
+    .final-cta-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    .final-cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10,10,10,0.72);
+    }
+
+    .final-cta-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 640px;
+      padding: 0 40px;
+    }
+
+    .final-cta-content .section-label {
+      justify-content: center;
+    }
+
+    .final-cta-content .section-label::before { display: none; }
+
+    .final-cta-content .section-title {
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .final-cta-sub {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 2;
+      color: rgba(250,250,248,0.65);
+      margin-bottom: 44px;
+      letter-spacing: 0.04em;
+    }
+
+    .final-cta-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      padding: 64px 80px 40px;
+      border-top: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand .nav-logo-name {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .footer-brand .nav-logo-sub {
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .footer-brand p {
+      font-size: 11px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(250,250,248,0.45);
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .footer-col a,
+    .footer-col p {
+      display: block;
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(250,250,248,0.5);
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+      letter-spacing: 0.03em;
+    }
+
+    .footer-col a:hover { color: var(--gold-light); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .footer-bottom p {
+      font-size: 10px;
+      color: rgba(250,250,248,0.3);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-bottom-logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes zoomOut {
+      from { transform: scale(1.05); }
+      to   { transform: scale(1); }
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+
+      .hero { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+      .hero-left { padding: 120px 32px 60px; }
+      .hero-right { height: 50vh; }
+      .hero-location { left: 32px; }
+
+      .intro { grid-template-columns: 1fr; }
+      .intro-images { height: 60vw; }
+      .intro-img-inset { display: none; }
+      .intro-content { padding: 60px 32px; }
+
+      .services { padding: 80px 32px; }
+      .services-grid { grid-template-columns: 1fr; gap: 3px; }
+      .service-card { aspect-ratio: 4/3; }
+
+      .gallery-strip { grid-template-columns: repeat(3, 1fr); height: 200px; }
+      .gallery-strip-item:nth-child(n+4) { display: none; }
+
+      .testimonial-section { grid-template-columns: 1fr; padding: 80px 32px; gap: 40px; }
+      .testimonial-cards { grid-template-columns: 1fr; }
+
+      .process { padding: 80px 32px; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .process-steps::before { display: none; }
+
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      footer { padding: 48px 32px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="images/2.jpg" alt="Amba Haverly Logo" />
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">Amba Haverly</span>
+        <span class="nav-logo-sub">Bespoke Personal Styling</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="nav-cta">Book a Consultation</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow"> London · Worldwide</p>
+      <h1 class="hero-title">
+        Unleash Your<br>
+        <em>Style Identity</em>
+      </h1>
+      <p class="hero-desc">
+        Dressing with confidence and purpose. Bespoke personal styling rooted in colour theory, body analysis and a deeply personal approach — crafted entirely for you.
+      </p>
+      <div class="hero-actions">
+        <a href="services.html" class="btn-primary">Explore Services</a>
+        <a href="about.html" class="btn-secondary">My Approach</a>
+      </div>
+      <div class="hero-location">Based in Central London · Available Worldwide</div>
+    </div>
+    <div class="hero-right">
+      <img src="profile_pic.jpg" alt="Amba Haverly — Personal Stylist" />
+      <div class="hero-right-overlay"></div>
+      <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-inner">
+      <span class="marquee-item">Colour Analysis <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Wardrobe Edit <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Personal Shopping <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Image Consultation <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Editorial Styling <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Body Analysis <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Colour Analysis <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Wardrobe Edit <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Personal Shopping <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Image Consultation <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Editorial Styling <span class="marquee-dot">✦</span></span>
+      <span class="marquee-item">Body Analysis <span class="marquee-dot">✦</span></span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="intro-images">
+      <img class="intro-img-main" src="private_lounge.jpg" alt="Styling Session" />
+      <img class="intro-img-inset" src="6CE0CC0F-208E-4A8C-9E05-214E086B99AE.JPG" alt="Styling Detail" />
+    </div>
+    <div class="intro-content">
+      <p class="section-label">The Philosophy</p>
+      <h2 class="section-title">Every Client is a<br><em>Blank Canvas</em></h2>
+      <p class="intro-text">
+        Style is not about following trends it is about discovering the truth of who you are and wearing it with intention. I treat every client as a unique individual, helping you uncover your personal colour season, understand your body type, and build a wardrobe that feels effortlessly, authentically you.
+      </p>
+      <p class="intro-text">
+        Rooted in the 14 colour sub-seasons and professional body analysis, my approach combines technical expertise with a deeply personal touch from your first consultation to your final look.
+      </p>
+      <div class="intro-signature">Amba Haverly</div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section class="services">
+    <div class="services-header">
+      <p class="section-label">What I Offer</p>
+      <h2 class="section-title">Bespoke Styling,<br><em>Tailored to You</em></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="IMG_5941.JPG" alt="Colour Analysis" />
+        <div class="service-overlay">
+          <div class="service-num">01</div>
+          <h3 class="service-name">Colour Analysis</h3>
+          <p class="service-desc">Discover your unique colour season from the 14 sub-seasons unlocking the palette that makes your complexion glow.</p>
+          <a href="services.html" class="service-link">Learn More</a>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="IMG_5944.jpeg" alt="Wardrobe Edit" />
+        <div class="service-overlay">
+          <div class="service-num">02</div>
+          <h3 class="service-name">Wardrobe Edit</h3>
+          <p class="service-desc">A transformative cleanse and curation of your existing wardrobe keeping only what serves your authentic style identity.</p>
+          <a href="services.html" class="service-link">Learn More</a>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="instore_styling.jpg" alt="In-Store Styling" />
+        <div class="service-overlay">
+          <div class="service-num">03</div>
+          <h3 class="service-name">In-Store Styling</h3>
+          <p class="service-desc">Personal shopping at luxury styling lounges worldwide I curate every piece with your lifestyle and vision in mind.</p>
+          <a href="services.html" class="service-link">Learn More</a>
+        </div>
+      </div>
+    </div>
+    <div class="services-cta">
+      <a href="services.html" class="btn-primary" style="display:inline-block; margin-top: 48px;">View All Services</a>
+    </div>
+  </section>
+
+  <!-- GALLERY STRIP -->
+  <div class="gallery-strip">
+    <div class="gallery-strip-item"><img src="capsule.jpg" alt="Styling" /></div>
+    <div class="gallery-strip-item"><img src="interview.jpg" alt="Styling" /></div>
+    <div class="gallery-strip-item"><img src="photoshoot.jpg" alt="Styling" /></div>
+    <div class="gallery-strip-item"><img src="B0BA3F1B-84CA-4A87-852B-4D280F25A464.JPG" alt="Styling" /></div>
+    <div class="gallery-strip-item"><img src="83F3B375-4744-472A-AC76-EFB11141C452.JPG" alt="Styling" /></div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonial-section">
+    <div class="testimonial-left">
+      <p class="section-label">Client Words</p>
+      <h2 class="section-title">Trusted by<br><em>Discerning</em><br>Individuals</h2>
+    </div>
+    <div class="testimonial-cards">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Amba helped me so wonderfully! I trusted her to ensure my new wardrobe would be tailored to my individuality — not only focused on trends but finding the timeless classics everyone needs. I couldn't recommend this lovely lady more!</p>
+        <p class="testimonial-author">— Maddie L.</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Amba taught me all about my complexion and undertone and this has given me a completely new mindset when shopping. I can't wait for my next session with her!</p>
+        <p class="testimonial-author">— Giada B.</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Amba is very knowledgeable about personal styling and making sure you find the right colours and pieces for your wardrobe. Looking forward to working with her in the future!</p>
+        <p class="testimonial-author">— Simon N.</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Amba was super helpful and very patient, finding me the perfect outfit that fitted both my ultra demanding needs and my budget. Many thanks!</p>
+        <p class="testimonial-author">— Nick H.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process">
+    <div class="process-header">
+      <p class="section-label">The Journey</p>
+      <h2 class="section-title">Your Style Journey,<br><em>Step by Step</em></h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <h3 class="step-title">Discovery</h3>
+        <p class="step-text">An in-depth consultation to understand your lifestyle, aspirations and current relationship with style.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h3 class="step-title">Analysis</h3>
+        <p class="step-text">Colour season mapping and body type analysis — the scientific foundation of your personal style blueprint.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h3 class="step-title">Curation</h3>
+        <p class="step-text">Wardrobe edit, personal shopping or in-store styling — building your wardrobe with intention and purpose.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <h3 class="step-title">Confidence</h3>
+        <p class="step-text">You leave with clarity, a cohesive wardrobe, and the knowledge to dress with confidence every single day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-bg">
+      <img src="34AE6E5A-36B7-4E93-BB24-6B363436C5D3.jpeg" alt="Amba Haverly" />
+    </div>
+    <div class="final-cta-overlay"></div>
+    <div class="final-cta-content">
+      <p class="section-label">Begin Your Transformation</p>
+      <h2 class="section-title">Ready to Discover<br><em>Your Style Identity?</em></h2>
+      <p class="final-cta-sub">Book a consultation and begin your bespoke styling journey. Available in person in Central London — and worldwide.</p>
+      <div class="final-cta-actions">
+        <a href="contact.html" class="btn-primary">Book a Consultation</a>
+        <a href="services.html" class="btn-secondary" style="color:rgba(250,250,248,0.65); border-color: rgba(201,168,76,0.4);">View Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="nav-logo-name" style="font-family:'Cormorant Garamond',serif; color:#fafaf8; font-size:20px; display:block; margin-bottom:4px;">Amba Haverly</span>
+        <span class="nav-logo-sub" style="font-size:9px; font-weight:300; color:#c9a84c; letter-spacing:0.25em; text-transform:uppercase; display:block; margin-bottom:20px;">Bespoke Personal Styling</span>
+        <p>Helping individuals discover their true style identity through colour, form and a deeply personal approach to dressing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="services.html">Colour Analysis</a>
+        <a href="services.html">Wardrobe Edit</a>
+        <a href="services.html">Personal Shopping</a>
+        <a href="services.html">Image Consultation</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>155 Draycott Avenue</p>
+        <p>Chelsea, London</p>
+        <p>Available Worldwide</p>
+        <a href="contact.html" style="color:#c9a84c; margin-top:8px;">Get in Touch →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Amba Haverly. All rights reserved.</p>
+      <div class="footer-bottom-logo">
+        <img src="2.jpg" alt="AH" />
+      </div>
+      <p>Central London · Worldwide</p>
+    </div>
+  </footer>
+
+</body>
+</html>
