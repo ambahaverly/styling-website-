@@ -441,6 +441,344 @@
     #ca-mag-cross::before { width: 1px; height: 100%; left: 50%; }
     #ca-mag-cross::after { width: 100%; height: 1px; top: 50%; }
 
+    /* ── PHOTO SCAN SECTION ── */
+    #ca-photo-scan {
+      background: linear-gradient(180deg, #0a0a0a 0%, #111110 100%);
+      padding: 80px 80px 100px;
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .scan-inner { max-width: 960px; margin: 0 auto; }
+    .scan-header { text-align: center; margin-bottom: 56px; }
+    .scan-header .ca-section-label { color: var(--gold); margin-bottom: 20px; }
+    .scan-header h2 { font-family: var(--font-display); font-size: clamp(32px,4vw,58px); font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 16px; }
+    .scan-header h2 em { font-style: italic; color: var(--gold-light); }
+    .scan-header p { font-size: 12px; font-weight: 300; color: rgba(250,250,248,0.5); line-height: 2; letter-spacing: 0.04em; max-width: 520px; margin: 0 auto; }
+    .scan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .scan-upload-panel {
+      border: 1px solid rgba(201,168,76,0.2);
+      background: rgba(201,168,76,0.02);
+      padding: 32px;
+    }
+    .scan-upload-zone {
+      border: 1px dashed rgba(201,168,76,0.35);
+      aspect-ratio: 3/4; max-height: 400px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden;
+      background: rgba(0,0,0,0.3);
+    }
+    .scan-upload-zone:hover { border-color: var(--gold); background: rgba(201,168,76,0.04); }
+    .scan-upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .scan-upload-icon { margin-bottom: 16px; opacity: 0.6; display: flex; align-items: center; justify-content: center; }
+    .scan-upload-text { font-size: 11px; font-weight: 300; color: rgba(250,250,248,0.4); letter-spacing: 0.05em; text-align: center; line-height: 1.9; }
+    .scan-upload-text strong { display: block; font-size: 13px; font-weight: 400; color: rgba(250,250,248,0.7); margin-bottom: 6px; }
+    #scan-preview-wrap { display: none; position: relative; user-select: none; }
+    #scan-preview-wrap canvas { width: 100%; height: auto; display: block; max-height: 440px; }
+    #scan-zones-overlay { position: absolute; inset: 0; pointer-events: none; }
+    .scan-zone-handle {
+      position: absolute; pointer-events: all; cursor: grab; transform: translate(-50%, -50%);
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      transition: filter 0.15s;
+    }
+    .scan-zone-handle:active { cursor: grabbing; filter: brightness(1.3); }
+    .szh-ring {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid var(--gold); background: rgba(201,168,76,0.12);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.15), inset 0 0 8px rgba(201,168,76,0.1);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .scan-zone-handle:hover .szh-ring,
+    .scan-zone-handle.dragging .szh-ring {
+      background: rgba(201,168,76,0.25);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.2), 0 0 14px rgba(201,168,76,0.3);
+    }
+    .szh-label {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 8px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); background: rgba(0,0,0,0.75); padding: 3px 8px;
+      white-space: nowrap; pointer-events: none; backdrop-filter: blur(4px);
+    }
+    .scan-drag-hint {
+      margin-top: 10px; font-size: 10px; color: rgba(250,250,248,0.3);
+      letter-spacing: 0.05em; text-align: center; font-weight: 300;
+    }
+    .scan-btn-row { display: flex; gap: 10px; margin-top: 16px; }
+    .scan-analyse-btn {
+      flex: 1; padding: 14px; font-family: var(--font-body); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; border: none;
+      background: var(--gold); color: var(--black); transition: all 0.3s;
+    }
+    .scan-analyse-btn:hover { background: var(--gold-light); }
+    .scan-analyse-btn:disabled { opacity: 0.4; cursor: default; }
+    .scan-clear-btn {
+      padding: 14px 18px; font-family: var(--font-body); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+      background: transparent; border: 1px solid rgba(201,168,76,0.25); color: rgba(250,250,248,0.4);
+      transition: all 0.2s;
+    }
+    .scan-clear-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .scan-privacy-note {
+      margin-top: 14px; font-size: 10px; color: rgba(250,250,248,0.25); line-height: 1.7;
+      letter-spacing: 0.03em; text-align: center;
+    }
+    /* results panel */
+    .scan-results-panel { display: flex; flex-direction: column; gap: 20px; }
+    .scan-result-card {
+      border: 1px solid rgba(201,168,76,0.12); background: rgba(255,255,255,0.02);
+      padding: 24px 28px; animation: caFadeUp 0.4s ease;
+    }
+    .src-label {
+      font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600;
+      color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+    }
+    .src-label::before { content: ''; width: 16px; height: 1px; background: var(--gold); display: inline-block; }
+    .src-swatches { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .src-swatch {
+      width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.1);
+      position: relative; cursor: pointer; transition: transform 0.15s;
+      flex-shrink: 0;
+    }
+    .src-swatch:hover { transform: scale(1.1); }
+    .src-swatch .src-sw-hex {
+      position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
+      font-size: 8px; font-family: monospace; color: rgba(250,250,248,0.5); white-space: nowrap;
+    }
+    .src-swatches-wrap { margin-bottom: 24px; }
+    .src-analysis {
+      font-size: 11px; font-weight: 300; line-height: 1.9; color: rgba(250,250,248,0.55);
+      letter-spacing: 0.03em;
+    }
+    .src-analysis strong { color: var(--gold-light); font-weight: 500; }
+    .scan-undertone-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 18px; margin: 10px 0;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .scan-season-suggest {
+      background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25);
+      padding: 20px 24px; margin-top: 8px;
+    }
+    .scan-season-suggest .sss-title {
+      font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    .scan-season-suggest .sss-name {
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 300;
+      color: var(--white); line-height: 1.2; margin-bottom: 8px;
+    }
+    .scan-season-suggest .sss-name em { font-style: italic; color: var(--gold-light); }
+    .scan-season-suggest p {
+      font-size: 11px; color: rgba(250,250,248,0.5); font-weight: 300; line-height: 1.8;
+    }
+    .sss-strip { display: flex; height: 6px; margin: 12px 0 16px; }
+    .sss-strip div { flex: 1; }
+    .sss-btn {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--black); background: var(--gold); border: none; padding: 10px 24px;
+      cursor: pointer; font-family: var(--font-body); transition: background 0.2s;
+    }
+    .sss-btn:hover { background: var(--gold-light); }
+    .scan-loading {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 300px; gap: 20px;
+    }
+    .scan-spinner {
+      width: 48px; height: 48px; border: 1px solid rgba(201,168,76,0.2);
+      border-top-color: var(--gold); border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .scan-loading-text { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(250,250,248,0.4); font-weight: 300; }
+    .scan-empty {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 300px; gap: 16px; text-align: center;
+    }
+    .scan-empty-icon { font-size: 40px; opacity: 0.15; }
+    .scan-empty-text { font-size: 11px; color: rgba(250,250,248,0.3); font-weight: 300; line-height: 1.8; letter-spacing: 0.04em; }
+    .conf-bar-wrap { margin-top: 10px; }
+    .conf-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(250,250,248,0.35); font-weight: 500; margin-bottom: 6px; display: flex; justify-content: space-between; }
+    .conf-bar { height: 2px; background: rgba(255,255,255,0.08); }
+    .conf-fill { height: 100%; background: var(--gold); transition: width 0.8s ease; }
+
+    /* ── AI CHATBOT ── */
+    .chat-fab {
+      position: fixed; bottom: 32px; right: 32px; z-index: 1000;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: var(--gold); border: none; cursor: pointer;
+      box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; transition: all 0.3s; font-family: var(--font-body);
+    }
+    .chat-fab:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(201,168,76,0.5); background: var(--gold-light); }
+    .chat-fab-label {
+      position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
+      background: var(--black); color: var(--white);
+      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500;
+      padding: 8px 14px; white-space: nowrap; font-family: var(--font-body);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+    .chat-fab:hover .chat-fab-label { opacity: 1; }
+    .chat-window {
+      position: fixed; bottom: 108px; right: 32px; z-index: 1001;
+      width: 380px; max-height: 580px; display: flex; flex-direction: column;
+      background: #0f0f0d; border: 1px solid rgba(201,168,76,0.2);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+      transform: translateY(20px) scale(0.95); opacity: 0;
+      pointer-events: none; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .chat-window.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
+    .chat-header {
+      padding: 18px 22px; display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+      background: rgba(201,168,76,0.04);
+    }
+    .chat-header-left { display: flex; align-items: center; gap: 12px; }
+    .chat-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0;
+    }
+    .chat-header-name { font-size: 12px; font-weight: 500; color: var(--white); letter-spacing: 0.04em; }
+    .chat-header-sub { font-size: 9px; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; margin-top: 1px; }
+    .chat-close {
+      background: none; border: none; color: rgba(250,250,248,0.4); cursor: pointer;
+      font-size: 18px; transition: color 0.2s; line-height: 1; padding: 4px;
+    }
+    .chat-close:hover { color: var(--white); }
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 20px 18px; display: flex; flex-direction: column;
+      gap: 14px; min-height: 0; scrollbar-width: thin; scrollbar-color: rgba(201,168,76,0.2) transparent;
+    }
+    .chat-msg { display: flex; gap: 10px; animation: caFadeUp 0.3s ease; }
+    .chat-msg.user { flex-direction: row-reverse; }
+    .chat-msg-avatar {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      display: flex; align-items: center; justify-content: center; font-size: 12px;
+    }
+    .chat-msg.user .chat-msg-avatar {
+      background: rgba(255,255,255,0.1); font-size: 11px;
+    }
+    .chat-bubble {
+      max-width: 80%; padding: 11px 15px; font-size: 12px; line-height: 1.7;
+      font-weight: 300; letter-spacing: 0.02em;
+    }
+    .chat-msg:not(.user) .chat-bubble {
+      background: rgba(255,255,255,0.05); color: rgba(250,250,248,0.85);
+      border-radius: 0 12px 12px 12px;
+    }
+    .chat-msg.user .chat-bubble {
+      background: rgba(201,168,76,0.15); color: rgba(250,250,248,0.9);
+      border-radius: 12px 0 12px 12px;
+    }
+    .chat-typing {
+      display: flex; gap: 4px; align-items: center; padding: 4px 0;
+    }
+    .chat-typing span {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+      animation: typingBounce 1.2s infinite ease-in-out;
+    }
+    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce { 0%,80%,100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
+    .chat-input-row {
+      padding: 14px 16px; border-top: 1px solid rgba(201,168,76,0.1);
+      display: flex; gap: 10px; align-items: flex-end;
+    }
+    .chat-input {
+      flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.15);
+      color: var(--white); padding: 10px 14px; font-size: 12px; font-family: var(--font-body);
+      font-weight: 300; outline: none; resize: none; min-height: 40px; max-height: 120px;
+      scrollbar-width: none; line-height: 1.5;
+    }
+    .chat-input::placeholder { color: rgba(250,250,248,0.25); }
+    .chat-input:focus { border-color: rgba(201,168,76,0.4); }
+    .chat-send {
+      width: 40px; height: 40px; background: var(--gold); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; transition: background 0.2s; flex-shrink: 0;
+    }
+    .chat-send:hover { background: var(--gold-light); }
+    .chat-send:disabled { opacity: 0.4; cursor: default; }
+    .chat-suggestions {
+      padding: 0 16px 12px; display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .chat-suggestion {
+      font-size: 10px; letter-spacing: 0.08em; color: var(--gold-light);
+      border: 1px solid rgba(201,168,76,0.25); padding: 5px 11px;
+      cursor: pointer; transition: all 0.2s; background: transparent; font-family: var(--font-body);
+    }
+    .chat-suggestion:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+    .chat-colour-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+      padding: 3px 9px 3px 5px; border-radius: 3px; margin: 2px 0;
+      font-size: 11px; color: rgba(250,250,248,0.7); vertical-align: middle;
+    }
+    .chat-colour-chip-dot { width: 12px; height: 12px; border-radius: 2px; }
+    .chat-season-tag {
+      display: inline-block; padding: 2px 10px; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
+    }
+    /* ── per-zone ring sizes ── */
+    #zone-skin .szh-ring { width: 36px; height: 36px; }
+    #zone-hair .szh-ring { width: 36px; height: 36px; }
+    #zone-eye  .szh-ring { width: 18px; height: 18px; } /* smaller — eyes need precision */
+
+    /* ── zoom controls ── */
+    .scan-zoom-bar {
+      display: none; /* shown via JS after image loads */
+      align-items: center; gap: 0;
+      border: 1px solid rgba(201,168,76,0.2);
+      background: rgba(0,0,0,0.4);
+      position: absolute; bottom: 10px; right: 10px; z-index: 10;
+      backdrop-filter: blur(6px);
+    }
+    .szoom-btn {
+      width: 32px; height: 32px; background: transparent; border: none;
+      color: var(--gold); cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-body); font-size: 16px; font-weight: 300;
+      transition: background 0.15s; flex-shrink: 0;
+    }
+    .szoom-btn:hover { background: rgba(201,168,76,0.12); }
+    .szoom-btn:active { background: rgba(201,168,76,0.22); }
+    .szoom-level {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.15em; color: var(--gold);
+      padding: 0 10px; font-family: var(--font-body); white-space: nowrap;
+      border-left: 1px solid rgba(201,168,76,0.2); border-right: 1px solid rgba(201,168,76,0.2);
+      line-height: 32px;
+    }
+    /* the canvas + overlay wrapper that actually scales */
+    #scan-zoom-inner {
+      transform-origin: top center;
+      transition: transform 0.25s ease;
+      position: relative; /* so overlay stays aligned */
+    }
+    #scan-preview-wrap { overflow: hidden; } /* clip when zoomed */
+    .chat-scroll-btn {
+      position: absolute; bottom: 80px; right: 48px; z-index: 2;
+      width: 28px; height: 28px; border-radius: 50%; background: rgba(201,168,76,0.8);
+      border: none; cursor: pointer; color: var(--black); font-size: 12px;
+      display: none; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+
+    /* ── FEATURE TEASE STRIP ── */
+    .feature-strip {
+      background: var(--black); border-top: 1px solid rgba(201,168,76,0.12);
+      display: grid; grid-template-columns: repeat(4,1fr);
+    }
+    .feature-tile {
+      padding: 40px 32px; border-right: 1px solid rgba(201,168,76,0.08);
+      text-align: center; transition: background 0.3s;
+    }
+    .feature-tile:last-child { border-right: none; }
+    .feature-tile:hover { background: rgba(201,168,76,0.03); }
+    .ft-icon { font-size: 28px; margin-bottom: 14px; }
+    .ft-title { font-family: var(--font-display); font-size: 1rem; color: var(--white); font-weight: 400; margin-bottom: 6px; }
+    .ft-desc { font-size: 10px; color: rgba(250,250,248,0.35); font-weight: 300; line-height: 1.8; letter-spacing: 0.03em; }
+
     /* responsive */
     @media (max-width: 900px) {
       nav { padding: 18px 24px; }
@@ -458,6 +796,10 @@
       .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
       footer { padding: 48px 32px 32px; }
       .seasons-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+      #ca-photo-scan { padding: 60px 24px; }
+      .scan-grid { grid-template-columns: 1fr; }
+      .feature-strip { grid-template-columns: 1fr 1fr; }
+      .chat-window { width: calc(100vw - 48px); right: 24px; }
     }
   </style>
 </head>
@@ -509,6 +851,148 @@
     <a href="mailto:stylist@ambahaverly.co.uk" class="btn-email">stylist@ambahaverly.co.uk</a>
   </div>
 </div>
+
+<!-- FEATURE STRIP -->
+<div class="feature-strip">
+  <div class="feature-tile">
+    <div class="ft-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="7" width="22" height="17" rx="1" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="14" cy="15.5" r="4.5" stroke="#c9a84c" stroke-width="1.2"/>
+        <path d="M10 7V5.5a1 1 0 011-1h6a1 1 0 011 1V7" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="14" cy="15.5" r="2" fill="#c9a84c" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="ft-title">Photo Tone Scan</div>
+    <div class="ft-desc">Upload a selfie to extract your real skin, hair & eye undertones</div>
+  </div>
+  <div class="feature-tile">
+    <div class="ft-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="8" cy="8" r="4" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="20" cy="8" r="4" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="8" cy="20" r="4" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="20" cy="20" r="4" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="8" cy="8" r="1.5" fill="#c9a84c" opacity="0.5"/>
+        <circle cx="20" cy="8" r="1.5" fill="#c9a84c" opacity="0.5"/>
+        <circle cx="8" cy="20" r="1.5" fill="#c9a84c" opacity="0.5"/>
+        <circle cx="20" cy="20" r="1.5" fill="#c9a84c" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="ft-title">12-Season Guide</div>
+    <div class="ft-desc">Full wardrobe palettes, makeup colours & shopping tips</div>
+  </div>
+  <div class="feature-tile">
+    <div class="ft-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 3L15.8 11.2L24 14L15.8 16.8L14 25L12.2 16.8L4 14L12.2 11.2L14 3Z" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/>
+        <circle cx="14" cy="14" r="2.5" fill="#c9a84c" opacity="0.35"/>
+      </svg>
+    </div>
+    <div class="ft-title">Colour Matcher</div>
+    <div class="ft-desc">Pick any colour to see if it works for your season</div>
+  </div>
+  <div class="feature-tile">
+    <div class="ft-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 6h20v14a1 1 0 01-1 1H5a1 1 0 01-1-1V6z" stroke="#c9a84c" stroke-width="1.2"/>
+        <path d="M4 6l10 8 10-8" stroke="#c9a84c" stroke-width="1.2"/>
+        <path d="M9 13l-5 7M19 13l5 7" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="ft-title">AI Stylist Chat</div>
+    <div class="ft-desc">Ask Amba's AI colour expert any question about your palette</div>
+  </div>
+</div>
+
+<!-- PHOTO SCAN SECTION -->
+<section id="ca-photo-scan">
+  <div class="scan-inner">
+    <div class="scan-header">
+      <p class="ca-section-label">New Feature</p>
+      <h2>Photo <em>Tone Analysis</em></h2>
+      <p>Upload a clear, natural-light selfie. We'll extract your skin undertones, hair colour and eye colour — then suggest the most likely season matches.</p>
+    </div>
+    <div class="scan-grid">
+      <!-- Upload panel -->
+      <div class="scan-upload-panel">
+        <div id="scan-upload-zone" class="scan-upload-zone">
+          <input type="file" accept="image/*" id="scan-file-input" onchange="scanLoadImage(event)">
+          <div class="scan-upload-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 28V14M20 14L13 21M20 14L27 21" stroke="#c9a84c" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+              <rect x="6" y="30" width="28" height="1.2" rx="0.6" fill="#c9a84c" opacity="0.2"/>
+            </svg>
+          </div>
+          <div class="scan-upload-text">
+            <strong>Drop or click to upload</strong>
+            Best results with a front-facing photo<br>in natural daylight, no filter
+          </div>
+        </div>
+        <div id="scan-preview-wrap">
+          <div id="scan-zoom-inner">
+            <canvas id="scan-canvas"></canvas>
+            <!-- Draggable zone markers — positioned absolutely over the canvas -->
+            <div id="scan-zones-overlay">
+              <div class="scan-zone-handle" id="zone-skin" data-zone="skin" title="Drag to reposition skin sample area">
+                <div class="szh-ring"></div>
+                <div class="szh-label">
+                  <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3" fill="#c9a84c" opacity="0.7"/></svg>
+                  Skin
+                </div>
+              </div>
+              <div class="scan-zone-handle" id="zone-hair" data-zone="hair" title="Drag to reposition hair sample area">
+                <div class="szh-ring"></div>
+                <div class="szh-label">
+                  <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3" fill="#c9a84c" opacity="0.7"/></svg>
+                  Hair
+                </div>
+              </div>
+              <div class="scan-zone-handle" id="zone-eye" data-zone="eye" title="Drag to reposition eye sample area">
+                <div class="szh-ring"></div>
+                <div class="szh-label">
+                  <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3" fill="#c9a84c" opacity="0.7"/></svg>
+                  Eyes
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Zoom controls — shown after image loads -->
+          <div class="scan-zoom-bar" id="scan-zoom-bar">
+            <button class="szoom-btn" onclick="scanZoom(-1)" title="Zoom out">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="5" stroke="#c9a84c" stroke-width="1.1"/><path d="M3.5 6h5" stroke="#c9a84c" stroke-width="1.1" stroke-linecap="round"/><path d="M10 10l2.5 2.5" stroke="#c9a84c" stroke-width="1.1" stroke-linecap="round"/></svg>
+            </button>
+            <span class="szoom-level" id="szoom-level">100%</span>
+            <button class="szoom-btn" onclick="scanZoom(1)" title="Zoom in">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="5" stroke="#c9a84c" stroke-width="1.1"/><path d="M3.5 6h5M6 3.5v5" stroke="#c9a84c" stroke-width="1.1" stroke-linecap="round"/><path d="M10 10l2.5 2.5" stroke="#c9a84c" stroke-width="1.1" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <p class="scan-drag-hint">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-right:5px;"><circle cx="6" cy="6" r="5" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/><path d="M6 3v6M3 6h6" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/></svg>
+          Drag the markers to align with your facial features
+        </p>
+        <div class="scan-btn-row">
+          <button class="scan-analyse-btn" id="scan-btn" onclick="runScanAnalysis()" disabled>Analyse My Tones</button>
+          <button class="scan-clear-btn" onclick="scanClear()">Clear</button>
+        </div>
+        <p class="scan-privacy-note">
+          <svg width="10" height="12" viewBox="0 0 10 12" fill="none" style="vertical-align:middle;margin-right:5px;"><rect x="1" y="5" width="8" height="7" rx="0.8" stroke="#c9a84c" stroke-width="0.9" opacity="0.5"/><path d="M3 5V3.5a2 2 0 014 0V5" stroke="#c9a84c" stroke-width="0.9" opacity="0.5"/></svg>
+          Your photo never leaves your browser. Analysis is done locally.
+        </p>
+      </div>
+      <!-- Results panel -->
+      <div class="scan-results-panel" id="scan-results-panel">
+        <div class="scan-empty">
+          <div class="scan-empty-icon" style="opacity:0.12">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><path d="M22 4L25.4 17.6L39 22L25.4 26.4L22 40L18.6 26.4L5 22L18.6 17.6L22 4Z" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="scan-empty-text">Upload a photo to begin your<br>tone analysis</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- COLOUR ANALYSIS TOOL -->
 <div class="tool-wrap">
@@ -724,6 +1208,38 @@
 
   </div><!-- end ca-root -->
 </div><!-- end tool-wrap -->
+
+<!-- AI STYLIST CHATBOT -->
+<button class="chat-fab" id="chat-fab" onclick="toggleChat()" title="Ask Amba's AI Stylist">
+  <span class="chat-fab-label">Ask the AI Stylist</span>
+  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11 2L12.8 9.2L20 11L12.8 13.8L11 21L9.2 13.8L2 11L9.2 8.2L11 2Z" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="0.5" stroke-linejoin="round"/>
+  </svg>
+</button>
+<div class="chat-window" id="chat-window">
+  <div class="chat-header">
+    <div class="chat-header-left">
+      <div class="chat-avatar"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L8.4 5.7L13 7L8.4 9.3L7 14L5.6 9.3L1 7L5.6 4.7L7 1Z" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="0.3" stroke-linejoin="round"/></svg></div>
+      <div>
+        <div class="chat-header-name">Amba's AI Colour Stylist</div>
+        <div class="chat-header-sub">Colour Analysis Expert</div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages"></div>
+  <div class="chat-suggestions" id="chat-suggestions">
+    <button class="chat-suggestion" onclick="sendSuggestion(this)">What season am I?</button>
+    <button class="chat-suggestion" onclick="sendSuggestion(this)">Best neutrals for Soft Autumn</button>
+    <button class="chat-suggestion" onclick="sendSuggestion(this)">Cool vs warm undertones</button>
+    <button class="chat-suggestion" onclick="sendSuggestion(this)">Wedding guest colour ideas</button>
+  </div>
+  <div class="chat-input-row">
+    <textarea class="chat-input" id="chat-input" placeholder="Ask me anything about colour…" rows="1"
+      onkeydown="chatKeydown(event)" oninput="autoResizeChat(this)"></textarea>
+    <button class="chat-send" id="chat-send-btn" onclick="sendChat()">→</button>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -1138,6 +1654,424 @@ function setupPicker(cv){
     setPicked('#'+[px[0],px[1],px[2]].map(v=>v.toString(16).padStart(2,'0')).join(''));
     mag.style.display='none';
   };
+}
+
+// ══════════════════════════════════════════════
+// PHOTO TONE SCAN
+// ══════════════════════════════════════════════
+// ══════════════════════════════════════════════
+// PHOTO TONE SCAN — DRAGGABLE MARKERS
+// ══════════════════════════════════════════════
+let scanImageData = null;
+let scanZoomLevel = 1; // 1 = 100%
+const ZOOM_STEPS = [0.75, 1, 1.4, 1.9, 2.6, 3.4];
+
+function scanZoom(dir) {
+  const idx = ZOOM_STEPS.indexOf(scanZoomLevel);
+  const next = Math.max(0, Math.min(ZOOM_STEPS.length - 1, idx + dir));
+  scanZoomLevel = ZOOM_STEPS[next];
+  const inner = document.getElementById('scan-zoom-inner');
+  inner.style.transform = `scale(${scanZoomLevel})`;
+  document.getElementById('szoom-level').textContent = Math.round(scanZoomLevel * 100) + '%';
+}
+
+// Zone positions as % of overlay (0–100). Default guesses for a centred portrait.
+const zonePos = {
+  skin: { x: 50, y: 62 },
+  hair: { x: 50, y: 14 },
+  eye:  { x: 50, y: 44 }
+};
+
+function initDraggableZones() {
+  ['skin','hair','eye'].forEach(zone => {
+    const el = document.getElementById('zone-' + zone);
+    positionZoneHandle(el, zonePos[zone]);
+    makeDraggable(el, zone);
+  });
+}
+
+function positionZoneHandle(el, pos) {
+  el.style.left = pos.x + '%';
+  el.style.top  = pos.y + '%';
+}
+
+function makeDraggable(el, zone) {
+  let startX, startY, startLeft, startTop;
+  const overlay = document.getElementById('scan-zones-overlay');
+
+  const onDown = e => {
+    e.preventDefault();
+    el.classList.add('dragging');
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const rect = overlay.getBoundingClientRect();
+    startX = clientX;
+    startY = clientY;
+    startLeft = zonePos[zone].x;
+    startTop  = zonePos[zone].y;
+
+    const onMove = ev => {
+      const cx = ev.touches ? ev.touches[0].clientX : ev.clientX;
+      const cy = ev.touches ? ev.touches[0].clientY : ev.clientY;
+      // Divide delta by zoom so marker tracks correctly at any zoom level
+      const dx = ((cx - startX) / rect.width)  * 100 / scanZoomLevel;
+      const dy = ((cy - startY) / rect.height) * 100 / scanZoomLevel;
+      zonePos[zone].x = Math.max(2, Math.min(98, startLeft + dx));
+      zonePos[zone].y = Math.max(2, Math.min(98, startTop  + dy));
+      positionZoneHandle(el, zonePos[zone]);
+    };
+    const onUp = () => {
+      el.classList.remove('dragging');
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      document.removeEventListener('touchmove', onMove);
+      document.removeEventListener('touchend', onUp);
+    };
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+    document.addEventListener('touchmove', onMove, {passive:false});
+    document.addEventListener('touchend', onUp);
+  };
+
+  el.addEventListener('mousedown', onDown);
+  el.addEventListener('touchstart', onDown, {passive:false});
+}
+
+function scanLoadImage(e) {
+  const f = e.target.files[0]; if (!f) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      const maxW = 500, maxH = 640;
+      let w = img.width, h = img.height;
+      if (w > maxW) { h = h*(maxW/w); w = maxW; }
+      if (h > maxH) { w = w*(maxH/h); h = maxH; }
+      const cv = document.getElementById('scan-canvas');
+      cv.width = Math.round(w); cv.height = Math.round(h);
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+      scanImageData = cv.getContext('2d').getImageData(0, 0, cv.width, cv.height);
+      document.getElementById('scan-upload-zone').style.display = 'none';
+      document.getElementById('scan-preview-wrap').style.display = 'block';
+      document.getElementById('scan-zoom-bar').style.display = 'flex';
+      document.getElementById('scan-btn').disabled = false;
+      initDraggableZones();
+      document.getElementById('scan-results-panel').innerHTML = `
+        <div class="scan-empty">
+          <div class="scan-empty-icon" style="opacity:0.12">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><path d="M22 4L25.4 17.6L39 22L25.4 26.4L22 40L18.6 26.4L5 22L18.6 17.6L22 4Z" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="scan-empty-text">Drag the markers to align<br>with your features, then click<br><strong style="color:var(--gold-light)">Analyse My Tones</strong></div>
+        </div>`;
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(f);
+}
+
+function scanClear() {
+  scanImageData = null;
+  scanZoomLevel = 1;
+  const inner = document.getElementById('scan-zoom-inner');
+  if (inner) inner.style.transform = 'scale(1)';
+  const zbar = document.getElementById('scan-zoom-bar');
+  if (zbar) zbar.style.display = 'none';
+  const zlevel = document.getElementById('szoom-level');
+  if (zlevel) zlevel.textContent = '100%';
+  // Reset zone positions
+  zonePos.skin = { x: 50, y: 62 };
+  zonePos.hair = { x: 50, y: 14 };
+  zonePos.eye  = { x: 50, y: 44 };
+  document.getElementById('scan-upload-zone').style.display = 'flex';
+  document.getElementById('scan-preview-wrap').style.display = 'none';
+  document.getElementById('scan-btn').disabled = true;
+  document.getElementById('scan-file-input').value = '';
+  document.getElementById('scan-results-panel').innerHTML = `
+    <div class="scan-empty">
+      <div class="scan-empty-icon" style="opacity:0.12">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><path d="M22 4L25.4 17.6L39 22L25.4 26.4L22 40L18.6 26.4L5 22L18.6 17.6L22 4Z" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="scan-empty-text">Upload a photo to begin your<br>tone analysis</div>
+    </div>`;
+}
+
+function sampleAtZonePos(data, w, h, zx, zy, radiusPct=0.07, samples=120) {
+  // zx, zy are percentages (0–100) relative to the image
+  const cx = Math.floor(w * zx / 100);
+  const cy = Math.floor(h * zy / 100);
+  const radius = Math.floor(Math.min(w, h) * radiusPct);
+  let r=0,g=0,b=0,count=0;
+  for (let i = 0; i < samples; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const dist  = Math.random() * radius;
+    const x = Math.round(cx + Math.cos(angle) * dist);
+    const y = Math.round(cy + Math.sin(angle) * dist);
+    if (x < 0 || x >= w || y < 0 || y >= h) continue;
+    const idx = (y * w + x) * 4;
+    r += data[idx]; g += data[idx+1]; b += data[idx+2]; count++;
+  }
+  if (!count) return '#888888';
+  return '#'+[Math.round(r/count),Math.round(g/count),Math.round(b/count)].map(v=>v.toString(16).padStart(2,'0')).join('');
+}
+
+function hexToRgb(h) {
+  return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+}
+
+function getUndertone(skinHex) {
+  const [r,g,b] = hexToRgb(skinHex);
+  const warmScore = (r - b) + (r - g)*0.5;
+  const pinkScore = (r-g) - (r-b)*0.3;
+  if (warmScore > 20) return {tone:'Warm', desc:'Golden or olive undertones — you suit earthy, warm palettes.', col:'#C9A84C'};
+  if (pinkScore > 8) return {tone:'Cool', desc:'Pink or bluish undertones — cool, clear palettes work best.', col:'#7A9EC8'};
+  return {tone:'Neutral', desc:'A balance of warm and cool — you can work across multiple families.', col:'#9A9A7A'};
+}
+
+function analyseHairTone(hairHex) {
+  const [r,g,b] = hexToRgb(hairHex);
+  const lum = 0.299*r+0.587*g+0.114*b;
+  const warm = r - b;
+  if (lum > 180) return 'Light / Blonde';
+  if (lum > 120 && warm > 20) return 'Golden Brown';
+  if (lum > 120) return 'Ash Brown';
+  if (lum > 60 && warm > 15) return 'Dark Warm Brown';
+  if (lum > 60) return 'Dark Cool Brown';
+  return 'Very Dark / Black';
+}
+
+function analyseEyeDesc(eyeHex) {
+  const [r,g,b] = hexToRgb(eyeHex);
+  const lum = 0.299*r+0.587*g+0.114*b;
+  const warm = r - b;
+  if (b > r && b > g) return 'Blue';
+  if (g > r && g > b) return 'Green';
+  if (warm > 40 && lum < 120) return 'Dark Brown (warm)';
+  if (lum < 100) return 'Dark Brown';
+  return 'Hazel / Mixed';
+}
+
+function suggestSeasonFromScan(undertone, hair, eyeDesc) {
+  const t = undertone.tone;
+  if (t === 'Warm') {
+    if (hair === 'Light / Blonde' || hair === 'Golden Brown') return 'light_spring';
+    if (hair === 'Dark Warm Brown') return 'true_autumn';
+    return 'true_spring';
+  }
+  if (t === 'Cool') {
+    if (hair === 'Very Dark / Black' || hair === 'Dark Cool Brown') return 'deep_winter';
+    if (hair === 'Light / Blonde' || hair === 'Ash Brown') return 'light_summer';
+    return 'true_summer';
+  }
+  if (hair === 'Light / Blonde' || hair === 'Golden Brown') return 'soft_autumn';
+  if (hair === 'Very Dark / Black') return 'deep_autumn';
+  return 'soft_summer';
+}
+
+function runScanAnalysis() {
+  if (!scanImageData) return;
+  document.getElementById('scan-results-panel').innerHTML = `
+    <div class="scan-loading">
+      <div class="scan-spinner"></div>
+      <div class="scan-loading-text">Sampling tones…</div>
+    </div>`;
+
+  setTimeout(() => {
+    const {data, width: w, height: h} = scanImageData;
+
+    // Sample from wherever user placed the markers
+    const skinHex  = sampleAtZonePos(data, w, h, zonePos.skin.x, zonePos.skin.y, 0.08);
+    const skinHex2 = sampleAtZonePos(data, w, h, zonePos.skin.x + 5, zonePos.skin.y + 5, 0.06);
+    const hairHex  = sampleAtZonePos(data, w, h, zonePos.hair.x, zonePos.hair.y, 0.10);
+    const eyeHex   = sampleAtZonePos(data, w, h, zonePos.eye.x,  zonePos.eye.y,  0.02);
+
+    const undertone = getUndertone(skinHex);
+    const hairDesc  = analyseHairTone(hairHex);
+    const eyeDesc   = analyseEyeDesc(eyeHex);
+    const seasonKey = suggestSeasonFromScan(undertone, hairDesc, eyeDesc);
+    const season    = S[seasonKey];
+    const ut2 = getUndertone(skinHex2);
+    const confidence = ut2.tone === undertone.tone ? 82 : 65;
+
+    document.getElementById('scan-results-panel').innerHTML = `
+      <div class="scan-result-card">
+        <div class="src-label">Skin Undertone</div>
+        <div class="src-swatches-wrap">
+          <div class="src-swatches">
+            <div class="src-swatch" style="background:${skinHex}"><div class="src-sw-hex">${skinHex.toUpperCase()}</div></div>
+            <div class="src-swatch" style="background:${skinHex2}"><div class="src-sw-hex">${skinHex2.toUpperCase()}</div></div>
+          </div>
+        </div>
+        <div class="scan-undertone-badge" style="background:${undertone.col}22;color:${undertone.col};border:1px solid ${undertone.col}44;">
+          <span>◆</span> ${undertone.tone} Undertone
+        </div>
+        <div class="src-analysis">${undertone.desc}</div>
+        <div class="conf-bar-wrap">
+          <div class="conf-label"><span>Confidence</span><span>${confidence}%</span></div>
+          <div class="conf-bar"><div class="conf-fill" style="width:0%" data-target="${confidence}"></div></div>
+        </div>
+      </div>
+      <div class="scan-result-card">
+        <div class="src-label">Hair Colour</div>
+        <div class="src-swatches-wrap">
+          <div class="src-swatches">
+            <div class="src-swatch" style="background:${hairHex}"><div class="src-sw-hex">${hairHex.toUpperCase()}</div></div>
+          </div>
+        </div>
+        <div class="src-analysis"><strong>${hairDesc}</strong><br>
+        ${hairDesc.includes('Warm') || hairDesc.includes('Golden') ? 'Warm-toned hair signals an affinity for golden and earthy palettes.' : hairDesc.includes('Ash') || hairDesc.includes('Cool') ? 'Cool-toned hair suggests cool palette families will harmonise best.' : 'Your hair tone works across palette families.'}
+        </div>
+      </div>
+      <div class="scan-result-card">
+        <div class="src-label">Eye Colour</div>
+        <div class="src-swatches-wrap">
+          <div class="src-swatches">
+            <div class="src-swatch" style="background:${eyeHex}"><div class="src-sw-hex">${eyeHex.toUpperCase()}</div></div>
+          </div>
+        </div>
+        <div class="src-analysis"><strong>${eyeDesc}</strong><br>
+        ${eyeDesc.includes('Blue') ? 'Blue eyes are typically associated with cool seasons — Spring and Summer families.' : eyeDesc.includes('Green') ? 'Green eyes appear across Spring and Autumn families, often with a warm-neutral undertone.' : eyeDesc.includes('warm') ? 'Dark warm eyes are classic Autumn — rich depth and golden warmth.' : 'Dark eyes appear in all seasons but especially signal contrast in Winter types.'}
+        </div>
+      </div>
+      <div class="scan-season-suggest">
+        <div class="sss-title">Suggested Season</div>
+        <div class="sss-name"><em>${season.name.split(' ')[0]}</em> ${season.name.split(' ').slice(1).join(' ')}</div>
+        <div class="sss-strip">${season.strip.map(c=>`<div style="background:${c}"></div>`).join('')}</div>
+        <p>Based on your ${undertone.tone.toLowerCase()} undertone, ${hairDesc.toLowerCase()} hair and ${eyeDesc.toLowerCase()} eyes — ${season.about.desc.toLowerCase()}.</p>
+        <br>
+        <button class="sss-btn" onclick="loadGuide('${seasonKey}')">See My Full Guide →</button>
+      </div>`;
+
+    setTimeout(() => {
+      document.querySelectorAll('.conf-fill[data-target]').forEach(el => {
+        el.style.width = el.dataset.target + '%';
+      });
+    }, 100);
+  }, 900);
+}
+
+// ══════════════════════════════════════════════
+// AI STYLIST CHATBOT
+// ══════════════════════════════════════════════
+let chatOpen = false;
+let chatHistory = [];
+let chatInitialised = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chat-window').classList.toggle('open', chatOpen);
+  if (chatOpen && !chatInitialised) {
+    chatInitialised = true;
+    addChatMessage('assistant', `Hello — I'm Amba's AI Colour Stylist.\n\nI'm here to help with everything colour analysis: your season, palette questions, what to wear, makeup choices, or how to shop for your colours. What would you like to explore?`);
+  }
+  if (chatOpen) {
+    setTimeout(() => document.getElementById('chat-input').focus(), 300);
+  }
+}
+
+function addChatMessage(role, text, isTyping=false) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg' + (role==='user'?' user':'');
+  const avatarSvg = role === 'user'
+    ? `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="2.5" stroke="rgba(250,250,248,0.6)" stroke-width="1"/><path d="M2 12c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="rgba(250,250,248,0.6)" stroke-width="1" stroke-linecap="round"/></svg>`
+    : `<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L7.9 5.7L12.5 6.5L7.9 8.3L6.5 13L5.1 8.3L0.5 6.5L5.1 4.7L6.5 1Z" fill="#c9a84c" stroke="#c9a84c" stroke-width="0.3" stroke-linejoin="round"/></svg>`;
+  const bubble = isTyping
+    ? `<div class="chat-bubble"><div class="chat-typing"><span></span><span></span><span></span></div></div>`
+    : `<div class="chat-bubble">${formatChatText(text)}</div>`;
+  div.innerHTML = `<div class="chat-msg-avatar">${avatarSvg}</div>${bubble}`;
+  div.id = isTyping ? 'chat-typing-indicator' : '';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function formatChatText(text) {
+  // Bold **text**, line breaks, colour chips for hex codes, season tags
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/#([0-9A-Fa-f]{6})/g, (m,h) => `<span class="chat-colour-chip"><span class="chat-colour-chip-dot" style="background:#${h}"></span>#${h.toUpperCase()}</span>`)
+    .replace(/\n/g, '<br>');
+}
+
+function buildSystemPrompt() {
+  let ctx = `You are an expert colour analyst and personal stylist assistant for Amba Haverly, a luxury personal styling brand based in Chelsea, London. Your name is Amba's AI Colour Stylist.
+
+You are knowledgeable about the 12-season colour analysis system (True Spring, Light Spring, Bright Spring, True Summer, Light Summer, Soft Summer, True Autumn, Soft Autumn, Deep Autumn, True Winter, Cool Winter, Deep Winter).
+
+You give warm, authoritative, concise advice. You use British English spelling. You are not sycophantic — give direct, confident answers. When relevant, suggest the user take the quiz or view their season guide on the page.
+
+Current context:`;
+  
+  if (curSeason) {
+    const s = S[curSeason];
+    ctx += `\nThe user has selected or been assigned the season: ${s.name}. Family: ${s.family}. Key characteristics: ${s.about.desc}. Their best neutrals: ${s.about.neutral}.`;
+  } else {
+    ctx += `\nThe user has not yet been assigned a season.`;
+  }
+  
+  ctx += `\n\nKeep responses concise — 2-4 short paragraphs max. Use **bold** for key terms. You may mention hex colours like #C9A84C when helpful.`;
+  return ctx;
+}
+
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('chat-send-btn').disabled = true;
+  document.getElementById('chat-suggestions').style.display = 'none';
+  
+  addChatMessage('user', text);
+  chatHistory.push({role:'user', content: text});
+  
+  const typingEl = addChatMessage('assistant', '', true);
+  
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: buildSystemPrompt(),
+        messages: chatHistory
+      })
+    });
+    const data = await response.json();
+    const reply = data.content?.[0]?.text || 'I apologise — something went wrong. Please try again.';
+    
+    typingEl.remove();
+    addChatMessage('assistant', reply);
+    chatHistory.push({role:'assistant', content: reply});
+    
+    // Keep history manageable
+    if (chatHistory.length > 20) chatHistory = chatHistory.slice(-18);
+    
+  } catch(err) {
+    typingEl.remove();
+    addChatMessage('assistant', 'I\'m having a moment — please try again.');
+  }
+  
+  document.getElementById('chat-send-btn').disabled = false;
+}
+
+function sendSuggestion(btn) {
+  document.getElementById('chat-input').value = btn.textContent;
+  sendChat();
+}
+
+function chatKeydown(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendChat();
+  }
+}
+
+function autoResizeChat(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
 }
 
 // ══════════════════════════════════════════════
