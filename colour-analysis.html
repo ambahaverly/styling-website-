@@ -30,7 +30,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
       padding: 22px 48px;
-      background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
+      background: rgba(10,10,10,0.95); backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(201,168,76,0.2);
     }
     .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
@@ -45,383 +45,400 @@
     .nav-links a:hover::after { width: 100%; }
     .nav-links a.active { color: var(--gold); }
     .nav-links a.active::after { width: 100%; }
-    .nav-cta { font-size: 9px !important; font-weight: 600 !important; letter-spacing: 0.22em !important; text-transform: uppercase !important; color: var(--black) !important; background: var(--gold); padding: 10px 22px; text-decoration: none; transition: background 0.3s !important; }
+    .nav-cta {
+      font-size: 9px !important; font-weight: 600 !important; letter-spacing: 0.22em !important;
+      text-transform: uppercase !important; color: var(--black) !important;
+      background: var(--gold); padding: 10px 22px; text-decoration: none; transition: background 0.3s !important;
+    }
     .nav-cta:hover { background: var(--gold-light) !important; }
     .nav-cta::after { display: none !important; }
 
-    /* ── HERO BANNER ── */
+    /* ── HERO ── */
     .page-hero {
       padding-top: 88px;
       background: var(--black);
-      min-height: 420px;
-      display: flex; align-items: flex-end;
+      min-height: 100vh;
+      display: flex; align-items: center;
       position: relative; overflow: hidden;
     }
-    .page-hero::before {
-      content: '';
+    .hero-bg-palette {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 42%;
+      display: flex; pointer-events: none;
+    }
+    .hero-bg-palette-col { flex: 1; display: flex; flex-direction: column; }
+    .hero-bg-palette-col div { flex: 1; opacity: 0.18; }
+    .hero-bg-fade {
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(201,168,76,0.07) 0%, transparent 60%);
+      background: linear-gradient(90deg, #0a0a0a 45%, transparent 100%);
       pointer-events: none;
     }
-    .hero-palette-strip {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 6px; display: flex;
-    }
-    .hero-palette-strip div { flex: 1; }
     .page-hero-inner {
-      padding: 60px 80px 60px;
-      position: relative; z-index: 2; max-width: 780px;
+      padding: 80px 80px;
+      position: relative; z-index: 2; max-width: 680px;
     }
     .hero-eyebrow {
       font-size: 9px; font-weight: 500; letter-spacing: 0.35em;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 24px;
       display: flex; align-items: center; gap: 12px;
     }
     .hero-eyebrow::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold); }
     .page-hero h1 {
-      font-family: var(--font-display); font-size: clamp(44px, 5vw, 76px);
-      font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 24px;
+      font-family: var(--font-display); font-size: clamp(48px, 5.5vw, 86px);
+      font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 28px;
     }
     .page-hero h1 em { font-style: italic; color: var(--gold-light); }
-    .page-hero p {
-      font-size: 12px; font-weight: 300; line-height: 2; letter-spacing: 0.05em;
-      color: rgba(250,250,248,0.6); max-width: 520px;
+    .page-hero-desc {
+      font-size: 12px; font-weight: 300; line-height: 2.1; letter-spacing: 0.05em;
+      color: rgba(250,250,248,0.55); max-width: 480px; margin-bottom: 44px;
     }
-
-    /* ── BOOKING BANNER ── */
-    .booking-banner {
-      background: var(--light-grey);
-      border-top: 1px solid rgba(201,168,76,0.2);
-      border-bottom: 1px solid rgba(201,168,76,0.2);
-      padding: 28px 80px;
-      display: flex; align-items: center; justify-content: space-between; gap: 32px;
-      flex-wrap: wrap;
-    }
-    .booking-banner-text { display: flex; align-items: center; gap: 16px; }
-    .booking-banner-icon {
-      width: 42px; height: 42px; border-radius: 50%;
-      border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .booking-banner-icon svg { width: 18px; height: 18px; }
-    .booking-banner p {
-      font-size: 11px; font-weight: 300; line-height: 1.7;
-      color: var(--grey); letter-spacing: 0.03em;
-    }
-    .booking-banner strong {
-      font-weight: 500; color: var(--black); display: block;
-      font-size: 12px; letter-spacing: 0.04em; margin-bottom: 2px;
-    }
-    .booking-banner-actions { display: flex; gap: 12px; align-items: center; flex-shrink: 0; }
-    .btn-book {
-      font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--black); background: var(--gold); padding: 12px 28px;
-      text-decoration: none; transition: all 0.3s; white-space: nowrap; border: none; cursor: pointer;
-    }
-    .btn-book:hover { background: var(--gold-light); }
-    .btn-email {
-      font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold-dark); text-decoration: none; border-bottom: 1px solid rgba(138,110,47,0.4);
-      padding-bottom: 2px; transition: all 0.3s; white-space: nowrap;
-    }
-    .btn-email:hover { color: var(--gold); border-color: var(--gold); }
-
-    /* ── TOOL CONTAINER ── */
-    .tool-wrap {
-      background: var(--white);
-      padding: 0;
-    }
-
-    /* ── TOOL INTERNAL STYLES ── */
-    .ca-root {
-      font-family: var(--font-body);
-      color: var(--black);
-      min-height: 80vh;
-    }
-
-    /* screens */
-    .ca-screen { display: none; }
-    .ca-screen.active { display: block; }
-    .ca-screen-flex { display: none; }
-    .ca-screen-flex.active { display: flex; }
-
-    /* ── LANDING ── */
-    #ca-landing {
-      background: var(--black);
-      padding: 80px 80px 100px;
-      text-align: center;
-      position: relative; overflow: hidden;
-    }
-    #ca-landing::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(ellipse 70% 50% at 20% 80%, rgba(201,168,76,0.06), transparent),
-                  radial-gradient(ellipse 50% 60% at 80% 20%, rgba(120,160,140,0.04), transparent);
-    }
-    .ca-landing-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
-    .ca-section-label {
-      font-size: 9px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 20px; display: flex; align-items: center;
-      justify-content: center; gap: 12px;
-    }
-    .ca-section-label::before, .ca-section-label::after {
-      content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold);
-    }
-    .ca-landing-title {
-      font-family: var(--font-display); font-size: clamp(36px, 4.5vw, 64px);
-      font-weight: 300; line-height: 1.1; color: var(--white); margin-bottom: 20px;
-    }
-    .ca-landing-title em { font-style: italic; color: var(--gold-light); }
-    .ca-landing-desc {
-      font-size: 12px; font-weight: 300; line-height: 2; letter-spacing: 0.04em;
-      color: rgba(250,250,248,0.55); margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto;
-    }
-    .season-dot-grid { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin: 32px auto 40px; max-width: 500px; }
-    .sdot { width: 28px; height: 28px; border-radius: 50%; transition: transform 0.2s; }
-    .sdot:hover { transform: scale(1.2); }
-    .ca-landing-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .ca-btn-primary {
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
       font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--black); background: var(--gold); padding: 15px 36px;
-      border: none; cursor: pointer; transition: all 0.3s; font-family: var(--font-body);
+      color: var(--black); background: var(--gold); padding: 16px 38px;
+      text-decoration: none; border: none; cursor: pointer; transition: all 0.3s;
+      font-family: var(--font-body);
     }
-    .ca-btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-    .ca-btn-outline {
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-ghost {
       font-size: 9px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
       color: rgba(250,250,248,0.65); background: transparent;
-      border: 1px solid rgba(201,168,76,0.35); padding: 15px 36px;
-      cursor: pointer; transition: all 0.3s; font-family: var(--font-body);
+      border: 1px solid rgba(201,168,76,0.35); padding: 16px 38px;
+      cursor: pointer; transition: all 0.3s; font-family: var(--font-body); text-decoration: none;
     }
-    .ca-btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-scroll-hint {
+      position: absolute; bottom: 40px; left: 80px; z-index: 2;
+      display: flex; align-items: center; gap: 12px;
+      font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(250,250,248,0.25); font-weight: 500;
+    }
+    .hero-scroll-hint::before {
+      content: ''; display: block; width: 1px; height: 40px;
+      background: linear-gradient(180deg, transparent, rgba(201,168,76,0.4));
+    }
 
-    /* ── QUIZ ── */
-    #ca-quiz { background: var(--white); padding: 60px 80px 80px; }
-    .quiz-inner-wrap { max-width: 620px; margin: 0 auto; }
-    .quiz-top { text-align: center; margin-bottom: 48px; }
-    .quiz-top h2 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 300; margin-bottom: 8px; }
-    .quiz-top p { font-size: 11px; color: var(--grey); letter-spacing: 0.05em; }
-    .q-progress { height: 2px; background: rgba(0,0,0,0.08); margin-bottom: 48px; }
+    /* ── HOW IT WORKS ── */
+    .how-section {
+      background: var(--light-grey);
+      padding: 100px 80px;
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .section-label {
+      font-size: 9px; font-weight: 500; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold); }
+    .how-section h2 {
+      font-family: var(--font-display); font-size: clamp(34px, 3.5vw, 54px);
+      font-weight: 300; line-height: 1.1; margin-bottom: 60px; max-width: 560px;
+    }
+    .how-section h2 em { font-style: italic; color: var(--gold-dark); }
+    .how-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+    .how-step {
+      background: var(--white); padding: 40px 32px;
+      border-top: 3px solid transparent; transition: border-color 0.3s;
+      position: relative;
+    }
+    .how-step:hover { border-color: var(--gold); }
+    .step-num {
+      font-family: var(--font-display); font-size: 52px; font-weight: 300;
+      color: rgba(201,168,76,0.15); line-height: 1; margin-bottom: 20px;
+      display: block;
+    }
+    .step-title {
+      font-family: var(--font-display); font-size: 1.15rem; font-weight: 400;
+      margin-bottom: 10px; letter-spacing: 0.03em;
+    }
+    .step-desc {
+      font-size: 11px; font-weight: 300; line-height: 1.9;
+      color: var(--grey); letter-spacing: 0.03em;
+    }
+
+    /* ── QUIZ SECTION ── */
+    #quiz-section {
+      background: var(--black);
+      padding: 100px 80px;
+      border-top: 1px solid rgba(201,168,76,0.12);
+    }
+    .quiz-wrap { max-width: 680px; margin: 0 auto; }
+    .quiz-header { text-align: center; margin-bottom: 56px; }
+    .quiz-header h2 {
+      font-family: var(--font-display); font-size: clamp(34px,4vw,58px);
+      font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 16px;
+    }
+    .quiz-header h2 em { font-style: italic; color: var(--gold-light); }
+    .quiz-header p {
+      font-size: 12px; font-weight: 300; color: rgba(250,250,248,0.45);
+      line-height: 2; letter-spacing: 0.04em;
+    }
+    .q-progress { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 52px; }
     .q-fill { height: 100%; background: var(--gold); transition: width 0.45s ease; }
-    .q-step { display: none; }
-    .q-step.active { display: block; animation: caFadeUp 0.35s ease; }
-    @keyframes caFadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-    .q-num { font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--gold); font-weight: 500; margin-bottom: 8px; }
-    .q-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 300; line-height: 1.2; margin-bottom: 6px; }
-    .q-hint { font-size: 11px; color: var(--grey); margin-bottom: 28px; font-weight: 300; letter-spacing: 0.03em; }
+    .q-step { display: none; animation: fadeUp 0.35s ease; }
+    .q-step.active { display: block; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    .q-num { font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--gold); font-weight: 500; margin-bottom: 10px; }
+    .q-title {
+      font-family: var(--font-display); font-size: clamp(22px,2.5vw,36px);
+      font-weight: 300; color: var(--white); line-height: 1.25; margin-bottom: 8px;
+    }
+    .q-hint { font-size: 11px; color: rgba(250,250,248,0.35); margin-bottom: 32px; font-weight: 300; letter-spacing: 0.04em; }
     .q-opts { display: flex; flex-direction: column; gap: 10px; }
     .q-opt {
-      display: flex; align-items: center; gap: 16px;
-      padding: 16px 20px; border: 1px solid rgba(0,0,0,0.1);
-      cursor: pointer; transition: all 0.2s; background: var(--white); position: relative;
+      display: flex; align-items: center; gap: 18px;
+      padding: 18px 22px; border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer; transition: all 0.2s; background: rgba(255,255,255,0.02);
+      position: relative;
     }
-    .q-opt:hover { border-color: rgba(201,168,76,0.5); background: #FDFAF5; }
-    .q-opt.sel { border-color: var(--gold); background: #FDF8EE; }
-    .q-opt.sel::after { content: '✓'; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 13px; }
-    .opt-swatch { width: 42px; height: 42px; flex-shrink: 0; }
-    .opt-name { font-size: 13px; font-weight: 400; color: var(--black); }
-    .opt-sub { font-size: 11px; color: var(--grey); margin-top: 2px; }
-    .q-nav { display: flex; justify-content: space-between; margin-top: 32px; }
+    .q-opt:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.04); }
+    .q-opt.sel { border-color: var(--gold); background: rgba(201,168,76,0.07); }
+    .q-opt.sel::after {
+      content: '✓'; position: absolute; right: 20px; top: 50%;
+      transform: translateY(-50%); color: var(--gold); font-size: 12px;
+    }
+    .opt-swatch { width: 44px; height: 44px; flex-shrink: 0; }
+    .opt-name { font-size: 13px; font-weight: 400; color: var(--white); }
+    .opt-sub { font-size: 11px; color: rgba(250,250,248,0.4); margin-top: 3px; }
+    .q-nav { display: flex; justify-content: space-between; margin-top: 36px; align-items: center; }
     .qbtn {
-      padding: 12px 28px; font-family: var(--font-body); font-size: 9px;
-      font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+      padding: 13px 30px; font-family: var(--font-body); font-size: 9px;
+      font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; border: none;
     }
-    .qbtn-next { background: var(--black); color: var(--white); border: none; }
-    .qbtn-next:hover { background: #2a2a2a; }
+    .qbtn-next { background: var(--gold); color: var(--black); }
+    .qbtn-next:hover:not(:disabled) { background: var(--gold-light); }
     .qbtn-next:disabled { opacity: 0.3; cursor: default; }
-    .qbtn-back { background: transparent; color: var(--grey); border: 1px solid rgba(0,0,0,0.15); }
-    .qbtn-back:hover { color: var(--black); }
+    .qbtn-back { background: transparent; color: rgba(250,250,248,0.4); border: 1px solid rgba(255,255,255,0.1); }
+    .qbtn-back:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
 
-    /* ── RESULT ── */
-    #ca-result {
-      background: var(--black);
-      flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 80px 40px; min-height: 60vh;
+    /* ── RESULT TEASER ── */
+    #result-section { display: none; background: var(--black); }
+    .result-reveal {
+      padding: 100px 80px;
+      text-align: center; max-width: 700px; margin: 0 auto;
     }
-    .result-eyebrow { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 16px; }
-    .result-name { font-family: var(--font-display); font-size: clamp(42px, 6vw, 80px); font-weight: 300; color: var(--white); line-height: 1.05; margin-bottom: 8px; }
-    .result-name em { font-style: italic; color: var(--gold-light); }
-    .result-strip { display: flex; height: 10px; border-radius: 0; overflow: hidden; width: 100%; max-width: 440px; margin: 24px auto; }
+    .result-eyebrow {
+      font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); font-weight: 500; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .result-eyebrow::before, .result-eyebrow::after {
+      content: ''; display: inline-block; width: 24px; height: 1px; background: var(--gold);
+    }
+    .result-season-name {
+      font-family: var(--font-display); font-size: clamp(48px,7vw,96px);
+      font-weight: 300; color: var(--white); line-height: 1.0; margin-bottom: 10px;
+    }
+    .result-season-name em { font-style: italic; color: var(--gold-light); }
+    .result-strip {
+      display: flex; height: 8px; width: 100%; max-width: 400px;
+      margin: 28px auto 0; overflow: hidden;
+    }
     .result-strip div { flex: 1; }
-    .result-desc { font-size: 12px; font-weight: 300; line-height: 2; color: rgba(250,250,248,0.55); max-width: 400px; margin: 0 auto 36px; letter-spacing: 0.04em; }
-    .result-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-    /* ── SEASONS LIST ── */
-    #ca-seasons { background: var(--white); padding: 60px 80px 80px; }
-    .seasons-wrap { max-width: 900px; margin: 0 auto; }
-    .seasons-top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
-    .seasons-top h2 { font-family: var(--font-display); font-size: clamp(30px, 3.5vw, 48px); font-weight: 300; }
-    .seasons-top h2 em { font-style: italic; color: var(--gold-dark); }
-    .seasons-back {
-      font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); background: none; border: none; cursor: pointer;
-      font-family: var(--font-body); display: flex; align-items: center; gap: 6px; transition: color 0.2s;
+    /* blur teaser block */
+    .result-teaser-wrap {
+      position: relative; margin-top: 48px; margin-bottom: 0;
     }
-    .seasons-back:hover { color: var(--gold-dark); }
-    .fam-group { margin-bottom: 48px; }
-    .fam-label {
-      font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600;
-      padding-bottom: 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+    .result-teaser-blur {
+      filter: blur(6px); pointer-events: none; user-select: none;
+      opacity: 0.5;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+      padding: 0 0 40px;
     }
-    .fam-label::after { content: ''; flex: 1; height: 1px; background: rgba(0,0,0,0.1); }
-    .seasons-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .scard {
-      border: 1px solid rgba(0,0,0,0.1); padding: 20px;
-      cursor: pointer; transition: all 0.2s; background: var(--white); position: relative;
+    .teaser-swatch-group { display: flex; flex-direction: column; gap: 6px; }
+    .teaser-swatch { height: 48px; border-radius: 0; }
+    .teaser-label {
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(250,250,248,0.3); font-weight: 500; margin-bottom: 8px;
     }
-    .scard:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-    .scard-strip { display: flex; height: 14px; margin-bottom: 14px; overflow: hidden; }
-    .scard-strip div { flex: 1; }
-    .scard-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; margin-bottom: 3px; }
-    .scard-tag { font-size: 10px; color: var(--grey); font-weight: 300; letter-spacing: 0.03em; }
+    .result-lock-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.6) 30%, rgba(10,10,10,0.92) 65%, var(--black) 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      padding-bottom: 0;
+    }
+    .lock-msg {
+      background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25);
+      padding: 28px 36px; text-align: center; max-width: 440px;
+    }
+    .lock-msg p {
+      font-size: 12px; font-weight: 300; line-height: 1.9;
+      color: rgba(250,250,248,0.65); letter-spacing: 0.04em; margin-bottom: 20px;
+    }
+    .lock-msg p strong { color: var(--gold-light); font-weight: 500; }
+    .lock-msg small {
+      display: block; font-size: 10px; color: rgba(250,250,248,0.3);
+      letter-spacing: 0.08em; margin-top: 14px;
+    }
 
-    /* ── GUIDE ── */
-    #ca-guide { background: var(--white); }
-    .guide-banner {
-      background: var(--black); padding: 40px 80px;
-      display: flex; align-items: center; justify-content: space-between; gap: 32px;
-      flex-wrap: wrap;
+    /* ── PRICING SECTION ── */
+    #pricing-section {
+      background: var(--white);
+      padding: 100px 80px;
+      border-top: 1px solid rgba(0,0,0,0.06);
     }
-    .guide-banner-left { display: flex; align-items: center; gap: 20px; }
-    .guide-banner-strip { display: flex; width: 80px; height: 80px; flex-wrap: wrap; flex-shrink: 0; overflow: hidden; }
-    .guide-banner-strip div { width: 20px; height: 20px; flex-shrink: 0; }
-    .guide-season-name { font-family: var(--font-display); font-size: clamp(28px,3vw,44px); font-weight: 300; color: var(--white); line-height: 1.1; }
-    .guide-season-name em { font-style: italic; color: var(--gold-light); }
-    .guide-family-badge {
-      display: inline-block; margin-top: 6px; padding: 4px 14px;
-      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600;
-      font-family: var(--font-body);
+    .pricing-header { text-align: center; margin-bottom: 64px; }
+    .pricing-header h2 {
+      font-family: var(--font-display); font-size: clamp(34px,4vw,58px);
+      font-weight: 300; line-height: 1.1; margin-bottom: 16px;
     }
-    .guide-back {
-      font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(250,250,248,0.5); background: none; border: 1px solid rgba(201,168,76,0.25);
-      padding: 9px 20px; cursor: pointer; font-family: var(--font-body); transition: all 0.2s;
+    .pricing-header h2 em { font-style: italic; color: var(--gold-dark); }
+    .pricing-header p {
+      font-size: 12px; font-weight: 300; color: var(--grey);
+      line-height: 2; letter-spacing: 0.04em; max-width: 480px; margin: 0 auto;
     }
-    .guide-back:hover { color: var(--gold); border-color: var(--gold); }
-    .guide-strip-full { display: flex; height: 5px; }
-    .guide-strip-full div { flex: 1; }
-    .g-tabs {
-      background: var(--black); border-top: 1px solid rgba(201,168,76,0.15);
-      display: flex; padding: 0 80px;
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .pricing-card {
+      border: 1px solid rgba(0,0,0,0.08); padding: 44px 36px 40px;
+      position: relative; transition: all 0.3s; background: var(--white);
+      display: flex; flex-direction: column;
     }
-    .g-tab {
-      padding: 16px 0; margin-right: 40px; font-size: 9px; font-weight: 600;
-      letter-spacing: 0.22em; text-transform: uppercase; color: rgba(250,250,248,0.4);
-      background: none; border: none; border-bottom: 2px solid transparent;
-      cursor: pointer; transition: all 0.2s; font-family: var(--font-body);
+    .pricing-card:hover { box-shadow: 0 16px 60px rgba(0,0,0,0.1); transform: translateY(-4px); }
+    .pricing-card.featured {
+      border-color: var(--gold); background: var(--black);
+      transform: translateY(-8px);
     }
-    .g-tab:hover { color: rgba(250,250,248,0.75); }
-    .g-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
-    .g-body { padding: 60px 80px; max-width: 1000px; }
-    .g-panel { display: none; }
-    .g-panel.active { display: block; animation: caFadeUp 0.3s ease; }
+    .pricing-card.featured:hover { transform: translateY(-12px); }
+    .featured-badge {
+      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: var(--black);
+      font-size: 8px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+      padding: 6px 18px; white-space: nowrap;
+    }
+    .card-tier {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .card-name {
+      font-family: var(--font-display); font-size: 1.6rem; font-weight: 400;
+      margin-bottom: 4px; letter-spacing: 0.04em;
+    }
+    .pricing-card.featured .card-name { color: var(--white); }
+    .card-price {
+      display: flex; align-items: baseline; gap: 4px; margin: 24px 0 28px;
+    }
+    .price-currency {
+      font-size: 18px; font-weight: 400; color: var(--grey); margin-bottom: 3px;
+    }
+    .pricing-card.featured .price-currency { color: rgba(250,250,248,0.5); }
+    .price-amount {
+      font-family: var(--font-display); font-size: 64px; font-weight: 300;
+      line-height: 1; color: var(--black);
+    }
+    .pricing-card.featured .price-amount { color: var(--white); }
+    .card-divider {
+      height: 1px; background: rgba(0,0,0,0.08);
+      margin-bottom: 28px;
+    }
+    .pricing-card.featured .card-divider { background: rgba(201,168,76,0.2); }
+    .card-features { list-style: none; flex: 1; margin-bottom: 36px; }
+    .card-features li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 11px; font-weight: 300; line-height: 1.7;
+      color: var(--grey); padding: 7px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05); letter-spacing: 0.03em;
+    }
+    .pricing-card.featured .card-features li {
+      color: rgba(250,250,248,0.6);
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+    .card-features li:last-child { border-bottom: none; }
+    .feat-tick { color: var(--gold); flex-shrink: 0; margin-top: 1px; font-size: 12px; }
+    .card-features li strong { color: var(--black); font-weight: 500; }
+    .pricing-card.featured .card-features li strong { color: var(--white); }
+    .card-book-btn {
+      display: block; width: 100%; text-align: center;
+      padding: 15px; font-family: var(--font-body);
+      font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+      cursor: pointer; transition: all 0.3s; text-decoration: none; border: none;
+    }
+    .card-book-btn.primary-btn { background: var(--gold); color: var(--black); }
+    .card-book-btn.primary-btn:hover { background: var(--gold-light); }
+    .card-book-btn.outline-btn { background: transparent; border: 1px solid rgba(0,0,0,0.15); color: var(--black); }
+    .card-book-btn.outline-btn:hover { border-color: var(--gold); color: var(--gold-dark); }
+    .pricing-note {
+      text-align: center; margin-top: 48px;
+      font-size: 11px; font-weight: 300; color: var(--grey);
+      line-height: 1.9; letter-spacing: 0.03em;
+    }
+    .pricing-note a { color: var(--gold-dark); text-decoration: none; border-bottom: 1px solid rgba(138,110,47,0.3); }
+    .pricing-note a:hover { color: var(--gold); }
 
-    /* wardrobe */
-    .sw-section { margin-bottom: 48px; }
-    .sw-cat {
-      font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600;
-      color: var(--gold); padding-bottom: 12px; margin-bottom: 18px;
-      border-bottom: 1px solid rgba(201,168,76,0.2); display: flex; align-items: center; gap: 10px;
+    /* ── WHAT YOU GET STRIP ── */
+    .what-strip {
+      background: var(--black);
+      padding: 80px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; border-top: 1px solid rgba(201,168,76,0.1);
     }
-    .sw-cat::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--gold); }
-    .sw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 12px; }
-    .sw-item { cursor: pointer; transition: transform 0.15s; }
-    .sw-item:hover { transform: translateY(-3px); }
-    .sw-color {
-      width: 100%; aspect-ratio: 1; position: relative;
-      border: 1px solid rgba(0,0,0,0.07);
+    .what-tile {
+      padding: 0 36px 0 0; border-right: 1px solid rgba(201,168,76,0.1);
     }
-    .sw-tick {
-      position: absolute; top: 5px; right: 5px; width: 16px; height: 16px;
-      background: white; border-radius: 50%; opacity: 0; transition: opacity 0.2s;
+    .what-tile:last-child { border-right: none; padding-right: 0; padding-left: 36px; }
+    .what-tile:first-child { padding-left: 0; }
+    .what-tile:not(:first-child):not(:last-child) { padding-left: 36px; }
+    .what-icon { margin-bottom: 20px; }
+    .what-title {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 400;
+      color: var(--white); margin-bottom: 10px; letter-spacing: 0.04em;
+    }
+    .what-desc {
+      font-size: 11px; font-weight: 300; line-height: 1.9;
+      color: rgba(250,250,248,0.35); letter-spacing: 0.03em;
+    }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial-section {
+      background: var(--light-grey); padding: 80px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .testimonial-card {
+      background: var(--white); padding: 36px 32px;
+      border-top: 2px solid transparent; transition: border-color 0.3s;
+    }
+    .testimonial-card:hover { border-color: var(--gold); }
+    .testimonial-stars { color: var(--gold); font-size: 12px; letter-spacing: 3px; margin-bottom: 18px; }
+    .testimonial-text {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 300;
+      font-style: italic; line-height: 1.8; color: var(--black); margin-bottom: 20px;
+    }
+    .testimonial-author {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--grey);
+    }
+
+    /* ── FAQ ── */
+    .faq-section { background: var(--white); padding: 100px 80px; }
+    .faq-wrap { max-width: 680px; margin: 0 auto; }
+    .faq-header { margin-bottom: 52px; }
+    .faq-item {
+      border-bottom: 1px solid rgba(0,0,0,0.08); cursor: pointer;
+    }
+    .faq-q {
+      padding: 22px 0; display: flex; align-items: center; justify-content: space-between;
+      gap: 20px;
+    }
+    .faq-q-text {
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+    .faq-chevron {
+      width: 24px; height: 24px; flex-shrink: 0;
+      border: 1px solid rgba(0,0,0,0.15); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 9px; color: var(--black);
+      font-size: 10px; color: var(--gold); transition: transform 0.3s;
     }
-    .sw-item.copied .sw-tick { opacity: 1; }
-    .sw-name { font-size: 10px; color: var(--grey); margin-top: 6px; text-align: center; line-height: 1.3; letter-spacing: 0.02em; }
-    .sw-hex { font-size: 9px; color: rgba(107,107,107,0.6); text-align: center; font-family: monospace; margin-top: 1px; }
-
-    /* makeup */
-    .mk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-    .mk-card { border: 1px solid rgba(0,0,0,0.09); padding: 28px; }
-    .mk-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; letter-spacing: 0.04em; }
-    .mk-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .mk-item { display: flex; align-items: center; gap: 12px; padding: 8px 10px; transition: background 0.15s; cursor: pointer; }
-    .mk-item:hover { background: var(--light-grey); }
-    .mk-swatch { width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); flex-shrink: 0; }
-    .mk-iname { font-size: 12px; font-weight: 400; color: var(--black); }
-    .mk-idesc { font-size: 10px; color: var(--grey); margin-top: 1px; font-weight: 300; }
-
-    /* matcher */
-    .mc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-    .mc-card { border: 1px solid rgba(0,0,0,0.09); padding: 28px; }
-    .mc-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; margin-bottom: 20px; letter-spacing: 0.04em; }
-    .upload-zone {
-      border: 1px dashed rgba(201,168,76,0.4); padding: 36px 20px;
-      text-align: center; cursor: pointer; transition: all 0.2s;
-      background: rgba(201,168,76,0.02); position: relative;
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-a {
+      display: none; padding: 0 0 20px;
+      font-size: 12px; font-weight: 300; line-height: 2;
+      color: var(--grey); letter-spacing: 0.03em;
     }
-    .upload-zone:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
-    .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-    .upload-icon { font-size: 22px; margin-bottom: 10px; color: var(--gold); }
-    .upload-text { font-size: 11px; color: var(--grey); font-weight: 300; line-height: 1.7; letter-spacing: 0.03em; }
-    .canvas-wrap { position: relative; overflow: hidden; background: var(--light-grey); min-height: 140px; display: flex; align-items: center; justify-content: center; cursor: crosshair; }
-    .canvas-wrap canvas { max-width: 100%; height: auto; display: block; }
-    .canvas-hint { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); font-size: 9px; background: rgba(10,10,10,0.7); color: var(--white); padding: 4px 12px; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; pointer-events: none; }
-    .clr-row { display: flex; gap: 8px; align-items: center; margin: 14px 0 0; }
-    .clr-input {
-      flex: 1; padding: 10px 14px; border: 1px solid rgba(0,0,0,0.12);
-      font-size: 12px; font-family: var(--font-body); background: var(--white); color: var(--black); outline: none;
-    }
-    .clr-input:focus { border-color: var(--gold); }
-    .clr-btn {
-      padding: 10px 18px; font-size: 9px; font-family: var(--font-body); font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s;
-    }
-    input[type=color] { width: 38px; height: 38px; border: 1px solid rgba(0,0,0,0.12); padding: 2px; cursor: pointer; background: none; flex-shrink: 0; }
-    .clear-btn {
-      margin-top: 10px; width: 100%; padding: 9px; font-size: 9px; font-family: var(--font-body);
-      font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
-      border: 1px solid rgba(0,0,0,0.12); background: transparent; color: var(--grey); transition: all 0.2s;
-    }
-    .clear-btn:hover { border-color: var(--black); color: var(--black); }
-    .picked-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
-    .picked-block { width: 46px; height: 46px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.08); }
-    .picked-lbl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--grey); font-weight: 500; margin-bottom: 3px; }
-    .picked-hex-val { font-size: 15px; font-weight: 400; font-family: monospace; color: var(--black); }
-    .match-hdr { font-size: 9px; text-transform: uppercase; letter-spacing: 0.22em; font-weight: 600; color: var(--grey); margin-bottom: 14px; }
-    .match-item { display: flex; align-items: center; gap: 10px; padding: 7px 10px; margin-bottom: 6px; transition: background 0.15s; }
-    .match-item.top { background: rgba(201,168,76,0.06); border-left: 2px solid var(--gold); padding-left: 8px; }
-    .match-sw { width: 22px; height: 22px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.09); }
-    .match-name { font-size: 11px; flex: 1; color: var(--black); letter-spacing: 0.02em; }
-    .score-row { display: flex; align-items: center; gap: 6px; }
-    .score-bg { width: 56px; height: 3px; background: rgba(0,0,0,0.1); }
-    .score-fg { height: 100%; transition: width 0.4s; }
-    .score-pct { font-size: 11px; font-weight: 500; font-family: monospace; }
-    .verdict-box { margin-top: 14px; padding: 12px 16px; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; display: none; align-items: center; gap: 10px; border-left: 3px solid; }
-    .verdict-box.show { display: flex; }
-    .verdict-yes { background: rgba(80,130,80,0.07); color: #2d6b2d; border-color: #5C8050; }
-    .verdict-maybe { background: rgba(190,140,40,0.08); color: #6b4d10; border-color: #B08030; }
-    .verdict-no { background: rgba(160,50,50,0.07); color: #6b2020; border-color: #A03030; }
-    .tips-box { background: var(--light-grey); padding: 28px 32px; margin-top: 20px; border-left: 2px solid var(--gold); }
-    .tips-box h4 { font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600; color: var(--gold); margin-bottom: 12px; }
-    .tips-box ul { font-size: 11px; color: var(--grey); padding-left: 18px; line-height: 2; font-weight: 300; letter-spacing: 0.03em; }
-
-    /* about */
-    .about-intro-text { font-family: var(--font-display); font-size: 1.25rem; font-weight: 300; line-height: 1.8; color: var(--black); margin-bottom: 36px; font-style: italic; border-left: 2px solid var(--gold); padding-left: 24px; }
-    .about-palette-strip { display: flex; height: 28px; margin-bottom: 36px; }
-    .about-palette-strip div { flex: 1; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .ab-card { border: 1px solid rgba(0,0,0,0.09); padding: 28px; }
-    .ab-card h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; margin-bottom: 16px; letter-spacing: 0.04em; }
-    .ab-card p { font-size: 11px; color: var(--grey); line-height: 1.9; font-weight: 300; letter-spacing: 0.03em; }
-    .wear-list, .avoid-list { font-size: 11px; color: var(--grey); line-height: 2.1; list-style: none; padding: 0; font-weight: 300; }
-    .wear-list li::before { content: '✓  '; color: #4a7a4a; font-weight: 600; }
-    .avoid-list li::before { content: '✕  '; color: #8a3030; font-weight: 600; }
+    .faq-item.open .faq-a { display: block; }
 
     /* ── FOOTER ── */
-    footer {
-      background: var(--black); padding: 64px 80px 40px;
-      border-top: 1px solid rgba(201,168,76,0.2);
-    }
+    footer { background: var(--black); padding: 64px 80px 40px; border-top: 1px solid rgba(201,168,76,0.2); }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
     .footer-brand .fnl { font-family: var(--font-display); font-size: 20px; font-weight: 400; color: var(--white); letter-spacing: 0.12em; display: block; margin-bottom: 4px; }
     .footer-brand .fsub { font-size: 9px; font-weight: 300; color: var(--gold); letter-spacing: 0.25em; text-transform: uppercase; display: block; margin-bottom: 20px; }
@@ -433,373 +450,35 @@
     .footer-bottom p { font-size: 10px; color: rgba(250,250,248,0.3); letter-spacing: 0.08em; }
     .footer-bottom img { width: 36px; height: 36px; border-radius: 50%; opacity: 0.6; }
 
-    /* magnifier */
-    #ca-mag { position: fixed; width: 76px; height: 76px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 14px rgba(0,0,0,0.3); pointer-events: none; display: none; z-index: 9999; overflow: hidden; transform: translate(-50%,-130%); }
-    #ca-mag-bg { width: 100%; height: 100%; background-size: cover; }
-    #ca-mag-cross { position: absolute; inset: 0; pointer-events: none; }
-    #ca-mag-cross::before, #ca-mag-cross::after { content: ''; position: absolute; background: rgba(255,255,255,0.7); }
-    #ca-mag-cross::before { width: 1px; height: 100%; left: 50%; }
-    #ca-mag-cross::after { width: 100%; height: 1px; top: 50%; }
+    /* ── UTILS ── */
+    @keyframes shimmer {
+      0% { opacity: 0.5; } 50% { opacity: 0.8; } 100% { opacity: 0.5; }
+    }
+    .pulse-gold { animation: shimmer 2.5s ease-in-out infinite; }
 
-    /* ── PHOTO SCAN SECTION ── */
-    #ca-photo-scan {
-      background: linear-gradient(180deg, #0a0a0a 0%, #111110 100%);
-      padding: 80px 80px 100px;
-      border-top: 1px solid rgba(201,168,76,0.15);
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1000px) {
+      .how-steps { grid-template-columns: 1fr 1fr; }
+      .what-strip { grid-template-columns: 1fr 1fr; gap: 40px; padding: 60px 40px; }
+      .what-tile { border-right: none; padding: 0 !important; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+      .pricing-card.featured { transform: none; }
+      .pricing-card.featured:hover { transform: translateY(-4px); }
+      .testimonials-grid { grid-template-columns: 1fr; }
     }
-    .scan-inner { max-width: 960px; margin: 0 auto; }
-    .scan-header { text-align: center; margin-bottom: 56px; }
-    .scan-header .ca-section-label { color: var(--gold); margin-bottom: 20px; }
-    .scan-header h2 { font-family: var(--font-display); font-size: clamp(32px,4vw,58px); font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 16px; }
-    .scan-header h2 em { font-style: italic; color: var(--gold-light); }
-    .scan-header p { font-size: 12px; font-weight: 300; color: rgba(250,250,248,0.5); line-height: 2; letter-spacing: 0.04em; max-width: 520px; margin: 0 auto; }
-    .scan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-    .scan-upload-panel {
-      border: 1px solid rgba(201,168,76,0.2);
-      background: rgba(201,168,76,0.02);
-      padding: 32px;
-    }
-    .scan-upload-zone {
-      border: 1px dashed rgba(201,168,76,0.35);
-      aspect-ratio: 3/4; max-height: 400px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden;
-      background: rgba(0,0,0,0.3);
-    }
-    .scan-upload-zone:hover { border-color: var(--gold); background: rgba(201,168,76,0.04); }
-    .scan-upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-    .scan-upload-icon { margin-bottom: 16px; opacity: 0.6; display: flex; align-items: center; justify-content: center; }
-    .scan-upload-text { font-size: 11px; font-weight: 300; color: rgba(250,250,248,0.4); letter-spacing: 0.05em; text-align: center; line-height: 1.9; }
-    .scan-upload-text strong { display: block; font-size: 13px; font-weight: 400; color: rgba(250,250,248,0.7); margin-bottom: 6px; }
-    #scan-preview-wrap { display: none; position: relative; user-select: none; }
-    #scan-preview-wrap canvas { width: 100%; height: auto; display: block; max-height: 440px; }
-    #scan-zones-overlay { position: absolute; inset: 0; pointer-events: none; }
-    .scan-zone-handle {
-      position: absolute; pointer-events: all; cursor: grab; transform: translate(-50%, -50%);
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-      transition: filter 0.15s;
-    }
-    .scan-zone-handle:active { cursor: grabbing; filter: brightness(1.3); }
-    .szh-ring {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: 1.5px solid var(--gold); background: rgba(201,168,76,0.12);
-      box-shadow: 0 0 0 1px rgba(201,168,76,0.15), inset 0 0 8px rgba(201,168,76,0.1);
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-    .scan-zone-handle:hover .szh-ring,
-    .scan-zone-handle.dragging .szh-ring {
-      background: rgba(201,168,76,0.25);
-      box-shadow: 0 0 0 3px rgba(201,168,76,0.2), 0 0 14px rgba(201,168,76,0.3);
-    }
-    .szh-label {
-      display: flex; align-items: center; gap: 4px;
-      font-size: 8px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); background: rgba(0,0,0,0.75); padding: 3px 8px;
-      white-space: nowrap; pointer-events: none; backdrop-filter: blur(4px);
-    }
-    .scan-drag-hint {
-      margin-top: 10px; font-size: 10px; color: rgba(250,250,248,0.3);
-      letter-spacing: 0.05em; text-align: center; font-weight: 300;
-    }
-    .scan-btn-row { display: flex; gap: 10px; margin-top: 16px; }
-    .scan-analyse-btn {
-      flex: 1; padding: 14px; font-family: var(--font-body); font-size: 9px; font-weight: 600;
-      letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; border: none;
-      background: var(--gold); color: var(--black); transition: all 0.3s;
-    }
-    .scan-analyse-btn:hover { background: var(--gold-light); }
-    .scan-analyse-btn:disabled { opacity: 0.4; cursor: default; }
-    .scan-clear-btn {
-      padding: 14px 18px; font-family: var(--font-body); font-size: 9px; font-weight: 500;
-      letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
-      background: transparent; border: 1px solid rgba(201,168,76,0.25); color: rgba(250,250,248,0.4);
-      transition: all 0.2s;
-    }
-    .scan-clear-btn:hover { border-color: var(--gold); color: var(--gold); }
-    .scan-privacy-note {
-      margin-top: 14px; font-size: 10px; color: rgba(250,250,248,0.25); line-height: 1.7;
-      letter-spacing: 0.03em; text-align: center;
-    }
-    /* results panel */
-    .scan-results-panel { display: flex; flex-direction: column; gap: 20px; }
-    .scan-result-card {
-      border: 1px solid rgba(201,168,76,0.12); background: rgba(255,255,255,0.02);
-      padding: 24px 28px; animation: caFadeUp 0.4s ease;
-    }
-    .src-label {
-      font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600;
-      color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
-    }
-    .src-label::before { content: ''; width: 16px; height: 1px; background: var(--gold); display: inline-block; }
-    .src-swatches { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-    .src-swatch {
-      width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.1);
-      position: relative; cursor: pointer; transition: transform 0.15s;
-      flex-shrink: 0;
-    }
-    .src-swatch:hover { transform: scale(1.1); }
-    .src-swatch .src-sw-hex {
-      position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
-      font-size: 8px; font-family: monospace; color: rgba(250,250,248,0.5); white-space: nowrap;
-    }
-    .src-swatches-wrap { margin-bottom: 24px; }
-    .src-analysis {
-      font-size: 11px; font-weight: 300; line-height: 1.9; color: rgba(250,250,248,0.55);
-      letter-spacing: 0.03em;
-    }
-    .src-analysis strong { color: var(--gold-light); font-weight: 500; }
-    .scan-undertone-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 18px; margin: 10px 0;
-      font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
-    }
-    .scan-season-suggest {
-      background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25);
-      padding: 20px 24px; margin-top: 8px;
-    }
-    .scan-season-suggest .sss-title {
-      font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600;
-      color: var(--gold); margin-bottom: 10px;
-    }
-    .scan-season-suggest .sss-name {
-      font-family: var(--font-display); font-size: 1.5rem; font-weight: 300;
-      color: var(--white); line-height: 1.2; margin-bottom: 8px;
-    }
-    .scan-season-suggest .sss-name em { font-style: italic; color: var(--gold-light); }
-    .scan-season-suggest p {
-      font-size: 11px; color: rgba(250,250,248,0.5); font-weight: 300; line-height: 1.8;
-    }
-    .sss-strip { display: flex; height: 6px; margin: 12px 0 16px; }
-    .sss-strip div { flex: 1; }
-    .sss-btn {
-      font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--black); background: var(--gold); border: none; padding: 10px 24px;
-      cursor: pointer; font-family: var(--font-body); transition: background 0.2s;
-    }
-    .sss-btn:hover { background: var(--gold-light); }
-    .scan-loading {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      min-height: 300px; gap: 20px;
-    }
-    .scan-spinner {
-      width: 48px; height: 48px; border: 1px solid rgba(201,168,76,0.2);
-      border-top-color: var(--gold); border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .scan-loading-text { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(250,250,248,0.4); font-weight: 300; }
-    .scan-empty {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      min-height: 300px; gap: 16px; text-align: center;
-    }
-    .scan-empty-icon { font-size: 40px; opacity: 0.15; }
-    .scan-empty-text { font-size: 11px; color: rgba(250,250,248,0.3); font-weight: 300; line-height: 1.8; letter-spacing: 0.04em; }
-    .conf-bar-wrap { margin-top: 10px; }
-    .conf-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(250,250,248,0.35); font-weight: 500; margin-bottom: 6px; display: flex; justify-content: space-between; }
-    .conf-bar { height: 2px; background: rgba(255,255,255,0.08); }
-    .conf-fill { height: 100%; background: var(--gold); transition: width 0.8s ease; }
-
-    /* ── AI CHATBOT ── */
-    .chat-fab {
-      position: fixed; bottom: 32px; right: 32px; z-index: 1000;
-      width: 60px; height: 60px; border-radius: 50%;
-      background: var(--gold); border: none; cursor: pointer;
-      box-shadow: 0 8px 32px rgba(201,168,76,0.35);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px; transition: all 0.3s; font-family: var(--font-body);
-    }
-    .chat-fab:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(201,168,76,0.5); background: var(--gold-light); }
-    .chat-fab-label {
-      position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
-      background: var(--black); color: var(--white);
-      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500;
-      padding: 8px 14px; white-space: nowrap; font-family: var(--font-body);
-      opacity: 0; pointer-events: none; transition: opacity 0.3s;
-      border: 1px solid rgba(201,168,76,0.2);
-    }
-    .chat-fab:hover .chat-fab-label { opacity: 1; }
-    .chat-window {
-      position: fixed; bottom: 108px; right: 32px; z-index: 1001;
-      width: 380px; max-height: 580px; display: flex; flex-direction: column;
-      background: #0f0f0d; border: 1px solid rgba(201,168,76,0.2);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-      transform: translateY(20px) scale(0.95); opacity: 0;
-      pointer-events: none; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    .chat-window.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
-    .chat-header {
-      padding: 18px 22px; display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 1px solid rgba(201,168,76,0.12);
-      background: rgba(201,168,76,0.04);
-    }
-    .chat-header-left { display: flex; align-items: center; gap: 12px; }
-    .chat-avatar {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; flex-shrink: 0;
-    }
-    .chat-header-name { font-size: 12px; font-weight: 500; color: var(--white); letter-spacing: 0.04em; }
-    .chat-header-sub { font-size: 9px; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; margin-top: 1px; }
-    .chat-close {
-      background: none; border: none; color: rgba(250,250,248,0.4); cursor: pointer;
-      font-size: 18px; transition: color 0.2s; line-height: 1; padding: 4px;
-    }
-    .chat-close:hover { color: var(--white); }
-    .chat-messages {
-      flex: 1; overflow-y: auto; padding: 20px 18px; display: flex; flex-direction: column;
-      gap: 14px; min-height: 0; scrollbar-width: thin; scrollbar-color: rgba(201,168,76,0.2) transparent;
-    }
-    .chat-msg { display: flex; gap: 10px; animation: caFadeUp 0.3s ease; }
-    .chat-msg.user { flex-direction: row-reverse; }
-    .chat-msg-avatar {
-      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      display: flex; align-items: center; justify-content: center; font-size: 12px;
-    }
-    .chat-msg.user .chat-msg-avatar {
-      background: rgba(255,255,255,0.1); font-size: 11px;
-    }
-    .chat-bubble {
-      max-width: 80%; padding: 11px 15px; font-size: 12px; line-height: 1.7;
-      font-weight: 300; letter-spacing: 0.02em;
-    }
-    .chat-msg:not(.user) .chat-bubble {
-      background: rgba(255,255,255,0.05); color: rgba(250,250,248,0.85);
-      border-radius: 0 12px 12px 12px;
-    }
-    .chat-msg.user .chat-bubble {
-      background: rgba(201,168,76,0.15); color: rgba(250,250,248,0.9);
-      border-radius: 12px 0 12px 12px;
-    }
-    .chat-typing {
-      display: flex; gap: 4px; align-items: center; padding: 4px 0;
-    }
-    .chat-typing span {
-      width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
-      animation: typingBounce 1.2s infinite ease-in-out;
-    }
-    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
-    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typingBounce { 0%,80%,100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
-    .chat-input-row {
-      padding: 14px 16px; border-top: 1px solid rgba(201,168,76,0.1);
-      display: flex; gap: 10px; align-items: flex-end;
-    }
-    .chat-input {
-      flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.15);
-      color: var(--white); padding: 10px 14px; font-size: 12px; font-family: var(--font-body);
-      font-weight: 300; outline: none; resize: none; min-height: 40px; max-height: 120px;
-      scrollbar-width: none; line-height: 1.5;
-    }
-    .chat-input::placeholder { color: rgba(250,250,248,0.25); }
-    .chat-input:focus { border-color: rgba(201,168,76,0.4); }
-    .chat-send {
-      width: 40px; height: 40px; background: var(--gold); border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; transition: background 0.2s; flex-shrink: 0;
-    }
-    .chat-send:hover { background: var(--gold-light); }
-    .chat-send:disabled { opacity: 0.4; cursor: default; }
-    .chat-suggestions {
-      padding: 0 16px 12px; display: flex; flex-wrap: wrap; gap: 6px;
-    }
-    .chat-suggestion {
-      font-size: 10px; letter-spacing: 0.08em; color: var(--gold-light);
-      border: 1px solid rgba(201,168,76,0.25); padding: 5px 11px;
-      cursor: pointer; transition: all 0.2s; background: transparent; font-family: var(--font-body);
-    }
-    .chat-suggestion:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
-    .chat-colour-chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
-      padding: 3px 9px 3px 5px; border-radius: 3px; margin: 2px 0;
-      font-size: 11px; color: rgba(250,250,248,0.7); vertical-align: middle;
-    }
-    .chat-colour-chip-dot { width: 12px; height: 12px; border-radius: 2px; }
-    .chat-season-tag {
-      display: inline-block; padding: 2px 10px; font-size: 10px; font-weight: 600;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
-    }
-    /* ── per-zone ring sizes ── */
-    #zone-skin .szh-ring { width: 36px; height: 36px; }
-    #zone-hair .szh-ring { width: 36px; height: 36px; }
-    #zone-eye  .szh-ring { width: 18px; height: 18px; } /* smaller — eyes need precision */
-
-    /* ── zoom controls ── */
-    .scan-zoom-bar {
-      display: none; /* shown via JS after image loads */
-      align-items: center; gap: 0;
-      border: 1px solid rgba(201,168,76,0.2);
-      background: rgba(0,0,0,0.4);
-      position: absolute; bottom: 10px; right: 10px; z-index: 10;
-      backdrop-filter: blur(6px);
-    }
-    .szoom-btn {
-      width: 32px; height: 32px; background: transparent; border: none;
-      color: var(--gold); cursor: pointer; display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-body); font-size: 16px; font-weight: 300;
-      transition: background 0.15s; flex-shrink: 0;
-    }
-    .szoom-btn:hover { background: rgba(201,168,76,0.12); }
-    .szoom-btn:active { background: rgba(201,168,76,0.22); }
-    .szoom-level {
-      font-size: 9px; font-weight: 600; letter-spacing: 0.15em; color: var(--gold);
-      padding: 0 10px; font-family: var(--font-body); white-space: nowrap;
-      border-left: 1px solid rgba(201,168,76,0.2); border-right: 1px solid rgba(201,168,76,0.2);
-      line-height: 32px;
-    }
-    /* the canvas + overlay wrapper that actually scales */
-    #scan-zoom-inner {
-      transform-origin: top center;
-      transition: transform 0.25s ease;
-      position: relative; /* so overlay stays aligned */
-    }
-    #scan-preview-wrap { overflow: hidden; } /* clip when zoomed */
-    .chat-scroll-btn {
-      position: absolute; bottom: 80px; right: 48px; z-index: 2;
-      width: 28px; height: 28px; border-radius: 50%; background: rgba(201,168,76,0.8);
-      border: none; cursor: pointer; color: var(--black); font-size: 12px;
-      display: none; align-items: center; justify-content: center; transition: all 0.2s;
-    }
-
-    /* ── FEATURE TEASE STRIP ── */
-    .feature-strip {
-      background: var(--black); border-top: 1px solid rgba(201,168,76,0.12);
-      display: grid; grid-template-columns: repeat(4,1fr);
-    }
-    .feature-tile {
-      padding: 40px 32px; border-right: 1px solid rgba(201,168,76,0.08);
-      text-align: center; transition: background 0.3s;
-    }
-    .feature-tile:last-child { border-right: none; }
-    .feature-tile:hover { background: rgba(201,168,76,0.03); }
-    .ft-icon { font-size: 28px; margin-bottom: 14px; }
-    .ft-title { font-family: var(--font-display); font-size: 1rem; color: var(--white); font-weight: 400; margin-bottom: 6px; }
-    .ft-desc { font-size: 10px; color: rgba(250,250,248,0.35); font-weight: 300; line-height: 1.8; letter-spacing: 0.03em; }
-
-    /* responsive */
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       nav { padding: 18px 24px; }
       .nav-links { display: none; }
-      .page-hero-inner { padding: 48px 32px; }
-      .booking-banner { padding: 20px 24px; }
-      #ca-landing { padding: 60px 32px; }
-      #ca-quiz { padding: 48px 24px; }
-      #ca-seasons { padding: 48px 24px; }
-      .seasons-row { grid-template-columns: 1fr 1fr; }
-      .guide-banner { padding: 28px 24px; }
-      .g-tabs { padding: 0 24px; }
-      .g-body { padding: 40px 24px; }
-      .mk-grid, .mc-grid, .about-grid { grid-template-columns: 1fr; }
+      .page-hero-inner { padding: 60px 24px; }
+      .page-hero h1 { font-size: 48px; }
+      .hero-bg-palette { display: none; }
+      .how-section, #quiz-section, #pricing-section, .faq-section { padding: 60px 24px; }
+      .how-steps { grid-template-columns: 1fr; }
+      .testimonial-section { padding: 60px 24px; }
+      .result-reveal { padding: 60px 24px; }
+      footer { padding: 48px 24px 32px; }
       .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
-      footer { padding: 48px 32px 32px; }
-      .seasons-top { flex-direction: column; align-items: flex-start; gap: 16px; }
-      #ca-photo-scan { padding: 60px 24px; }
-      .scan-grid { grid-template-columns: 1fr; }
-      .feature-strip { grid-template-columns: 1fr 1fr; }
-      .chat-window { width: calc(100vw - 48px); right: 24px; }
+      .hero-scroll-hint { display: none; }
     }
   </style>
 </head>
@@ -823,423 +502,326 @@
   </ul>
 </nav>
 
-<!-- PAGE HERO -->
+<!-- HERO -->
 <section class="page-hero">
+  <div class="hero-bg-palette" id="hero-bg-palette"></div>
+  <div class="hero-bg-fade"></div>
   <div class="page-hero-inner">
-    <p class="hero-eyebrow">Colour Analysis</p>
-    <h1>Discover Your<br><em>Colour Season</em></h1>
-    <p>Unlock the palette that makes your complexion glow — wardrobe colours, makeup shades, and an instant shopping colour-matcher for all 12 seasons.</p>
+    <p class="hero-eyebrow">Professional Colour Analysis</p>
+    <h1>The Colours That<br>Were Made <em>For You</em></h1>
+    <p class="page-hero-desc">Most women are wearing the wrong colours. Not because they lack taste — but because no one has ever shown them which ones make their complexion truly glow. That changes today.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="scrollToQuiz()">Discover Your Season</button>
+      <a href="#pricing-section" class="btn-ghost">View Packages</a>
+    </div>
   </div>
-  <div class="hero-palette-strip" id="hero-strip"></div>
+  <div class="hero-scroll-hint">Scroll to begin</div>
 </section>
 
-<!-- BOOKING BANNER -->
-<div class="booking-banner">
-  <div class="booking-banner-text">
-    <div class="booking-banner-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
-        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-      </svg>
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <p class="section-label">The Process</p>
+  <h2>What happens when you<br>book with <em>Amba</em></h2>
+  <div class="how-steps">
+    <div class="how-step">
+      <span class="step-num">01</span>
+      <div class="step-title">Take the colour assessment</div>
+      <p class="step-desc">Answer four quick questions to get a sense of your colour family. It's an educated estimate which is a starting point, not a diagnosis.</p>
     </div>
-    <div>
-      <strong>Prefer a professional in-person analysis?</strong>
-      <p>Book an in-person colour analysis or styling session with Amba available in Central London and worldwide.</p>
+    <div class="how-step">
+      <span class="step-num">02</span>
+      <div class="step-title">Send your photos</div>
+      <p class="step-desc">Upload a handful of natural light photographs. Amba reviews them within 48 hours, applying 16-season professional methodology.</p>
+    </div>
+    <div class="how-step">
+      <span class="step-num">03</span>
+      <div class="step-title">Receive your full report</div>
+      <p class="step-desc">A beautifully designed colour report with your confirmed season, full wardrobe palette, makeup guidance and shopping tips yours to keep.</p>
+    </div>
+    <div class="how-step">
+      <span class="step-num">04</span>
+      <div class="step-title">Your 15-min Zoom call</div>
+      <p class="step-desc">A personal consultation to walk through your results, answer any questions you may have, and help you understand exactly how to use your colours.</p>
     </div>
   </div>
-  <div class="booking-banner-actions">
-    <a href="contact.html" class="btn-book">Book Online</a>
-    <a href="mailto:stylist@ambahaverly.co.uk" class="btn-email">stylist@ambahaverly.co.uk</a>
-  </div>
-</div>
+</section>
 
-<!-- FEATURE STRIP -->
-<div class="feature-strip">
-  <div class="feature-tile">
-    <div class="ft-icon">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="3" y="7" width="22" height="17" rx="1" stroke="#c9a84c" stroke-width="1.2"/>
-        <circle cx="14" cy="15.5" r="4.5" stroke="#c9a84c" stroke-width="1.2"/>
-        <path d="M10 7V5.5a1 1 0 011-1h6a1 1 0 011 1V7" stroke="#c9a84c" stroke-width="1.2"/>
-        <circle cx="14" cy="15.5" r="2" fill="#c9a84c" opacity="0.4"/>
-      </svg>
+<!-- QUIZ -->
+<section id="quiz-section">
+  <div class="quiz-wrap">
+    <div class="quiz-header">
+      <p class="section-label" style="justify-content:center;"><span style="width:20px;height:1px;background:var(--gold);display:inline-block;"></span>&nbsp;&nbsp;Taster Quiz&nbsp;&nbsp;<span style="width:20px;height:1px;background:var(--gold);display:inline-block;"></span></p>
+      <h2>Find Your <em>Colour Season</em></h2>
+      <p>Four quick questions to point you toward your palette family. This is just a starting point only a professional analysis confirms your true season.</p>
     </div>
-    <div class="ft-title">Photo Tone Scan</div>
-    <div class="ft-desc">Upload a selfie to extract your real skin, hair & eye undertones</div>
-  </div>
-  <div class="feature-tile">
-    <div class="ft-icon">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="8" cy="8" r="4" stroke="#c9a84c" stroke-width="1.2"/>
-        <circle cx="20" cy="8" r="4" stroke="#c9a84c" stroke-width="1.2"/>
-        <circle cx="8" cy="20" r="4" stroke="#c9a84c" stroke-width="1.2"/>
-        <circle cx="20" cy="20" r="4" stroke="#c9a84c" stroke-width="1.2"/>
-        <circle cx="8" cy="8" r="1.5" fill="#c9a84c" opacity="0.5"/>
-        <circle cx="20" cy="8" r="1.5" fill="#c9a84c" opacity="0.5"/>
-        <circle cx="8" cy="20" r="1.5" fill="#c9a84c" opacity="0.5"/>
-        <circle cx="20" cy="20" r="1.5" fill="#c9a84c" opacity="0.5"/>
-      </svg>
-    </div>
-    <div class="ft-title">12-Season Guide</div>
-    <div class="ft-desc">Full wardrobe palettes, makeup colours & shopping tips</div>
-  </div>
-  <div class="feature-tile">
-    <div class="ft-icon">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14 3L15.8 11.2L24 14L15.8 16.8L14 25L12.2 16.8L4 14L12.2 11.2L14 3Z" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/>
-        <circle cx="14" cy="14" r="2.5" fill="#c9a84c" opacity="0.35"/>
-      </svg>
-    </div>
-    <div class="ft-title">Colour Matcher</div>
-    <div class="ft-desc">Pick any colour to see if it works for your season</div>
-  </div>
-  <div class="feature-tile">
-    <div class="ft-icon">
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 6h20v14a1 1 0 01-1 1H5a1 1 0 01-1-1V6z" stroke="#c9a84c" stroke-width="1.2"/>
-        <path d="M4 6l10 8 10-8" stroke="#c9a84c" stroke-width="1.2"/>
-        <path d="M9 13l-5 7M19 13l5 7" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
-      </svg>
-    </div>
-    <div class="ft-title">AI Stylist Chat</div>
-    <div class="ft-desc">Ask Amba's AI colour expert any question about your palette</div>
-  </div>
-</div>
 
-<!-- PHOTO SCAN SECTION -->
-<section id="ca-photo-scan">
-  <div class="scan-inner">
-    <div class="scan-header">
-      <p class="ca-section-label">New Feature</p>
-      <h2>Photo <em>Tone Analysis</em></h2>
-      <p>Upload a clear, natural-light selfie. We'll extract your skin undertones, hair colour and eye colour — then suggest the most likely season matches.</p>
-    </div>
-    <div class="scan-grid">
-      <!-- Upload panel -->
-      <div class="scan-upload-panel">
-        <div id="scan-upload-zone" class="scan-upload-zone">
-          <input type="file" accept="image/*" id="scan-file-input" onchange="scanLoadImage(event)">
-          <div class="scan-upload-icon">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 28V14M20 14L13 21M20 14L27 21" stroke="#c9a84c" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-              <rect x="6" y="30" width="28" height="1.2" rx="0.6" fill="#c9a84c" opacity="0.2"/>
-            </svg>
-          </div>
-          <div class="scan-upload-text">
-            <strong>Drop or click to upload</strong>
-            Best results with a front-facing photo<br>in natural daylight, no filter
-          </div>
+    <!-- Progress -->
+    <div class="q-progress"><div class="q-fill" id="q-fill" style="width:25%"></div></div>
+
+    <!-- Q1 -->
+    <div class="q-step active" id="qq1">
+      <div class="q-num">Question 1 of 4</div>
+      <div class="q-title">Look at your inner wrist — what colour are your veins?</div>
+      <div class="q-hint">Check in natural daylight, away from any artificial light.</div>
+      <div class="q-opts">
+        <div class="q-opt" onclick="pickOpt(this,'q1','blue')">
+          <div class="opt-swatch" style="background:linear-gradient(135deg,#7B9EC8,#5A7AAA)"></div>
+          <div><div class="opt-name">Blue or purple</div><div class="opt-sub">Distinctly cool-toned</div></div>
         </div>
-        <div id="scan-preview-wrap">
-          <div id="scan-zoom-inner">
-            <canvas id="scan-canvas"></canvas>
-            <!-- Draggable zone markers — positioned absolutely over the canvas -->
-            <div id="scan-zones-overlay">
-              <div class="scan-zone-handle" id="zone-skin" data-zone="skin" title="Drag to reposition skin sample area">
-                <div class="szh-ring"></div>
-                <div class="szh-label">
-                  <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3" fill="#c9a84c" opacity="0.7"/></svg>
-                  Skin
-                </div>
-              </div>
-              <div class="scan-zone-handle" id="zone-hair" data-zone="hair" title="Drag to reposition hair sample area">
-                <div class="szh-ring"></div>
-                <div class="szh-label">
-                  <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3" fill="#c9a84c" opacity="0.7"/></svg>
-                  Hair
-                </div>
-              </div>
-              <div class="scan-zone-handle" id="zone-eye" data-zone="eye" title="Drag to reposition eye sample area">
-                <div class="szh-ring"></div>
-                <div class="szh-label">
-                  <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3" fill="#c9a84c" opacity="0.7"/></svg>
-                  Eyes
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Zoom controls — shown after image loads -->
-          <div class="scan-zoom-bar" id="scan-zoom-bar">
-            <button class="szoom-btn" onclick="scanZoom(-1)" title="Zoom out">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="5" stroke="#c9a84c" stroke-width="1.1"/><path d="M3.5 6h5" stroke="#c9a84c" stroke-width="1.1" stroke-linecap="round"/><path d="M10 10l2.5 2.5" stroke="#c9a84c" stroke-width="1.1" stroke-linecap="round"/></svg>
-            </button>
-            <span class="szoom-level" id="szoom-level">100%</span>
-            <button class="szoom-btn" onclick="scanZoom(1)" title="Zoom in">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="5" stroke="#c9a84c" stroke-width="1.1"/><path d="M3.5 6h5M6 3.5v5" stroke="#c9a84c" stroke-width="1.1" stroke-linecap="round"/><path d="M10 10l2.5 2.5" stroke="#c9a84c" stroke-width="1.1" stroke-linecap="round"/></svg>
-            </button>
-          </div>
+        <div class="q-opt" onclick="pickOpt(this,'q1','green')">
+          <div class="opt-swatch" style="background:linear-gradient(135deg,#6A9A60,#4E7A44)"></div>
+          <div><div class="opt-name">Green or olive</div><div class="opt-sub">Distinctly warm-toned</div></div>
         </div>
-        <p class="scan-drag-hint">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="vertical-align:middle;margin-right:5px;"><circle cx="6" cy="6" r="5" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/><path d="M6 3v6M3 6h6" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/></svg>
-          Drag the markers to align with your facial features
-        </p>
-        <div class="scan-btn-row">
-          <button class="scan-analyse-btn" id="scan-btn" onclick="runScanAnalysis()" disabled>Analyse My Tones</button>
-          <button class="scan-clear-btn" onclick="scanClear()">Clear</button>
+        <div class="q-opt" onclick="pickOpt(this,'q1','mixed')">
+          <div class="opt-swatch" style="background:linear-gradient(135deg,#7B9EC8 50%,#6A9A60 50%)"></div>
+          <div><div class="opt-name">A mix of both</div><div class="opt-sub">Hard to tell clearly</div></div>
         </div>
-        <p class="scan-privacy-note">
-          <svg width="10" height="12" viewBox="0 0 10 12" fill="none" style="vertical-align:middle;margin-right:5px;"><rect x="1" y="5" width="8" height="7" rx="0.8" stroke="#c9a84c" stroke-width="0.9" opacity="0.5"/><path d="M3 5V3.5a2 2 0 014 0V5" stroke="#c9a84c" stroke-width="0.9" opacity="0.5"/></svg>
-          Your photo never leaves your browser. Analysis is done locally.
-        </p>
       </div>
-      <!-- Results panel -->
-      <div class="scan-results-panel" id="scan-results-panel">
-        <div class="scan-empty">
-          <div class="scan-empty-icon" style="opacity:0.12">
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><path d="M22 4L25.4 17.6L39 22L25.4 26.4L22 40L18.6 26.4L5 22L18.6 17.6L22 4Z" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="scan-empty-text">Upload a photo to begin your<br>tone analysis</div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-step" id="qq2">
+      <div class="q-num">Question 2 of 4</div>
+      <div class="q-title">Which metal jewellery flatters you most?</div>
+      <div class="q-hint">Think about what you instinctively reach for, not what you own.</div>
+      <div class="q-opts">
+        <div class="q-opt" onclick="pickOpt(this,'q2','silver')">
+          <div class="opt-swatch" style="background:linear-gradient(135deg,#D4D4D4,#A8A8A8)"></div>
+          <div><div class="opt-name">Silver or platinum</div><div class="opt-sub">Cool metals look best on me</div></div>
+        </div>
+        <div class="q-opt" onclick="pickOpt(this,'q2','gold')">
+          <div class="opt-swatch" style="background:linear-gradient(135deg,#D4AA50,#A87A28)"></div>
+          <div><div class="opt-name">Gold or rose gold</div><div class="opt-sub">Warm metals are more flattering</div></div>
+        </div>
+        <div class="q-opt" onclick="pickOpt(this,'q2','both')">
+          <div class="opt-swatch" style="background:linear-gradient(135deg,#D4D4D4 50%,#D4AA50 50%)"></div>
+          <div><div class="opt-name">Both suit me equally</div><div class="opt-sub">I can wear either comfortably</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-step" id="qq3">
+      <div class="q-num">Question 3 of 4</div>
+      <div class="q-title">How does your skin respond in the sun?</div>
+      <div class="q-hint">Your natural tendency, without sunscreen.</div>
+      <div class="q-opts">
+        <div class="q-opt" onclick="pickOpt(this,'q3','burn')">
+          <div class="opt-swatch" style="background:linear-gradient(135deg,#F0C0A0,#E8A080)"></div>
+          <div><div class="opt-name">I burn easily</div><div class="opt-sub">Little to no tanning</div></div>
+        </div>
+        <div class="q-opt" onclick="pickOpt(this,'q3','tan')">
+          <div class="opt-swatch" style="background:linear-gradient(135deg,#C09060,#A07040)"></div>
+          <div><div class="opt-name">I tan easily</div><div class="opt-sub">Skin goes golden or olive</div></div>
+        </div>
+        <div class="q-opt" onclick="pickOpt(this,'q3','mixed')">
+          <div class="opt-swatch" style="background:linear-gradient(135deg,#D4A878,#B88858)"></div>
+          <div><div class="opt-name">Burn first, then tan</div><div class="opt-sub">A bit of both</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-step" id="qq4">
+      <div class="q-num">Question 4 of 4</div>
+      <div class="q-title">What's the contrast between your features?</div>
+      <div class="q-hint">Compare hair, skin and eyes in natural light.</div>
+      <div class="q-opts">
+        <div class="q-opt" onclick="pickOpt(this,'q4','high')">
+          <div class="opt-swatch" style="background:linear-gradient(180deg,#1A1010 33%,#F0E0D0 33% 66%,#1A2A40 66%)"></div>
+          <div><div class="opt-name">High contrast</div><div class="opt-sub">Very dark & very light, or striking eyes</div></div>
+        </div>
+        <div class="q-opt" onclick="pickOpt(this,'q4','medium')">
+          <div class="opt-swatch" style="background:linear-gradient(180deg,#7A5035 33%,#D4A878 33% 66%,#5A6A40 66%)"></div>
+          <div><div class="opt-name">Medium contrast</div><div class="opt-sub">Noticeably different but harmonious</div></div>
+        </div>
+        <div class="q-opt" onclick="pickOpt(this,'q4','low')">
+          <div class="opt-swatch" style="background:linear-gradient(180deg,#9A8060 33%,#C8A880 33% 66%,#8A7850 66%)"></div>
+          <div><div class="opt-name">Low contrast</div><div class="opt-sub">Features blend softly together</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-nav">
+      <button class="qbtn qbtn-back" id="qbtn-back" onclick="quizBack()" style="visibility:hidden">← Back</button>
+      <button class="qbtn qbtn-next" id="qbtn-next" onclick="quizNext()" disabled>Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- RESULT TEASER -->
+<section id="result-section">
+  <div class="result-reveal">
+    <p class="result-eyebrow">Your estimated season</p>
+    <div class="result-season-name" id="res-name"></div>
+    <div class="result-strip" id="res-strip"></div>
+
+    <div class="result-teaser-wrap" id="res-teaser-wrap">
+      <div class="result-teaser-blur" id="res-teaser-blur">
+        <!-- populated by JS -->
+      </div>
+      <div class="result-lock-overlay">
+        <div class="lock-msg">
+          <p>This is your estimated season based on four questions. To discover your <strong>true confirmed season</strong> — determined using professional 16-season methodology, draping technique and expert eye — book a virtual colour analysis with Amba.</p>
+          <button class="btn-primary" onclick="scrollToPricing()">See Packages from £50 →</button>
+          <small>Includes full report · 15-min Zoom consultation · up to 25% off your first styling session</small>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COLOUR ANALYSIS TOOL -->
-<div class="tool-wrap">
-  <div class="ca-root">
-
-    <!-- LANDING -->
-    <div class="ca-screen active" id="ca-landing">
-      <div class="ca-landing-inner">
-        <p class="ca-section-label">Interactive Tool</p>
-        <h2 class="ca-landing-title">Find Your<br><em>Perfect Palette</em></h2>
-        <p class="ca-landing-desc">Answer four quick questions to discover your season — or choose from all 12 if you already know yours. Each season includes a full wardrobe guide, makeup palette, and a colour-matching tool for shopping online.</p>
-        <div class="season-dot-grid" id="landing-dot-grid"></div>
-        <div class="ca-landing-btns">
-          <button class="ca-btn-primary" onclick="goCA('quiz')">Take the Quiz</button>
-          <button class="ca-btn-outline" onclick="goCA('seasons')">I know my season</button>
-        </div>
-      </div>
+<!-- WHAT YOU GET -->
+<div class="what-strip">
+  <div class="what-tile">
+    <div class="what-icon">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M8 4h16v24H8z" stroke="#c9a84c" stroke-width="1.2"/>
+        <path d="M11 10h10M11 14h10M11 18h6" stroke="#c9a84c" stroke-width="1" stroke-linecap="round"/>
+      </svg>
     </div>
-
-    <!-- QUIZ -->
-    <div class="ca-screen" id="ca-quiz">
-      <div class="quiz-inner-wrap">
-        <div class="quiz-top">
-          <h2>Find Your Season</h2>
-          <p>Four quick questions — we'll suggest your best match</p>
-        </div>
-        <div class="q-progress"><div class="q-fill" id="q-fill" style="width:25%"></div></div>
-
-        <div class="q-step active" id="qq1">
-          <div class="q-num">Question 1 of 4</div>
-          <div class="q-title">Look at your inner wrist — what colour are your veins?</div>
-          <div class="q-hint">Check in natural light. Don't overthink it.</div>
-          <div class="q-opts">
-            <div class="q-opt" onclick="pickOpt(this,'q1','blue')">
-              <div class="opt-swatch" style="background:linear-gradient(135deg,#7B9EC8,#5A7AAA)"></div>
-              <div><div class="opt-name">Blue or purple</div><div class="opt-sub">Distinctly cool-toned</div></div>
-            </div>
-            <div class="q-opt" onclick="pickOpt(this,'q1','green')">
-              <div class="opt-swatch" style="background:linear-gradient(135deg,#6A9A60,#4E7A44)"></div>
-              <div><div class="opt-name">Green or olive</div><div class="opt-sub">Distinctly warm-toned</div></div>
-            </div>
-            <div class="q-opt" onclick="pickOpt(this,'q1','mixed')">
-              <div class="opt-swatch" style="background:linear-gradient(135deg,#7B9EC8 50%,#6A9A60 50%)"></div>
-              <div><div class="opt-name">A mix of both</div><div class="opt-sub">Hard to tell</div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="q-step" id="qq2">
-          <div class="q-num">Question 2 of 4</div>
-          <div class="q-title">Which metal jewellery suits you best?</div>
-          <div class="q-hint">Think about what you instinctively reach for — or what earns the most compliments.</div>
-          <div class="q-opts">
-            <div class="q-opt" onclick="pickOpt(this,'q2','silver')">
-              <div class="opt-swatch" style="background:linear-gradient(135deg,#D4D4D4,#A8A8A8)"></div>
-              <div><div class="opt-name">Silver or platinum</div><div class="opt-sub">Cool metals flatter me</div></div>
-            </div>
-            <div class="q-opt" onclick="pickOpt(this,'q2','gold')">
-              <div class="opt-swatch" style="background:linear-gradient(135deg,#D4AA50,#A87A28)"></div>
-              <div><div class="opt-name">Gold or rose gold</div><div class="opt-sub">Warm metals look best</div></div>
-            </div>
-            <div class="q-opt" onclick="pickOpt(this,'q2','both')">
-              <div class="opt-swatch" style="background:linear-gradient(135deg,#D4D4D4 50%,#D4AA50 50%)"></div>
-              <div><div class="opt-name">Both suit me equally</div><div class="opt-sub">I can wear either</div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="q-step" id="qq3">
-          <div class="q-num">Question 3 of 4</div>
-          <div class="q-title">How does your skin behave in the sun?</div>
-          <div class="q-hint">Your natural tendency, without sunscreen.</div>
-          <div class="q-opts">
-            <div class="q-opt" onclick="pickOpt(this,'q3','burn')">
-              <div class="opt-swatch" style="background:linear-gradient(135deg,#F0C0A0,#E8A080)"></div>
-              <div><div class="opt-name">I burn easily</div><div class="opt-sub">Little to no tanning</div></div>
-            </div>
-            <div class="q-opt" onclick="pickOpt(this,'q3','tan')">
-              <div class="opt-swatch" style="background:linear-gradient(135deg,#C09060,#A07040)"></div>
-              <div><div class="opt-name">I tan easily</div><div class="opt-sub">Skin goes golden or olive</div></div>
-            </div>
-            <div class="q-opt" onclick="pickOpt(this,'q3','mixed')">
-              <div class="opt-swatch" style="background:linear-gradient(135deg,#D4A878,#B88858)"></div>
-              <div><div class="opt-name">Burn first, then tan</div><div class="opt-sub">Some of both</div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="q-step" id="qq4">
-          <div class="q-num">Question 4 of 4</div>
-          <div class="q-title">What's the contrast between your features?</div>
-          <div class="q-hint">Compare hair, skin and eyes in natural light.</div>
-          <div class="q-opts">
-            <div class="q-opt" onclick="pickOpt(this,'q4','high')">
-              <div class="opt-swatch" style="background:linear-gradient(180deg,#1A1010 33%,#F0E0D0 33% 66%,#1A2A40 66%)"></div>
-              <div><div class="opt-name">High contrast</div><div class="opt-sub">Very dark & very light, or striking eyes</div></div>
-            </div>
-            <div class="q-opt" onclick="pickOpt(this,'q4','medium')">
-              <div class="opt-swatch" style="background:linear-gradient(180deg,#7A5035 33%,#D4A878 33% 66%,#5A6A40 66%)"></div>
-              <div><div class="opt-name">Medium contrast</div><div class="opt-sub">Noticeably different but harmonious</div></div>
-            </div>
-            <div class="q-opt" onclick="pickOpt(this,'q4','low')">
-              <div class="opt-swatch" style="background:linear-gradient(180deg,#9A8060 33%,#C8A880 33% 66%,#8A7850 66%)"></div>
-              <div><div class="opt-name">Low contrast</div><div class="opt-sub">Features blend softly together</div></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="q-nav">
-          <button class="qbtn qbtn-back" id="qbtn-back" onclick="quizBack()" style="visibility:hidden">← Back</button>
-          <button class="qbtn qbtn-next" id="qbtn-next" onclick="quizNext()" disabled>Next →</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- RESULT -->
-    <div class="ca-screen ca-screen-flex" id="ca-result">
-      <div>
-        <p class="result-eyebrow">Your suggested season</p>
-        <div class="result-name" id="res-name"></div>
-        <div class="result-strip" id="res-strip"></div>
-        <p class="result-desc" id="res-desc"></p>
-        <div class="result-btns">
-          <button class="ca-btn-primary" id="res-cta">See My Full Guide</button>
-          <button class="ca-btn-outline" onclick="goCA('seasons')">Browse All 12 Seasons</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- SEASONS -->
-    <div class="ca-screen" id="ca-seasons">
-      <div class="seasons-wrap">
-        <div class="seasons-top">
-          <div>
-            <p class="ca-section-label" style="justify-content:flex-start; margin-bottom:12px;">
-              <span style="width:20px;height:1px;background:var(--gold);display:inline-block;margin-right:10px;"></span>
-              All Seasons
-            </p>
-            <h2 style="font-family:var(--font-display);font-size:clamp(30px,3.5vw,48px);font-weight:300;">Select Your <em style="font-style:italic;color:var(--gold-dark);">Season</em></h2>
-          </div>
-          <button class="seasons-back" onclick="goCA('landing')">← Back</button>
-        </div>
-        <div id="seasons-list"></div>
-      </div>
-    </div>
-
-    <!-- GUIDE -->
-    <div class="ca-screen" id="ca-guide">
-      <div class="guide-banner">
-        <div class="guide-banner-left">
-          <div class="guide-banner-strip" id="g-banner-strip"></div>
-          <div>
-            <div class="guide-season-name" id="g-season-name"></div>
-            <div class="guide-family-badge" id="g-family-badge"></div>
-          </div>
-        </div>
-        <button class="guide-back" onclick="goCA('seasons')">← All Seasons</button>
-      </div>
-      <div class="guide-strip-full" id="g-strip-full"></div>
-      <div class="g-tabs">
-        <button class="g-tab active" onclick="showTab('wardrobe',this)">Wardrobe</button>
-        <button class="g-tab" onclick="showTab('makeup',this)">Makeup</button>
-        <button class="g-tab" onclick="showTab('matcher',this)">Colour Matcher</button>
-        <button class="g-tab" onclick="showTab('about',this)">About</button>
-      </div>
-      <div class="g-body">
-        <div class="g-panel active" id="gp-wardrobe"></div>
-        <div class="g-panel" id="gp-makeup"></div>
-        <div class="g-panel" id="gp-matcher">
-          <div class="mc-grid">
-            <div class="mc-card">
-              <div class="mc-title">Pick a colour from image</div>
-              <div id="mc-upload-wrap">
-                <div class="upload-zone">
-                  <input type="file" accept="image/*" id="mc-file" onchange="mcLoadImg(event)">
-                  <div class="upload-icon">↑</div>
-                  <div class="upload-text">Drop or click to upload a product photo<br>Then click any pixel to pick its colour</div>
-                </div>
-              </div>
-              <div id="mc-canvas-wrap" style="display:none; margin-top:12px;">
-                <div class="canvas-wrap" id="mc-cw">
-                  <canvas id="mc-cv"></canvas>
-                  <div class="canvas-hint">Click to pick colour</div>
-                </div>
-                <button class="clear-btn" onclick="mcClear()">Clear Image</button>
-              </div>
-              <div style="margin-top:16px; font-size:9px; text-transform:uppercase; letter-spacing:0.2em; color:var(--grey); font-weight:600; margin-bottom:10px;">Or enter manually</div>
-              <div class="clr-row">
-                <input type="color" id="mc-cpick" value="#C9A84C" oninput="mcSyncCol(this.value)" onchange="mcSyncCol(this.value)">
-                <input type="text" class="clr-input" id="mc-hexin" placeholder="#C9A84C" maxlength="7" oninput="mcSyncHex(this.value)">
-                <button class="clr-btn" id="mc-match-btn" onclick="mcMatchManual()">Match</button>
-              </div>
-              <div id="mc-picked" style="display:none;">
-                <div class="picked-row">
-                  <div class="picked-block" id="mc-pb"></div>
-                  <div><div class="picked-lbl">Picked colour</div><div class="picked-hex-val" id="mc-phex">—</div></div>
-                </div>
-              </div>
-            </div>
-            <div class="mc-card">
-              <div class="mc-title">Match results</div>
-              <div id="mc-results"><div style="font-size:11px;color:var(--grey);text-align:center;padding:40px 0;font-weight:300;letter-spacing:0.04em;">Pick a colour on the left to see matches</div></div>
-            </div>
-          </div>
-          <div class="tips-box">
-            <h4>Shopping Tips</h4>
-            <ul id="mc-tips"></ul>
-          </div>
-        </div>
-        <div class="g-panel" id="gp-about"></div>
-      </div>
-    </div>
-
-  </div><!-- end ca-root -->
-</div><!-- end tool-wrap -->
-
-<!-- AI STYLIST CHATBOT -->
-<button class="chat-fab" id="chat-fab" onclick="toggleChat()" title="Ask Amba's AI Stylist">
-  <span class="chat-fab-label">Ask the AI Stylist</span>
-  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M11 2L12.8 9.2L20 11L12.8 13.8L11 21L9.2 13.8L2 11L9.2 8.2L11 2Z" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="0.5" stroke-linejoin="round"/>
-  </svg>
-</button>
-<div class="chat-window" id="chat-window">
-  <div class="chat-header">
-    <div class="chat-header-left">
-      <div class="chat-avatar"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L8.4 5.7L13 7L8.4 9.3L7 14L5.6 9.3L1 7L5.6 4.7L7 1Z" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="0.3" stroke-linejoin="round"/></svg></div>
-      <div>
-        <div class="chat-header-name">Amba's AI Colour Stylist</div>
-        <div class="chat-header-sub">Colour Analysis Expert</div>
-      </div>
-    </div>
-    <button class="chat-close" onclick="toggleChat()">✕</button>
+    <div class="what-title">Bespoke Colour Report</div>
+    <p class="what-desc">A beautifully designed style PDF with your confirmed season, full wardrobe palette and makeup guide personalised for you.</p>
   </div>
-  <div class="chat-messages" id="chat-messages"></div>
-  <div class="chat-suggestions" id="chat-suggestions">
-    <button class="chat-suggestion" onclick="sendSuggestion(this)">What season am I?</button>
-    <button class="chat-suggestion" onclick="sendSuggestion(this)">Best neutrals for Soft Autumn</button>
-    <button class="chat-suggestion" onclick="sendSuggestion(this)">Cool vs warm undertones</button>
-    <button class="chat-suggestion" onclick="sendSuggestion(this)">Wedding guest colour ideas</button>
+  <div class="what-tile">
+    <div class="what-icon">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <rect x="4" y="8" width="24" height="18" rx="1" stroke="#c9a84c" stroke-width="1.2"/>
+        <path d="M4 14l12 7 12-7" stroke="#c9a84c" stroke-width="1.2"/>
+      </svg>
+    </div>
+    <div class="what-title">15-Min Zoom Call</div>
+    <p class="what-desc">A private consultation with Amba to walk through your results, answer any questions and discuss your next style steps.</p>
   </div>
-  <div class="chat-input-row">
-    <textarea class="chat-input" id="chat-input" placeholder="Ask me anything about colour…" rows="1"
-      onkeydown="chatKeydown(event)" oninput="autoResizeChat(this)"></textarea>
-    <button class="chat-send" id="chat-send-btn" onclick="sendChat()">→</button>
+  <div class="what-tile">
+    <div class="what-icon">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="11" stroke="#c9a84c" stroke-width="1.2"/>
+        <path d="M10 16l4 4 8-8" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="what-title">Up to 25% Off Styling</div>
+    <p class="what-desc">All packages include at least 15% off your first wardrobe edit or in-store styling session the natural next step on your style journey.</p>
+  </div>
+  <div class="what-tile">
+    <div class="what-icon">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M16 4l2.8 8.6H28l-7.4 5.4 2.8 8.6L16 21.2l-7.4 5.4 2.8-8.6L4 12.6h9.2z" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="what-title">Expert Methodology</div>
+    <p class="what-desc">Amba uses 16-season analysis which is far more nuanced than standard 4 or 12-season approaches for a truly accurate result.</p>
   </div>
 </div>
+
+<!-- PRICING -->
+<section id="pricing-section">
+  <div class="pricing-header">
+    <p class="section-label" style="justify-content:center;"><span style="width:20px;height:1px;background:var(--gold);display:inline-block;"></span>&nbsp;&nbsp;Packages&nbsp;&nbsp;<span style="width:20px;height:1px;background:var(--gold);display:inline-block;"></span></p>
+    <h2>Choose Your <em>Colour Journey</em></h2>
+    <p>Three ways to discover your palette all including a professional report, 15-min Zoom and at least 15% off your first styling session.</p>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- TIER 1: Signature -->
+    <div class="pricing-card">
+      <div class="card-tier">Signature</div>
+      <div class="card-name">Virtual Analysis</div>
+      <div class="card-price">
+        <span class="price-currency">£</span>
+        <span class="price-amount">50</span>
+      </div>
+      <div class="card-divider"></div>
+      <ul class="card-features">
+        <li><span class="feat-tick">✦</span><span><strong>Virtual colour analysis</strong> — Amba reviews your photos within 48hrs</span></li>
+        <li><span class="feat-tick">✦</span><span><strong>Bespoke colour report PDF</strong> — your confirmed season with full wardrobe and makeup palettes</span></li>
+        <li><span class="feat-tick">✦</span><span><strong>15-minute Zoom consultation</strong> — personal walk-through of your results</span></li>
+        <li><span class="feat-tick">✦</span><span><strong>15% off</strong> your first wardrobe edit or styling session</span></li>
+      </ul>
+      <a href="https://book.stripe.com/bJedR8dP03697FGbH34Vy0c" class="card-book-btn outline-btn" id="book-tier1">Book Signature →</a>
+    </div>
+
+    <!-- TIER 2: Prestige (FEATURED) -->
+    <div class="pricing-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div class="card-tier">Prestige</div>
+      <div class="card-name" style="color:var(--white)">Analysis + Colour Card</div>
+      <div class="card-price">
+        <span class="price-currency">£</span>
+        <span class="price-amount" style="color:var(--white)">85</span>
+      </div>
+      <div class="card-divider"></div>
+      <ul class="card-features">
+        <li><span class="feat-tick">✦</span><span>Everything in Signature, plus:</span></li>
+        <li><span class="feat-tick">✦</span><span><strong>Physical WOW Colour Card</strong> — your personalised WOW colour palette printed and posted to your door</span></li>
+        <li><span class="feat-tick">✦</span><span><strong>Take shopping, to salons</strong> or anywhere you need your colours</span></li>
+        <li><span class="feat-tick">✦</span><span><strong>20% off</strong> your first wardrobe edit or styling session</span></li>
+      </ul>
+      <a href="https://buy.stripe.com/eVq14m7qCeORgcc6mJ4Vy0d" class="card-book-btn outline-btn" id="book-tier2">Book Prestige →</a>
+    </div>
+
+    <!-- TIER 3: Atelier -->
+    <div class="pricing-card">
+      <div class="card-tier">Atelier</div>
+      <div class="card-name">The Full Experience</div>
+      <div class="card-price">
+        <span class="price-currency">£</span>
+        <span class="price-amount">115</span>
+      </div>
+      <div class="card-divider"></div>
+      <ul class="card-features">
+        <li><span class="feat-tick">✦</span><span>Everything in Prestige, plus:</span></li>
+        <li><span class="feat-tick">✦</span><span><strong>30-minute wardrobe consult call</strong> — review your existing wardrobe against your new palette together</span></li>
+        <li><span class="feat-tick">✦</span><span><strong>Shopping shortlist</strong> — 3–5 specific items or brands recommended for your season</span></li>
+        <li><span class="feat-tick">✦</span><span><strong>25% off</strong> your first wardrobe edit or styling session</span></li>
+      </ul>
+      <a href="https://buy.stripe.com/6oUbJ0bGSbCF2lmcL74Vy0e" class="card-book-btn outline-btn" id="book-tier3">Book Atelier →</a>
+    </div>
+
+  </div>
+
+  <p class="pricing-note">
+    Not sure which to choose? <a href="mailto:stylist@ambahaverly.co.uk">Email Amba</a> she's happy to help you pick the right package.<br>
+    All sessions are virtual and available worldwide. New clients only for the % styling discount.
+  </p>
+</section>
+
+
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-wrap">
+    <p class="section-label">Questions</p>
+    <div class="faq-header">
+      <h2 style="font-family:var(--font-display);font-size:clamp(32px,3.5vw,48px);font-weight:300;margin-top:16px;">Frequently <em style="font-style:italic;color:var(--gold-dark);">Asked</em></h2>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span class="faq-q-text">How does the virtual analysis work?</span><span class="faq-chevron">▾</span></div>
+      <div class="faq-a">After booking, you'll receive an email with simple instructions on what photos to send — a front-facing natural-light selfie and a few others. Amba reviews them within 48 hours, applies professional 16-season methodology and sends you your full colour report. Your 15-minute Zoom is then scheduled at a time that suits you.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span class="faq-q-text">Is the quiz result accurate?</span><span class="faq-chevron">▾</span></div>
+      <div class="faq-a">The quiz gives you an educated estimate of your season family — it's a great starting point. But a true colour analysis requires an expert eye looking at your actual skin undertones, hair and feature contrast in good lighting, which is why Amba's virtual analysis uses your photographs reviewed by a professional. The difference in accuracy is significant.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span class="faq-q-text">What is the 16-season system?</span><span class="faq-chevron">▾</span></div>
+      <div class="faq-a">Most colour analysis uses 4 or 12 seasons. The 16-season system goes further, identifying nuances within each season family — for example the difference between True Summer, Soft Summer and Deep Soft Summer — resulting in a far more precise and flattering palette for you specifically.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span class="faq-q-text">How long until I receive my report?</span><span class="faq-chevron">▾</span></div>
+      <div class="faq-a">Within 48 hours of receiving your photos. You'll then receive an email to schedule your 15-minute Zoom consultation at a convenient time.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span class="faq-q-text">What does the physical colour card look like?</span><span class="faq-chevron">▾</span></div>
+      <div class="faq-a">The WOW Colour Card is a beautiful, wallet-sized card printed with your personalised colour palette — your key neutrals, signature shades and accent colours. It's designed to be taken shopping, to your hairdresser, or anywhere you need to check if something is right for your season.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q"><span class="faq-q-text">Can I book an in-person analysis instead?</span><span class="faq-chevron">▾</span></div>
+      <div class="faq-a">Yes — Amba offers in-person colour analysis and full styling sessions in Central London, at Harvey Nichols and Westfield, and worldwide for travel. <a href="contact.html" style="color:var(--gold-dark);border-bottom:1px solid rgba(138,110,47,0.3);">Get in touch</a> to enquire about in-person options.</div>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
@@ -1251,24 +833,18 @@
     </div>
     <div class="footer-col">
       <h4>Navigate</h4>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="colour-analysis.html">Colour Analysis</a>
+      <a href="index.html">Home</a><a href="about.html">About</a>
+      <a href="services.html">Services</a><a href="colour-analysis.html">Colour Analysis</a>
       <a href="contact.html">Contact</a>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
-      <a href="services.html">Colour Analysis</a>
-      <a href="services.html">Wardrobe Edit</a>
-      <a href="services.html">Personal Shopping</a>
-      <a href="services.html">Image Consultation</a>
+      <a href="services.html">Colour Analysis</a><a href="services.html">Wardrobe Edit</a>
+      <a href="services.html">Personal Shopping</a><a href="services.html">Image Consultation</a>
     </div>
     <div class="footer-col">
       <h4>Contact</h4>
-      <p>155 Draycott Avenue</p>
-      <p>Chelsea, London</p>
-      <p>Available Worldwide</p>
+      <p>155 Draycott Avenue</p><p>Chelsea, London</p><p>Available Worldwide</p>
       <a href="mailto:stylist@ambahaverly.co.uk" style="color:var(--gold);margin-top:8px;">stylist@ambahaverly.co.uk</a>
       <a href="contact.html" style="color:var(--gold);margin-top:4px;">Get in Touch →</a>
     </div>
@@ -1280,804 +856,129 @@
   </div>
 </footer>
 
-<div id="ca-mag"><div id="ca-mag-bg"></div><div id="ca-mag-cross"></div></div>
-
 <script>
-// ══════════════════════════════════════════════
-// SEASON DATA
-// ══════════════════════════════════════════════
-const S = {
-  true_spring:{name:'True Spring',family:'Spring',famCol:'#C8732A',
-    strip:['#F5D9B0','#EBB870','#D4832A','#C86820','#8AAA60','#5A8A40','#D4C080','#A07828'],
-    about:{intro:"True Spring is the purest expression of warmth — clear, golden and fresh. Warm undertones with medium-to-high contrast.",wear:['Clear, warm, bright tones','Warm yellows and peachy oranges','Coral and warm red','Camel and golden beige','Warm aqua and turquoise','Grass green and olive'],avoid:['Cool blues or icy pastels','Stark black','Cool pinks','Muted or dusty tones','Silver jewellery'],desc:"True Spring sits at the heart of the Spring family — the brightest, most saturated warm season.",neutral:"Ivory and warm camel are your neutrals. Warm off-white and chocolate brown replace white and black."},
-    wardrobe:{neutrals:[{n:'Warm Ivory',h:'#F5EAD0'},{n:'Light Camel',h:'#D4AC6A'},{n:'Golden Beige',h:'#C8986A'},{n:'Warm Tan',h:'#B87840'},{n:'Warm White',h:'#FAF0E0'},{n:'Sand',h:'#DEC080'}],mains:[{n:'Coral',h:'#E87850'},{n:'Warm Red',h:'#C84820'},{n:'Peach',h:'#E8A070'},{n:'Warm Yellow',h:'#E8C040'},{n:'Golden Yellow',h:'#D4A020'},{n:'Apricot',h:'#E89060'}],accent:[{n:'Grass Green',h:'#6AA040'},{n:'Warm Lime',h:'#90B830'},{n:'Warm Aqua',h:'#40A0A0'},{n:'Warm Teal',h:'#208880'},{n:'Olive',h:'#7A8030'},{n:'Turquoise',h:'#30B0A8'}],deeps:[{n:'Caramel',h:'#8A5020'},{n:'Warm Brown',h:'#6A3810'},{n:'Rich Tan',h:'#A06028'},{n:'Warm Navy',h:'#384870'},{n:'Deep Teal',h:'#185850'},{n:'Chocolate',h:'#4A2810'}]},
-    makeup:{foundation:[{c:'#E8C090',n:'Foundation',d:'Warm golden/peachy undertone'},{c:'#C89060',n:'Bronzer',d:'Light warm bronze'},{c:'#F0C890',n:'Highlighter',d:'Warm gold shimmer'}],lips:[{c:'#E8805A',n:'Coral Pink',d:'Everyday brightness'},{c:'#C85030',n:'Warm Red',d:'Statement look'},{c:'#E8A070',n:'Peachy Nude',d:'Natural everyday'},{c:'#D06840',n:'Terracotta',d:'Warm earthy option'}],eyes:[{c:'#C87830',n:'Warm Bronze',d:'Classic lid'},{c:'#6A7830',n:'Olive',d:'Earthy liner'},{c:'#A05820',n:'Warm Brown',d:'Liner'},{c:'#E0B070',n:'Golden Peach',d:'Highlight'},{c:'#40A0A0',n:'Warm Teal',d:'Pop of colour'}],cheeks:[{c:'#E89060',n:'Peachy Blush',d:'Fresh warm flush'},{c:'#D87850',n:'Coral Blush',d:'Vibrant and warm'},{c:'#C89050',n:'Golden Bronze',d:'Warm contour'}]},
-    tips:['Stick to warm clear tones — avoid anything greyed','Look for peachy foundations, never cool-pink','Gold jewellery always','Aim 75%+ match score when shopping']},
-
-  light_spring:{name:'Light Spring',family:'Spring',famCol:'#D4907A',
-    strip:['#F8E8D0','#F0C8A0','#E8A080','#D89070','#A8C888','#78A868','#E8D888','#C0A850'],
-    about:{intro:"Light Spring is the lightest, most delicate warm season — soft, fresh and luminous with a gentle warmth.",wear:['Light warm pastels','Peach, apricot and warm blush','Light warm aquas','Light camel and ivory','Soft warm greens','Light warm coral'],avoid:['Dark heavy colours','Cool or icy tones','Stark black or white','Deeply saturated colours','Cool grey'],desc:"Light Spring sits at the border of Spring and Summer — warm undertones in a very light expression.",neutral:"Warm ivory and light camel. Very light warm tones always."},
-    wardrobe:{neutrals:[{n:'Warm Ivory',h:'#FAF0E0'},{n:'Light Peach',h:'#F0CCA8'},{n:'Warm Cream',h:'#F0E0C0'},{n:'Champagne',h:'#E8D0A0'},{n:'Blush White',h:'#FAE8E0'},{n:'Warm Linen',h:'#EADCC0'}],mains:[{n:'Peach Blush',h:'#F0B090'},{n:'Apricot',h:'#F0A870'},{n:'Warm Coral',h:'#E89070'},{n:'Light Warm Red',h:'#D87060'},{n:'Warm Pink',h:'#E8A090'},{n:'Salmon',h:'#E09080'}],accent:[{n:'Light Aqua',h:'#80C8C0'},{n:'Warm Mint',h:'#90C8A0'},{n:'Soft Lime',h:'#B0CC78'},{n:'Light Teal',h:'#60B0A8'},{n:'Warm Sky',h:'#80B8D0'},{n:'Soft Green',h:'#98C088'}],deeps:[{n:'Light Brown',h:'#A07050'},{n:'Warm Tan',h:'#B88860'},{n:'Caramel',h:'#C09060'},{n:'Soft Navy',h:'#5A708A'},{n:'Mocha',h:'#8A6040'},{n:'Warm Dusk',h:'#9A8070'}]},
-    makeup:{foundation:[{c:'#F0C8A0',n:'Foundation',d:'Very light warm peachy'},{c:'#D8A878',n:'Bronzer',d:'Barely-there warmth'},{c:'#F8D8B0',n:'Highlight',d:'Soft warm gold'}],lips:[{c:'#E8A080',n:'Warm Peach',d:'Perfect everyday'},{c:'#D07060',n:'Warm Rose',d:'Light statement'},{c:'#F0B090',n:'Peachy Nude',d:'No-makeup lip'},{c:'#C86050',n:'Soft Coral',d:'Evening'}],eyes:[{c:'#C09050',n:'Warm Sand',d:'Soft lid'},{c:'#88A060',n:'Soft Olive',d:'Gentle liner'},{c:'#907050',n:'Light Brown',d:'Liner'},{c:'#F0C898',n:'Champagne',d:'Highlight'},{c:'#70B0A8',n:'Soft Teal',d:'Colour pop'}],cheeks:[{c:'#F0A880',n:'Peach Blush',d:'Signature flush'},{c:'#E09870',n:'Apricot',d:'Warm and delicate'},{c:'#D8A870',n:'Warm Bronze',d:'Light contour'}]},
-    tips:['Keep everything light and delicate','Sheers and light washes suit you','Gold or rose gold jewellery','Pastels are your power colours']},
-
-  bright_spring:{name:'Bright Spring',family:'Spring',famCol:'#C83020',
-    strip:['#F0E0B8','#E8B040','#E06020','#C82010','#30B848','#10A030','#30A8D8','#1870B8'],
-    about:{intro:"Bright Spring is the most vivid and high-contrast spring — warm colouring with striking clarity.",wear:['Clear vivid warm tones','Bright warm reds and oranges','Vivid warm greens','Clear warm yellows','Bright aqua and turquoise','Bright coral'],avoid:['Muted dusty or greyed colours','Soft pastels that wash out','Cool tones','Overly dark shades','Anything lacking clarity'],desc:"Bright Spring shares brightness with Winter but warmth with Spring.",neutral:"Warm ivory and camel. You can handle more contrast than other springs."},
-    wardrobe:{neutrals:[{n:'Warm Ivory',h:'#F5E8C8'},{n:'Camel',h:'#C89040'},{n:'Warm Tan',h:'#B87828'},{n:'Warm White',h:'#FAF4E0'},{n:'Golden Sand',h:'#D4A840'},{n:'Rich Cream',h:'#EED880'}],mains:[{n:'Bright Coral',h:'#E85030'},{n:'Bright Red',h:'#C81818'},{n:'Hot Orange',h:'#E06018'},{n:'Warm Yellow',h:'#E8C018'},{n:'Bright Peach',h:'#F09060'},{n:'Warm Fuchsia',h:'#D84060'}],accent:[{n:'Bright Green',h:'#28A838'},{n:'Lime',h:'#88C020'},{n:'Bright Aqua',h:'#18B0C0'},{n:'Cobalt',h:'#1868C0'},{n:'Electric Teal',h:'#08A090'},{n:'Warm Purple',h:'#A840B0'}],deeps:[{n:'Warm Black',h:'#201008'},{n:'Rich Brown',h:'#5A2808'},{n:'Deep Teal',h:'#086050'},{n:'Deep Navy',h:'#0A1840'},{n:'Espresso',h:'#2A1005'},{n:'Deep Red',h:'#880810'}]},
-    makeup:{foundation:[{c:'#E8C888',n:'Foundation',d:'Warm golden medium'},{c:'#C89050',n:'Bronzer',d:'Rich warm bronze'},{c:'#F0D098',n:'Highlight',d:'Warm bright gold'}],lips:[{c:'#E04030',n:'Bright Coral',d:'Power lip'},{c:'#C81818',n:'True Red',d:'Classic statement'},{c:'#D87040',n:'Warm Orange',d:'Bold everyday'},{c:'#D04060',n:'Warm Fuchsia',d:'Vibrant evening'}],eyes:[{c:'#C87820',n:'Golden Bronze',d:'Vivid lid'},{c:'#287830',n:'Forest',d:'Bold liner'},{c:'#882010',n:'Deep Red',d:'Smoky liner'},{c:'#E8C060',n:'Gold',d:'Highlight'},{c:'#1898B0',n:'Teal',d:'Graphic pop'}],cheeks:[{c:'#E87858',n:'Bright Coral',d:'Vivid flush'},{c:'#E09040',n:'Warm Bronze',d:'Sun-kissed'},{c:'#D06040',n:'Terracotta',d:'Bold contour'}]},
-    tips:['You can wear more saturation than most — embrace it!','Avoid anything muted or dusty','High contrast outfits work for you','Clear jewel tones are your friend']},
-
-  true_summer:{name:'True Summer',family:'Summer',famCol:'#6A7AAA',
-    strip:['#D8DCF0','#B0B8E0','#8A9AC8','#6A7AAA','#90B8A8','#6A9888','#C0A8B8','#9A7898'],
-    about:{intro:"True Summer is the coolest, most classic summer — soft, muted and cool with gentle blended colouring.",wear:['Soft cool muted tones','Dusty rose and mauve','Lavender and soft purple','Cool sage and blue-greens','Powder blue','Cool grey'],avoid:['Warm golden or orange','Earthy terracottas','Stark bright saturated colours','Stark black','Warm yellow'],desc:"True Summer — classic cool undertones, medium depth, low saturation.",neutral:"Soft white, cool grey and muted navy. Avoid stark black and warm cream."},
-    wardrobe:{neutrals:[{n:'Soft White',h:'#F0EEF8'},{n:'Cool Linen',h:'#D8D4E0'},{n:'Powder Blue',h:'#C0C8E0'},{n:'Cool Grey',h:'#A8A8B8'},{n:'Muted Navy',h:'#4A5880'},{n:'Soft Ivory',h:'#E8E4F0'}],mains:[{n:'Dusty Rose',h:'#C09098'},{n:'Mauve',h:'#A87888'},{n:'Soft Raspberry',h:'#A84868'},{n:'Lavender',h:'#9898C8'},{n:'Periwinkle',h:'#7878B8'},{n:'Cool Pink',h:'#D8A0B0'}],accent:[{n:'Soft Blue',h:'#7898C8'},{n:'Cool Teal',h:'#4A8898'},{n:'Blue-Green',h:'#5A9888'},{n:'Cool Sage',h:'#889880'},{n:'Soft Green',h:'#78A880'},{n:'Mint',h:'#90B8A8'}],deeps:[{n:'Navy',h:'#2A3A60'},{n:'Charcoal',h:'#4A4858'},{n:'Deep Mauve',h:'#6A3848'},{n:'Deep Rose',h:'#782848'},{n:'Burgundy',h:'#682038'},{n:'Deep Blue',h:'#1A2A50'}]},
-    makeup:{foundation:[{c:'#E0D0C8',n:'Foundation',d:'Cool neutral-pink undertone'},{c:'#C0A8A0',n:'Bronzer',d:'Cool taupe not golden'},{c:'#F0E0D8',n:'Highlight',d:'Pearl or silver shimmer'}],lips:[{c:'#C09098',n:'Dusty Rose',d:'Signature shade'},{c:'#A84868',n:'Raspberry',d:'Evening drama'},{c:'#D0A0A8',n:'Cool Nude',d:'Everyday lip'},{c:'#9A6878',n:'Mauve',d:'Classic cool'}],eyes:[{c:'#8898C8',n:'Periwinkle',d:'Signature lid'},{c:'#6A7898',n:'Cool Grey-Blue',d:'Liner'},{c:'#8888A8',n:'Taupe',d:'Blending'},{c:'#D8D8E8',n:'Silver',d:'Highlight'},{c:'#5A8888',n:'Cool Teal',d:'Accent'}],cheeks:[{c:'#D0A0A8',n:'Cool Pink',d:'Natural flush'},{c:'#C09898',n:'Dusty Rose',d:'Romantic soft'},{c:'#A8A0B0',n:'Cool Taupe',d:'Contour'}]},
-    tips:['Stay cool and soft — avoid warm or bright','Silver jewellery always','Muted tones over brightness','Dusty rose is your most flattering neutral lip']},
-
-  light_summer:{name:'Light Summer',family:'Summer',famCol:'#8A98B8',
-    strip:['#E8EAF8','#D0D4F0','#B8C0E8','#A0A8D8','#A8C8C0','#88A8A0','#D0C0C8','#B0A0B0'],
-    about:{intro:"Light Summer is the softest lightest cool season — delicate, pale and gently cool.",wear:['Very light cool soft tones','Pale lavender and periwinkle','Light cool pink','Pale blue','Soft mint','Light cool grey'],avoid:['Dark heavy colours','Warm golden tones','Bright saturated colours','Black','Warm earthy tones'],desc:"Light Summer — cool, delicate colouring shared with Light Spring but leaning cool.",neutral:"Very soft white and pale grey. Keep everything light and cool."},
-    wardrobe:{neutrals:[{n:'Soft White',h:'#F4F2F8'},{n:'Pale Grey',h:'#D8D8E8'},{n:'Cool Linen',h:'#DCD8E4'},{n:'Powder',h:'#E4E0F0'},{n:'Light Taupe',h:'#C8C0C8'},{n:'Lavender White',h:'#EEEEF8'}],mains:[{n:'Pale Rose',h:'#E8C0C8'},{n:'Soft Pink',h:'#DDB0B8'},{n:'Dusty Blush',h:'#D0A8B0'},{n:'Pale Lavender',h:'#C8C0E0'},{n:'Soft Mauve',h:'#C0A8B8'},{n:'Cool Blush',h:'#E0C0C8'}],accent:[{n:'Powder Blue',h:'#A8C0D8'},{n:'Pale Aqua',h:'#A0C8C8'},{n:'Soft Teal',h:'#80A8A8'},{n:'Cool Mint',h:'#A8D0C0'},{n:'Light Periwinkle',h:'#A8B0D8'},{n:'Pale Blue',h:'#B8C8E0'}],deeps:[{n:'Soft Navy',h:'#4A5870'},{n:'Cool Charcoal',h:'#606070'},{n:'Soft Burgundy',h:'#785870'},{n:'Deep Rose',h:'#906870'},{n:'Cool Brown',h:'#706070'},{n:'Dusk Blue',h:'#5A6880'}]},
-    makeup:{foundation:[{c:'#F0E0D8',n:'Foundation',d:'Very light cool-pink'},{c:'#D0B8B0',n:'Bronzer',d:'Barely-there cool'},{c:'#F8EAE4',n:'Highlight',d:'Pearl shimmer'}],lips:[{c:'#DDB0B8',n:'Soft Blush',d:'Natural plus one'},{c:'#C89098',n:'Dusty Pink',d:'Light statement'},{c:'#E8C4CC',n:'Pale Rose',d:'Everyday nude'},{c:'#B87880',n:'Cool Berry',d:'Soft evening'}],eyes:[{c:'#B0B8D8',n:'Periwinkle',d:'Delicate lid'},{c:'#8090A8',n:'Soft Blue',d:'Cool liner'},{c:'#A8A0B0',n:'Lavender',d:'Blending'},{c:'#E0DDF0',n:'Pearl',d:'Highlight'},{c:'#78A0A8',n:'Soft Teal',d:'Accent'}],cheeks:[{c:'#E8C4C8',n:'Pale Pink',d:'Ethereal glow'},{c:'#D8B0B8',n:'Cool Blush',d:'Romantic'},{c:'#C0B0B8',n:'Cool Taupe',d:'Contour'}]},
-    tips:['The lightest most delicate colours suit you','Avoid heavy or dramatic choices','Pearl jewellery is your best friend','Sheer light products over heavy coverage']},
-
-  soft_summer:{name:'Soft Summer',family:'Summer',famCol:'#7A8898',
-    strip:['#D8DCE4','#B8C0CC','#98A0B0','#7A8898','#8AA898','#6A8880','#B8A0A8','#988090'],
-    about:{intro:"Soft Summer has the most muted colouring of all — gently cool with very low saturation.",wear:['Muted greyed cool tones','Dusty blue and soft teal','Muted rose and taupe','Cool sage','Soft lavender','Warm grey and blue-grey'],avoid:['Bright saturated colours','Warm golden tones','Stark black','Hot pink or vivid coral','Anything too vivid'],desc:"Soft Summer — the most muted of all seasons, cool and understated.",neutral:"Soft grey, muted navy and dusty rose. Everything quiet and understated."},
-    wardrobe:{neutrals:[{n:'Blue-Grey',h:'#B0B8C4'},{n:'Cool Taupe',h:'#C0B8B8'},{n:'Muted Navy',h:'#4A5870'},{n:'Warm Grey',h:'#B0ACA8'},{n:'Soft White',h:'#ECEAF0'},{n:'Dusty Linen',h:'#C8C0C0'}],mains:[{n:'Dusty Rose',h:'#B89098'},{n:'Mauve',h:'#A08090'},{n:'Muted Lavender',h:'#9898B8'},{n:'Soft Pink',h:'#C8A0A8'},{n:'Dusty Coral',h:'#C09088'},{n:'Muted Plum',h:'#907080'}],accent:[{n:'Dusty Blue',h:'#7898B0'},{n:'Soft Teal',h:'#6A9898'},{n:'Cool Sage',h:'#8A9888'},{n:'Muted Aqua',h:'#7AA8A8'},{n:'Grey-Green',h:'#80A090'},{n:'Steel Blue',h:'#6888A8'}],deeps:[{n:'Charcoal',h:'#4A4850'},{n:'Deep Navy',h:'#2A3850'},{n:'Dusty Burgundy',h:'#6A3848'},{n:'Deep Mauve',h:'#5A3848'},{n:'Cool Dark',h:'#383840'},{n:'Deep Teal',h:'#2A5858'}]},
-    makeup:{foundation:[{c:'#D8C8C0',n:'Foundation',d:'Cool-neutral medium light'},{c:'#B8A098',n:'Bronzer',d:'Cool taupe bronze'},{c:'#E8D8D0',n:'Highlight',d:'Soft pearl'}],lips:[{c:'#B89098',n:'Dusty Rose',d:'Signature soft lip'},{c:'#9A7080',n:'Mauve',d:'Statement'},{c:'#C8A4A8',n:'Muted Pink',d:'Everyday'},{c:'#887080',n:'Deep Mauve',d:'Evening'}],eyes:[{c:'#7898B0',n:'Dusty Blue',d:'Soft lid'},{c:'#7A7898',n:'Grey Lavender',d:'Liner'},{c:'#9898A8',n:'Cool Taupe',d:'Blend'},{c:'#D0D0D8',n:'Soft Silver',d:'Highlight'},{c:'#6A9898',n:'Muted Teal',d:'Accent'}],cheeks:[{c:'#C0A4A8',n:'Dusty Pink',d:'Soft flush'},{c:'#B09098',n:'Muted Rose',d:'Understated'},{c:'#A09098',n:'Cool Taupe',d:'Contour'}]},
-    tips:['Muted is your magic word — avoid vivid','Stay cool but never icy bright','Silver jewellery flatters best','Dusty greyed tones always over saturated']},
-
-  true_autumn:{name:'True Autumn',family:'Autumn',famCol:'#8A5020',
-    strip:['#E8C888','#D4A040','#C07820','#A05510','#8A7020','#6A6020','#709050','#4A7040'],
-    about:{intro:"True Autumn is the richest most earthy of all seasons — deep warm undertones with golden-olive skin.",wear:['Rich warm earthy tones','Golden orange and amber','Olive and warm greens','Bronze and copper','Rust and terracotta','Rich warm browns'],avoid:['Cool pinks and lavender','Icy pastels','Black','Silver jewellery','Cool blues'],desc:"True Autumn — the most saturated warm season, deep rich and earthy.",neutral:"Warm brown and camel. You can wear deeper richer tones than any other season."},
-    wardrobe:{neutrals:[{n:'Warm Camel',h:'#C4905A'},{n:'Dark Camel',h:'#A07040'},{n:'Warm Brown',h:'#7A4820'},{n:'Golden Tan',h:'#C09840'},{n:'Warm Ivory',h:'#EED8A0'},{n:'Dark Tan',h:'#B07838'}],mains:[{n:'Rust',h:'#B04820'},{n:'Terracotta',h:'#C06840'},{n:'Burnt Orange',h:'#D07018'},{n:'Warm Amber',h:'#C89020'},{n:'Copper',h:'#B06020'},{n:'Rich Red',h:'#A02810'}],accent:[{n:'Olive',h:'#707828'},{n:'Forest',h:'#3A6030'},{n:'Warm Khaki',h:'#9A9038'},{n:'Moss',h:'#507040'},{n:'Warm Teal',h:'#287870'},{n:'Ochre',h:'#B8900A'}],deeps:[{n:'Deep Brown',h:'#3A1808'},{n:'Espresso',h:'#280C04'},{n:'Warm Navy',h:'#1A2840'},{n:'Deep Olive',h:'#3A4010'},{n:'Aubergine',h:'#4A1828'},{n:'Deep Rust',h:'#681808'}]},
-    makeup:{foundation:[{c:'#D4A860',n:'Foundation',d:'Deep warm golden'},{c:'#B07828',n:'Bronzer',d:'Rich warm bronze'},{c:'#E8C070',n:'Highlight',d:'Deep warm gold'}],lips:[{c:'#B04820',n:'Rich Rust',d:'Signature autumn lip'},{c:'#A02810',n:'Deep Red',d:'Drama'},{c:'#C07840',n:'Terracotta',d:'Everyday'},{c:'#882018',n:'Burgundy',d:'Evening'}],eyes:[{c:'#A07020',n:'Rich Bronze',d:'Lid'},{c:'#507028',n:'Forest',d:'Liner'},{c:'#4A2808',n:'Dark Brown',d:'Lash line'},{c:'#D0A040',n:'Gold',d:'Highlight'},{c:'#287870',n:'Teal',d:'Accent'}],cheeks:[{c:'#C07840',n:'Terracotta',d:'Your season in a blush'},{c:'#D09050',n:'Warm Bronze',d:'Glow'},{c:'#A07030',n:'Amber',d:'Contour'}]},
-    tips:['Go rich and earthy — this is your territory','Deep autumn colours ground you','Gold jewellery is essential','Rust and olive are your most powerful neutrals']},
-
-  soft_autumn:{name:'Soft Autumn',family:'Autumn',famCol:'#B5573C',
-    strip:['#E8D5B0','#D4B896','#C9956A','#B5573C','#8A9B7A','#7A7A45','#4A7A72','#3D5C4A'],
-    about:{intro:"Soft Autumn sits at the border of Summer and Autumn — warm undertones in a softer muted expression. Low contrast and beautiful harmony.",wear:['Muted dusty earthy tones','Olive sage and warm greens','Terracotta and muted rust','Camel and warm sand','Warm teal and forest','Soft burgundy'],avoid:['Cool icy pastels','Stark white','Bright saturated colours','Black','Cool pink'],desc:"Soft Autumn — the gentlest autumn, warm undertones expressed softly.",neutral:"Camel, warm beige and oyster white. Dark chocolate brown replaces black."},
-    wardrobe:{neutrals:[{n:'Warm Cream',h:'#E8D5B0'},{n:'Warm Sand',h:'#D4B896'},{n:'Oyster',h:'#C8AE88'},{n:'Camel',h:'#C9956A'},{n:'Warm Taupe',h:'#A08060'},{n:'Linen',h:'#D8C8A8'}],mains:[{n:'Peach Blush',h:'#D4937A'},{n:'Dusty Rose',h:'#B87A6A'},{n:'Terracotta',h:'#C47B5C'},{n:'Rust',h:'#B5573C'},{n:'Muted Gold',h:'#C4A055'},{n:'Golden Brown',h:'#A07040'}],accent:[{n:'Sage',h:'#8A9B7A'},{n:'Dusty Sage',h:'#7A8A6A'},{n:'Olive',h:'#7A7A45'},{n:'Moss',h:'#5C6B3A'},{n:'Warm Teal',h:'#4A7A72'},{n:'Forest',h:'#3D5C4A'}],deeps:[{n:'Warm Navy',h:'#2E3E5C'},{n:'Burgundy',h:'#7A3030'},{n:'Chestnut',h:'#6B4530'},{n:'Dark Brown',h:'#3D2515'},{n:'Warm Charcoal',h:'#4A4035'},{n:'Espresso',h:'#2A1A0E'}]},
-    makeup:{foundation:[{c:'#D4A882',n:'Foundation',d:'Warm beige golden undertone'},{c:'#C8956A',n:'Bronzer',d:'Warm matte bronze'},{c:'#D4937A',n:'Highlight',d:'Warm peachy gold'}],lips:[{c:'#B87A6A',n:'Dusty Rose',d:'Everyday muted pink-brown'},{c:'#C47B5C',n:'Terracotta',d:'Earthy statement'},{c:'#B5573C',n:'Warm Rust',d:'Autumn evening'},{c:'#D4937A',n:'Peachy Nude',d:'No-makeup lip'}],eyes:[{c:'#A07040',n:'Warm Bronze',d:'Classic definition'},{c:'#7A7A45',n:'Olive',d:'Earthy liner'},{c:'#5C4030',n:'Warm Brown',d:'Lash line'},{c:'#C9956A',n:'Camel',d:'Highlight'},{c:'#4A7A72',n:'Warm Teal',d:'Colour pop'}],cheeks:[{c:'#C47B5C',n:'Terracotta',d:'Warm earthy flush'},{c:'#D4937A',n:'Peach Blush',d:'Natural glow'},{c:'#C4A055',n:'Golden Contour',d:'Warmth'}]},
-    tips:['Muted and earthy is your sweet spot','Avoid anything bright or cool','Gold jewellery always','Warm undertone is key when shopping']},
-
-  deep_autumn:{name:'Deep Autumn',family:'Autumn',famCol:'#7A3010',
-    strip:['#C8A060','#A07828','#885A18','#702808','#506028','#304818','#1A5048','#183028'],
-    about:{intro:"Deep Autumn is the darkest most dramatic autumn — rich, deep and intensely warm with strong contrast.",wear:['Deep rich warm tones','Dark chocolate and espresso','Deep olive and forest','Burnt orange and rust','Rich warm burgundy','Warm deep teal'],avoid:['Cool pinks','Light pastels','Silver jewellery','Cool grey-based tones','Icy bright colours'],desc:"Deep Autumn — darkest earthy tones, highest contrast of any autumn.",neutral:"Dark brown and espresso. High contrast earthy combinations."},
-    wardrobe:{neutrals:[{n:'Dark Camel',h:'#A07030'},{n:'Deep Brown',h:'#5A3010'},{n:'Espresso',h:'#2A1208'},{n:'Warm Khaki',h:'#7A6830'},{n:'Rich Tan',h:'#9A6828'},{n:'Warm Ivory',h:'#E0C890'}],mains:[{n:'Burnt Orange',h:'#B85818'},{n:'Rust',h:'#983010'},{n:'Copper',h:'#A84820'},{n:'Amber',h:'#B07810'},{n:'Deep Terracotta',h:'#904030'},{n:'Warm Red',h:'#882010'}],accent:[{n:'Deep Olive',h:'#4A5018'},{n:'Forest',h:'#284018'},{n:'Deep Teal',h:'#1A5048'},{n:'Warm Khaki',h:'#7A7030'},{n:'Bronze Green',h:'#505818'},{n:'Dark Moss',h:'#3A4A20'}],deeps:[{n:'Espresso',h:'#1A0800'},{n:'Near Black',h:'#180C08'},{n:'Deep Navy',h:'#101828'},{n:'Dark Burgundy',h:'#500808'},{n:'Deep Forest',h:'#102010'},{n:'Very Dark Brown',h:'#201008'}]},
-    makeup:{foundation:[{c:'#C09050',n:'Foundation',d:'Deep warm golden/olive'},{c:'#8A5818',n:'Bronzer',d:'Very rich warm bronze'},{c:'#D0A060',n:'Highlight',d:'Rich gold'}],lips:[{c:'#902010',n:'Deep Rust',d:'Power lip'},{c:'#780810',n:'Dark Red',d:'Drama'},{c:'#A04820',n:'Burnt Orange',d:'Statement'},{c:'#501808',n:'Deep Burgundy',d:'Evening'}],eyes:[{c:'#885010',n:'Deep Bronze',d:'Rich lid'},{c:'#304010',n:'Dark Olive',d:'Liner'},{c:'#2A1008',n:'Espresso',d:'Lash line'},{c:'#C09030',n:'Deep Gold',d:'Highlight'},{c:'#1A5048',n:'Deep Teal',d:'Accent'}],cheeks:[{c:'#A04820',n:'Deep Terracotta',d:'Rich flush'},{c:'#B07020',n:'Amber',d:'Warmth'},{c:'#7A4020',n:'Bronze',d:'Contour'}]},
-    tips:['Go dark and rich — pastels wash you out','Espresso is your perfect black','Gold jewellery only','Deep forest and teal are powerful accents']},
-
-  true_winter:{name:'True Winter',family:'Winter',famCol:'#1A3070',
-    strip:['#F0F0F8','#D0D0E8','#2858B0','#1A3070','#E81840','#B01028','#FFFFFF','#080808'],
-    about:{intro:"True Winter is the archetypal winter — cool, high contrast and dramatic. Sharp, clear colouring with strong feature contrast.",wear:['Pure cool clear tones','Icy pastels and stark white','True red and fuchsia','Royal blue and cobalt','Black and white contrasts','Cool emerald'],avoid:['Warm golden tones','Earthy or muted colours','Soft pastels','Orange or warm red','Camel or beige'],desc:"True Winter — highest contrast, most dramatic. Icy vivid cool colours.",neutral:"Stark white and true black — you wear both brilliantly."},
-    wardrobe:{neutrals:[{n:'Pure White',h:'#FFFFFF'},{n:'True Black',h:'#0A0A0A'},{n:'Cool Grey',h:'#9898A8'},{n:'Silver Grey',h:'#C0C0C8'},{n:'Charcoal',h:'#383840'},{n:'Off White',h:'#F4F4F8'}],mains:[{n:'True Red',h:'#D81018'},{n:'Fuchsia',h:'#C00858'},{n:'Cool Pink',h:'#E83878'},{n:'Magenta',h:'#B00880'},{n:'Royal Blue',h:'#1848B8'},{n:'Cool Purple',h:'#6020A8'}],accent:[{n:'Cobalt',h:'#0828B0'},{n:'Emerald',h:'#087840'},{n:'Ice Blue',h:'#88B8E8'},{n:'Cool Teal',h:'#087890'},{n:'Vivid Green',h:'#188040'},{n:'Electric Blue',h:'#0848D8'}],deeps:[{n:'Navy',h:'#0A1838'},{n:'Black',h:'#080808'},{n:'Deep Burgundy',h:'#500820'},{n:'Midnight',h:'#080828'},{n:'Deep Emerald',h:'#043820'},{n:'Dark Plum',h:'#300840'}]},
-    makeup:{foundation:[{c:'#E0D0D0',n:'Foundation',d:'Cool-pink or neutral'},{c:'#C0B0B0',n:'Contour',d:'Cool taupe or grey-brown'},{c:'#F0E8E8',n:'Highlight',d:'Icy pearl or silver'}],lips:[{c:'#D81018',n:'True Red',d:'Power classic'},{c:'#C00858',n:'Fuchsia',d:'High drama'},{c:'#C8C0C8',n:'Icy Nude',d:'Unexpected but works'},{c:'#900838',n:'Cool Berry',d:'Evening'}],eyes:[{c:'#1848B8',n:'Royal Blue',d:'Bold lid'},{c:'#383840',n:'Charcoal',d:'Classic liner'},{c:'#0A0A0A',n:'True Black',d:'Drama'},{c:'#EFEFFF',n:'Icy White',d:'Highlight'},{c:'#087840',n:'Emerald',d:'Graphic accent'}],cheeks:[{c:'#E830A0',n:'Cool Pink',d:'Vivid flush'},{c:'#C81878',n:'Fuchsia',d:'Drama'},{c:'#A0A0B0',n:'Cool Taupe',d:'Contour'}]},
-    tips:['Maximum contrast is your superpower','Pure black and white look stunning on you','Silver jewellery always','Stay vivid and clear — avoid muted or earthy']},
-
-  cool_winter:{name:'Cool Winter',family:'Winter',famCol:'#2848A0',
-    strip:['#E8EAF8','#B8C0E8','#6878C8','#2848A0','#C868A8','#A03880','#08A070','#085840'],
-    about:{intro:"Cool Winter is the purest cool season — deeply cool undertones with the clearest winter palette.",wear:['Cool clear intense tones','Ice blue and vivid blue','Cool fuchsia and pink','Vivid violet and purple','Cool emerald and pine','Icy pastels'],avoid:['Any warm tones','Earthy or golden colours','Cream or ivory','Orange or camel','Warm reds'],desc:"Cool Winter — maximum cool with strong clarity.",neutral:"Pure white, true black and cool charcoal. Stark and clean."},
-    wardrobe:{neutrals:[{n:'Pure White',h:'#FFFFFF'},{n:'Cool Charcoal',h:'#3A3848'},{n:'True Black',h:'#080810'},{n:'Silver',h:'#C0C4D0'},{n:'Ice Grey',h:'#D8DCE8'},{n:'Navy',h:'#0A1840'}],mains:[{n:'Ice Blue',h:'#90C0E8'},{n:'Cobalt',h:'#1038C0'},{n:'Cool Fuchsia',h:'#C81880'},{n:'Violet',h:'#7018B0'},{n:'Electric Purple',h:'#8820D0'},{n:'Cool Magenta',h:'#B00870'}],accent:[{n:'Vivid Teal',h:'#08A0A0'},{n:'Pine',h:'#0A5030'},{n:'Cool Lime',h:'#78C008'},{n:'Icy Pink',h:'#F0B0D0'},{n:'Ice Blue',h:'#B0D8F0'},{n:'Cool Emerald',h:'#0A8848'}],deeps:[{n:'Midnight',h:'#080820'},{n:'Deep Navy',h:'#0A1038'},{n:'Black',h:'#050508'},{n:'Deep Plum',h:'#280840'},{n:'Dark Teal',h:'#044040'},{n:'Deep Violet',h:'#180830'}]},
-    makeup:{foundation:[{c:'#E0D0D8',n:'Foundation',d:'Very cool pink'},{c:'#C0B0B8',n:'Contour',d:'Cool grey-taupe'},{c:'#F0E8F0',n:'Highlight',d:'Ice pearl or lavender shimmer'}],lips:[{c:'#C01878',n:'Cool Fuchsia',d:'Your signature'},{c:'#A00860',n:'Deep Fuchsia',d:'Drama'},{c:'#D8B8C8',n:'Icy Pink',d:'Minimal look'},{c:'#800040',n:'Deep Berry',d:'Evening'}],eyes:[{c:'#7018B0',n:'Violet',d:'Statement lid'},{c:'#3040A0',n:'Cool Blue',d:'Liner'},{c:'#080810',n:'True Black',d:'Drama liner'},{c:'#E0E8FF',n:'Ice White',d:'Highlight'},{c:'#08A0A0',n:'Teal',d:'Accent'}],cheeks:[{c:'#D040A0',n:'Cool Fuchsia',d:'Vivid flush'},{c:'#C03080',n:'Berry Blush',d:'Drama'},{c:'#9898B0',n:'Cool Taupe',d:'Contour'}]},
-    tips:['The cooler the better — zero warm tones','Icy pastels and vivid cools both work','Silver or platinum only','Stark contrast outfits are your power look']},
-
-  deep_winter:{name:'Deep Winter',family:'Winter',famCol:'#180830',
-    strip:['#C0B8D8','#8878B0','#504880','#180830','#E01840','#880010','#088040','#043820'],
-    about:{intro:"Deep Winter is the deepest most dramatic cool season — intense, rich and cool with dark colouring and striking depth.",wear:['Deep cool dramatic tones','Rich icy pastels for contrast','True red and cool burgundy','Deep navy','Cool dark emerald','Stark white with black'],avoid:['Warm golden or earthy tones','Camel or warm brown','Dusty or muted colours','Warm pastels','Golden jewellery'],desc:"Deep Winter — darkest most dramatic cool season, shared depth with Deep Autumn but cool.",neutral:"True black, stark white and deep navy. High contrast is your natural state."},
-    wardrobe:{neutrals:[{n:'True Black',h:'#080810'},{n:'Stark White',h:'#FFFFFF'},{n:'Charcoal',h:'#282830'},{n:'Deep Navy',h:'#0A1038'},{n:'Cool Dark Grey',h:'#3A3848'},{n:'Silver',h:'#B8B8C8'}],mains:[{n:'True Red',h:'#C80818'},{n:'Cool Burgundy',h:'#680828'},{n:'Icy Pink',h:'#F0B0C0'},{n:'Cool Fuchsia',h:'#A80860'},{n:'Vivid Blue',h:'#0838C0'},{n:'Electric Purple',h:'#6010B0'}],accent:[{n:'Cool Emerald',h:'#087840'},{n:'Deep Teal',h:'#044050'},{n:'Ice Blue',h:'#90B8E0'},{n:'Vivid Teal',h:'#068888'},{n:'Cool Pine',h:'#0A4828'},{n:'Icy Lavender',h:'#C0B8E0'}],deeps:[{n:'Midnight',h:'#050510'},{n:'Very Dark Navy',h:'#08102A'},{n:'Black',h:'#000000'},{n:'Dark Plum',h:'#200838'},{n:'Deep Burgundy',h:'#3A0410'},{n:'Dark Forest',h:'#042010'}]},
-    makeup:{foundation:[{c:'#D8C8C0',n:'Foundation',d:'Cool-neutral deeper'},{c:'#A89088',n:'Contour',d:'Cool grey-brown'},{c:'#E8E0E0',n:'Highlight',d:'Silver icy pearl'}],lips:[{c:'#C80818',n:'True Red',d:'Classic drama'},{c:'#680828',n:'Dark Burgundy',d:'Rich evening'},{c:'#F0B0C0',n:'Icy Pink',d:'High contrast cool'},{c:'#A80860',n:'Deep Fuchsia',d:'Statement'}],eyes:[{c:'#0838C0',n:'Deep Blue',d:'Bold lid'},{c:'#282830',n:'Charcoal',d:'Liner'},{c:'#080810',n:'True Black',d:'Maximum drama'},{c:'#E8E8FF',n:'Ice White',d:'Highlight'},{c:'#087840',n:'Emerald',d:'Accent'}],cheeks:[{c:'#E81840',n:'Cool Red Blush',d:'Dramatic'},{c:'#B00830',n:'Berry',d:'Rich depth'},{c:'#585868',n:'Cool Taupe',d:'Contour'}]},
-    tips:['Darkness and drama are your allies','Stark white creates stunning contrast','Silver and platinum only','Deep cool accents add intensity without warmth']}
+// ── SEASON DATA (stripped to teaser only — no full guides) ──
+const SEASONS = {
+  true_spring:    { name:'True Spring',    strip:['#F5D9B0','#EBB870','#D4832A','#C86820','#8AAA60','#5A8A40','#D4C080','#A07828'], teaserGroups:[['#F5D9B0','#EBB870','#D4832A'],['#C86820','#8AAA60','#5A8A40'],['#D4C080','#A07828','#C86820']] },
+  light_spring:   { name:'Light Spring',   strip:['#F8E8D0','#F0C8A0','#E8A080','#D89070','#A8C888','#78A868','#E8D888','#C0A850'], teaserGroups:[['#F8E8D0','#F0C8A0','#E8A080'],['#D89070','#A8C888','#78A868'],['#E8D888','#C0A850','#D89070']] },
+  bright_spring:  { name:'Bright Spring',  strip:['#F0E0B8','#E8B040','#E06020','#C82010','#30B848','#10A030','#30A8D8','#1870B8'], teaserGroups:[['#F0E0B8','#E8B040','#E06020'],['#C82010','#30B848','#10A030'],['#30A8D8','#1870B8','#E06020']] },
+  true_summer:    { name:'True Summer',    strip:['#D8DCF0','#B0B8E0','#8A9AC8','#6A7AAA','#90B8A8','#6A9888','#C0A8B8','#9A7898'], teaserGroups:[['#D8DCF0','#B0B8E0','#8A9AC8'],['#6A7AAA','#90B8A8','#6A9888'],['#C0A8B8','#9A7898','#8A9AC8']] },
+  light_summer:   { name:'Light Summer',   strip:['#E8EAF8','#D0D4F0','#B8C0E8','#A0A8D8','#A8C8C0','#88A8A0','#D0C0C8','#B0A0B0'], teaserGroups:[['#E8EAF8','#D0D4F0','#B8C0E8'],['#A0A8D8','#A8C8C0','#88A8A0'],['#D0C0C8','#B0A0B0','#B8C0E8']] },
+  soft_summer:    { name:'Soft Summer',    strip:['#D8DCE4','#B8C0CC','#98A0B0','#7A8898','#8AA898','#6A8880','#B8A0A8','#988090'], teaserGroups:[['#D8DCE4','#B8C0CC','#98A0B0'],['#7A8898','#8AA898','#6A8880'],['#B8A0A8','#988090','#98A0B0']] },
+  deep_soft_summer:{ name:'Deep Soft Summer', strip:['#7A8FA8','#5B8DD9','#3A7A8A','#4A5A7A','#9878C8','#8A7898','#787878','#5A3A5A'], teaserGroups:[['#7A8FA8','#5B8DD9','#3A7A8A'],['#4A5A7A','#9878C8','#8A7898'],['#787878','#5A3A5A','#3A7A8A']] },
+  true_autumn:    { name:'True Autumn',    strip:['#E8C888','#D4A040','#C07820','#A05510','#8A7020','#6A6020','#709050','#4A7040'], teaserGroups:[['#E8C888','#D4A040','#C07820'],['#A05510','#8A7020','#6A6020'],['#709050','#4A7040','#C07820']] },
+  soft_autumn:    { name:'Soft Autumn',    strip:['#E8D5B0','#D4B896','#C9956A','#B5573C','#8A9B7A','#7A7A45','#4A7A72','#3D5C4A'], teaserGroups:[['#E8D5B0','#D4B896','#C9956A'],['#B5573C','#8A9B7A','#7A7A45'],['#4A7A72','#3D5C4A','#C9956A']] },
+  deep_autumn:    { name:'Deep Autumn',    strip:['#C8A060','#A07828','#885A18','#702808','#506028','#304818','#1A5048','#183028'], teaserGroups:[['#C8A060','#A07828','#885A18'],['#702808','#506028','#304818'],['#1A5048','#183028','#885A18']] },
+  true_winter:    { name:'True Winter',    strip:['#F0F0F8','#D0D0E8','#2858B0','#1A3070','#E81840','#B01028','#FFFFFF','#080808'], teaserGroups:[['#F0F0F8','#D0D0E8','#2858B0'],['#1A3070','#E81840','#B01028'],['#FFFFFF','#080808','#2858B0']] },
+  cool_winter:    { name:'Cool Winter',    strip:['#E8EAF8','#B8C0E8','#6878C8','#2848A0','#C868A8','#A03880','#08A070','#085840'], teaserGroups:[['#E8EAF8','#B8C0E8','#6878C8'],['#2848A0','#C868A8','#A03880'],['#08A070','#085840','#6878C8']] },
+  deep_winter:    { name:'Deep Winter',    strip:['#C0B8D8','#8878B0','#504880','#180830','#E01840','#880010','#088040','#043820'], teaserGroups:[['#C0B8D8','#8878B0','#504880'],['#180830','#E01840','#880010'],['#088040','#043820','#504880']] }
 };
 
-// ══════════════════════════════════════════════
-// HELPERS
-// ══════════════════════════════════════════════
-function allSwatches(key){ const w=S[key].wardrobe; return [...w.neutrals,...w.mains,...w.accent,...w.deeps]; }
-function hex2rgb(h){ return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]; }
-function rgb2lab(r,g,b){
-  let rr=r/255,gg=g/255,bb=b/255;
-  rr=rr>0.04045?Math.pow((rr+0.055)/1.055,2.4):rr/12.92;
-  gg=gg>0.04045?Math.pow((gg+0.055)/1.055,2.4):gg/12.92;
-  bb=bb>0.04045?Math.pow((bb+0.055)/1.055,2.4):bb/12.92;
-  let x=rr*0.4124+gg*0.3576+bb*0.1805,y=rr*0.2126+gg*0.7152+bb*0.0722,z=rr*0.0193+gg*0.1192+bb*0.9505;
-  x/=0.95047;z/=1.08883;
-  const f=v=>v>0.008856?Math.pow(v,1/3):7.787*v+16/116;
-  return[116*f(y)-16,500*(f(x)-f(y)),200*(f(y)-f(z))];
+// ── HERO PALETTE BACKGROUND ──
+function initHeroPalette(){
+  const container = document.getElementById('hero-bg-palette');
+  const allStrips = Object.values(SEASONS).map(s => s.strip);
+  const numCols = 8;
+  for(let c = 0; c < numCols; c++){
+    const col = document.createElement('div');
+    col.className = 'hero-bg-palette-col';
+    for(let r = 0; r < allStrips.length; r++){
+      const cell = document.createElement('div');
+      cell.style.background = allStrips[r][c % allStrips[r].length];
+      col.appendChild(cell);
+    }
+    container.appendChild(col);
+  }
 }
-function dE(h1,h2){
-  const[r1,g1,b1]=hex2rgb(h1),[r2,g2,b2]=hex2rgb(h2);
-  const[L1,a1,b1l]=rgb2lab(r1,g1,b1),[L2,a2,b2l]=rgb2lab(r2,g2,b2);
-  return Math.sqrt((L2-L1)**2+(a2-a1)**2+(b2l-b1l)**2);
-}
-function matchScore(p,pal){ return Math.max(0,Math.round(100-dE(p,pal)*1.8)); }
+initHeroPalette();
 
-// ══════════════════════════════════════════════
-// NAVIGATION
-// ══════════════════════════════════════════════
-function goCA(screen){
-  document.querySelectorAll('.ca-screen').forEach(s=>{
-    s.classList.remove('active');
-  });
-  const el = document.getElementById('ca-'+screen);
-  el.classList.add('active');
-  // Scroll to tool
-  document.querySelector('.tool-wrap').scrollIntoView({behavior:'smooth', block:'start'});
-  if(screen==='seasons') renderSeasons();
-}
+// ── QUIZ LOGIC ──
+let qAns = {q1:null,q2:null,q3:null,q4:null}, qCur = 1;
 
-// ══════════════════════════════════════════════
-// LANDING DOTS
-// ══════════════════════════════════════════════
-function initLanding(){
-  const grid = document.getElementById('landing-dot-grid');
-  const heroStrip = document.getElementById('hero-strip');
-  const allCols = Object.values(S).flatMap(s=>s.strip);
-  const sample = allCols.filter((_,i)=>i%2===0).slice(0,30);
-  grid.innerHTML = sample.map(c=>`<div class="sdot" style="background:${c}"></div>`).join('');
-  // hero strip — all 12 seasons each contributing 2 colours
-  const stripCols = Object.values(S).flatMap(s=>[s.strip[2],s.strip[3]]);
-  heroStrip.innerHTML = stripCols.map(c=>`<div style="background:${c}"></div>`).join('');
-}
-
-// ══════════════════════════════════════════════
-// QUIZ
-// ══════════════════════════════════════════════
-let qAns={q1:null,q2:null,q3:null,q4:null}, qCur=1;
-
-function pickOpt(el,q,val){
-  el.closest('.q-opts').querySelectorAll('.q-opt').forEach(o=>o.classList.remove('sel'));
+function pickOpt(el, q, val){
+  el.closest('.q-opts').querySelectorAll('.q-opt').forEach(o => o.classList.remove('sel'));
   el.classList.add('sel');
-  qAns[q]=val;
-  document.getElementById('qbtn-next').disabled=false;
+  qAns[q] = val;
+  document.getElementById('qbtn-next').disabled = false;
 }
+
 function quizNext(){
-  if(qCur<4){
+  if(qCur < 4){
     document.getElementById('qq'+qCur).classList.remove('active');
     qCur++;
     document.getElementById('qq'+qCur).classList.add('active');
-    document.getElementById('q-fill').style.width=(qCur*25)+'%';
-    document.getElementById('qbtn-next').disabled=!qAns['q'+qCur];
-    document.getElementById('qbtn-back').style.visibility='visible';
-    if(qCur===4) document.getElementById('qbtn-next').textContent='See My Result →';
-  } else { showResult(); }
+    document.getElementById('q-fill').style.width = (qCur * 25) + '%';
+    document.getElementById('qbtn-next').disabled = !qAns['q'+qCur];
+    document.getElementById('qbtn-back').style.visibility = 'visible';
+    if(qCur === 4) document.getElementById('qbtn-next').textContent = 'See My Result →';
+  } else {
+    showResult();
+  }
 }
+
 function quizBack(){
-  if(qCur>1){
+  if(qCur > 1){
     document.getElementById('qq'+qCur).classList.remove('active');
     qCur--;
     document.getElementById('qq'+qCur).classList.add('active');
-    document.getElementById('q-fill').style.width=(qCur*25)+'%';
-    document.getElementById('qbtn-next').disabled=false;
-    document.getElementById('qbtn-next').textContent='Next →';
-    if(qCur===1) document.getElementById('qbtn-back').style.visibility='hidden';
+    document.getElementById('q-fill').style.width = (qCur * 25) + '%';
+    document.getElementById('qbtn-next').disabled = false;
+    document.getElementById('qbtn-next').textContent = 'Next →';
+    if(qCur === 1) document.getElementById('qbtn-back').style.visibility = 'hidden';
   }
 }
+
 function calcSeason(a){
-  const warm=(a.q1==='green'?1:a.q1==='blue'?-1:0)+(a.q2==='gold'?1:a.q2==='silver'?-1:0)+(a.q3==='tan'?1:a.q3==='burn'?-1:0);
-  const depth=a.q3==='tan'?1:a.q3==='burn'?-1:0;
-  const c=a.q4;
-  if(warm>1){ if(depth>0&&c==='high')return'deep_autumn'; if(c==='low')return'soft_autumn'; if(c==='high')return'bright_spring'; return'true_autumn'; }
-  else if(warm===1){ if(c==='low')return'soft_autumn'; if(c==='high')return'bright_spring'; return'light_spring'; }
-  else if(warm===0){ if(depth>0&&c==='high')return'deep_autumn'; if(c==='low')return'soft_summer'; if(c==='high')return'true_winter'; return'true_summer'; }
-  else if(warm===-1){ if(c==='low')return'soft_summer'; if(c==='high')return'true_winter'; return'light_summer'; }
-  else{ if(depth>0&&c==='high')return'deep_winter'; if(c==='low')return'soft_summer'; if(c==='high')return'cool_winter'; return'true_summer'; }
+  const warm = (a.q1==='green'?1:a.q1==='blue'?-1:0)
+             + (a.q2==='gold'?1:a.q2==='silver'?-1:0)
+             + (a.q3==='tan'?1:a.q3==='burn'?-1:0);
+  const depth = a.q3==='tan'?1:a.q3==='burn'?-1:0;
+  const c = a.q4;
+  if(warm > 1){ if(depth>0 && c==='high') return 'deep_autumn'; if(c==='low') return 'soft_autumn'; if(c==='high') return 'bright_spring'; return 'true_autumn'; }
+  else if(warm === 1){ if(c==='low') return 'soft_autumn'; if(c==='high') return 'bright_spring'; return 'light_spring'; }
+  else if(warm === 0){ if(depth>0 && c==='high') return 'deep_autumn'; if(c==='low') return 'deep_soft_summer'; if(c==='high') return 'true_winter'; return 'true_summer'; }
+  else if(warm === -1){ if(c==='low') return 'soft_summer'; if(c==='high') return 'true_winter'; if(depth>0) return 'deep_soft_summer'; return 'light_summer'; }
+  else { if(depth>0 && c==='high') return 'deep_winter'; if(c==='low') return 'soft_summer'; if(c==='high') return 'cool_winter'; return 'true_summer'; }
 }
+
 function showResult(){
-  const key=calcSeason(qAns), s=S[key];
-  document.getElementById('res-name').innerHTML=`<em>${s.name.split(' ')[0]}</em> ${s.name.split(' ').slice(1).join(' ')}`;
-  document.getElementById('res-strip').innerHTML=s.strip.map(c=>`<div style="background:${c}"></div>`).join('');
-  document.getElementById('res-desc').textContent=s.about.desc;
-  document.getElementById('res-cta').onclick=()=>loadGuide(key);
-  goCA('result');
+  const key = calcSeason(qAns);
+  const s = SEASONS[key];
+  const parts = s.name.split(' ');
+  document.getElementById('res-name').innerHTML = `<em>${parts[0]}</em> ${parts.slice(1).join(' ')}`;
+  document.getElementById('res-strip').innerHTML = s.strip.map(c => `<div style="background:${c}"></div>`).join('');
+
+  // Build blurred teaser swatches
+  const blur = document.getElementById('res-teaser-blur');
+  const labels = ['Neutrals', 'Key Colours', 'Accents'];
+  blur.innerHTML = s.teaserGroups.map((grp, i) => `
+    <div class="teaser-swatch-group">
+      <div class="teaser-label">${labels[i]}</div>
+      ${grp.map(c => `<div class="teaser-swatch" style="background:${c}"></div>`).join('')}
+    </div>
+  `).join('');
+
+  // Show result, hide quiz
+  document.getElementById('quiz-section').style.display = 'none';
+  const rs = document.getElementById('result-section');
+  rs.style.display = 'block';
+  rs.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ══════════════════════════════════════════════
-// SEASONS LIST
-// ══════════════════════════════════════════════
-function renderSeasons(){
-  const fams={Spring:['true_spring','light_spring','bright_spring'],Summer:['true_summer','light_summer','soft_summer'],Autumn:['true_autumn','soft_autumn','deep_autumn'],Winter:['true_winter','cool_winter','deep_winter']};
-  const fc={Spring:'#C8732A',Summer:'#6A7AAA',Autumn:'#8A5020',Winter:'#1A3070'};
-  let html='';
-  for(const[fam,keys] of Object.entries(fams)){
-    html+=`<div class="fam-group"><div class="fam-label" style="color:${fc[fam]}">${fam}</div><div class="seasons-row">`;
-    for(const k of keys){
-      const s=S[k];
-      html+=`<div class="scard" onclick="loadGuide('${k}')">
-        <div class="scard-strip">${s.strip.map(c=>`<div style="background:${c}"></div>`).join('')}</div>
-        <div class="scard-name">${s.name}</div>
-        <div class="scard-tag">${s.about.desc.substring(0,42)}…</div>
-      </div>`;
-    }
-    html+='</div></div>';
-  }
-  document.getElementById('seasons-list').innerHTML=html;
+// ── SCROLL HELPERS ──
+function scrollToQuiz(){
+  document.getElementById('quiz-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function scrollToPricing(){
+  document.getElementById('pricing-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ══════════════════════════════════════════════
-// GUIDE
-// ══════════════════════════════════════════════
-let curSeason=null;
-function loadGuide(key){
-  curSeason=key;
-  const s=S[key];
-  // banner
-  document.getElementById('g-season-name').innerHTML=`<em>${s.name.split(' ')[0]}</em> ${s.name.split(' ').slice(1).join(' ')}`;
-  const badge=document.getElementById('g-family-badge');
-  badge.textContent=s.family;
-  badge.style.cssText=`display:inline-block;margin-top:6px;padding:4px 14px;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;font-family:var(--font-body);background:${s.famCol}22;color:${s.famCol};border:1px solid ${s.famCol}44;`;
-  // strip mosaic
-  const bs=document.getElementById('g-banner-strip');
-  bs.innerHTML=s.strip.map(c=>`<div style="background:${c}"></div>`).join('');
-  const sf=document.getElementById('g-strip-full');
-  sf.innerHTML=s.strip.map(c=>`<div style="background:${c};flex:1;"></div>`).join('');
-  // reset tabs
-  document.querySelectorAll('.g-tab').forEach((t,i)=>{ t.classList.toggle('active',i===0); });
-  document.querySelectorAll('.g-panel').forEach((p,i)=>{ p.classList.toggle('active',i===0); });
-  // render panels
-  renderWardrobe(s);
-  renderMakeup(s);
-  renderAbout(s);
-  renderTips(s);
-  // reset matcher
-  mcClear();
-  document.getElementById('mc-results').innerHTML='<div style="font-size:11px;color:var(--grey);text-align:center;padding:40px 0;font-weight:300;">Pick a colour on the left to see matches</div>';
-  document.getElementById('mc-picked').style.display='none';
-  // style match button
-  const mb=document.getElementById('mc-match-btn');
-  mb.style.background=s.famCol; mb.style.color='white'; mb.style.border='none';
-  goCA('guide');
+// ── FAQ ──
+function toggleFaq(el){
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if(!wasOpen) el.classList.add('open');
 }
-function showTab(name,btn){
-  document.querySelectorAll('.g-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.g-panel').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('gp-'+name).classList.add('active');
-}
-
-function renderWardrobe(s){
-  const cats={neutrals:'Neutrals — your foundation colours',mains:'Key colours — your signature shades',accent:'Accents — interesting additions',deeps:'Deeps — grounding darks'};
-  let html='';
-  for(const[k,label] of Object.entries(cats)){
-    if(!s.wardrobe[k]) continue;
-    html+=`<div class="sw-section"><div class="sw-cat">${label}</div><div class="sw-grid">`;
-    html+=s.wardrobe[k].map(sw=>`<div class="sw-item" onclick="copySw('${sw.h}',this)"><div class="sw-color" style="background:${sw.h}"><div class="sw-tick">✓</div></div><div class="sw-name">${sw.n}</div><div class="sw-hex">${sw.h}</div></div>`).join('');
-    html+='</div></div>';
-  }
-  document.getElementById('gp-wardrobe').innerHTML=html;
-}
-function copySw(h,el){
-  if(navigator.clipboard) navigator.clipboard.writeText(h).catch(()=>{});
-  document.querySelectorAll('.sw-item.copied').forEach(e=>e.classList.remove('copied'));
-  el.classList.add('copied'); setTimeout(()=>el.classList.remove('copied'),1400);
-}
-function renderMakeup(s){
-  const secs=[['foundation','Foundation & Base'],['lips','Lips'],['eyes','Eyes'],['cheeks','Cheeks']];
-  let html='<div class="mk-grid">';
-  for(const[k,label] of secs){
-    if(!s.makeup[k]) continue;
-    html+=`<div class="mk-card"><div class="mk-title"><div class="mk-dot" style="background:${s.makeup[k][0].c}"></div>${label}</div>`;
-    s.makeup[k].forEach(m=>{ html+=`<div class="mk-item"><div class="mk-swatch" style="background:${m.c}"></div><div><div class="mk-iname">${m.n}</div><div class="mk-idesc">${m.d}</div></div></div>`; });
-    html+='</div>';
-  }
-  html+='</div>';
-  document.getElementById('gp-makeup').innerHTML=html;
-}
-function renderAbout(s){
-  const a=s.about;
-  const allC=[...s.wardrobe.neutrals,...s.wardrobe.mains,...s.wardrobe.accent,...s.wardrobe.deeps];
-  let html=`<p class="about-intro-text">${a.intro}</p>`;
-  html+=`<div class="about-palette-strip">${allC.map(c=>`<div style="background:${c.h}"></div>`).join('')}</div>`;
-  html+=`<div class="about-grid">
-    <div class="ab-card"><h3>What to look for</h3><ul class="wear-list">${a.wear.map(i=>`<li>${i}</li>`).join('')}</ul></div>
-    <div class="ab-card"><h3>What to avoid</h3><ul class="avoid-list">${a.avoid.map(i=>`<li>${i}</li>`).join('')}</ul></div>
-    <div class="ab-card"><h3>Your season</h3><p>${a.desc}</p></div>
-    <div class="ab-card"><h3>Your neutral secret</h3><p>${a.neutral}</p></div>
-  </div>`;
-  document.getElementById('gp-about').innerHTML=html;
-}
-function renderTips(s){
-  document.getElementById('mc-tips').innerHTML=(s.tips||[]).map(t=>`<li>${t}</li>`).join('');
-}
-
-// ══════════════════════════════════════════════
-// COLOUR MATCHER
-// ══════════════════════════════════════════════
-function setPicked(hex){
-  hex=hex.toLowerCase();
-  document.getElementById('mc-picked').style.display='block';
-  document.getElementById('mc-pb').style.background=hex;
-  document.getElementById('mc-phex').textContent=hex.toUpperCase();
-  document.getElementById('mc-hexin').value=hex;
-  document.getElementById('mc-cpick').value=hex;
-  if(!curSeason) return;
-  const swatches=allSwatches(curSeason);
-  const res=swatches.map(s=>({...s,sc:matchScore(hex,s.h)})).sort((a,b)=>b.sc-a.sc).slice(0,5);
-  const best=res[0].sc;
-  const bc=sc=>sc>=75?'#4a7a4a':sc>=55?'#8a6010':'#8a2020';
-  let html=`<div class="match-hdr">Closest palette matches</div>`;
-  html+=res.map((m,i)=>`<div class="match-item ${i===0?'top':''}"><div class="match-sw" style="background:${m.h}"></div><div class="match-name">${m.n}</div><div class="score-row"><div class="score-bg"><div class="score-fg" style="width:${m.sc}%;background:${bc(m.sc)}"></div></div><span class="score-pct" style="color:${bc(m.sc)}">${m.sc}%</span></div></div>`).join('');
-  const vd=best>=80?`<div class="verdict-box verdict-yes show">✓ Excellent match — right in your palette.</div>`:best>=60?`<div class="verdict-box verdict-maybe show">~ Decent match — check the undertone is right.</div>`:`<div class="verdict-box verdict-no show">✕ Poor match — likely outside your season.</div>`;
-  document.getElementById('mc-results').innerHTML=html+vd;
-}
-function mcSyncCol(v){ document.getElementById('mc-hexin').value=v; }
-function mcSyncHex(v){ if(/^#[0-9a-fA-F]{6}$/.test(v)) document.getElementById('mc-cpick').value=v; }
-function mcMatchManual(){
-  let v=document.getElementById('mc-hexin').value.trim();
-  if(!v.startsWith('#')) v='#'+v;
-  if(!/^#[0-9a-fA-F]{6}$/.test(v)){ alert('Enter a valid hex colour like #C9A84C'); return; }
-  setPicked(v);
-}
-function mcLoadImg(e){
-  const f=e.target.files[0]; if(!f) return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    const img=new Image();
-    img.onload=()=>{
-      const mW=300,mH=240; let w=img.width,h=img.height;
-      if(w>mW){h=h*(mW/w);w=mW;} if(h>mH){w=w*(mH/h);h=mH;}
-      const cv=document.getElementById('mc-cv');
-      cv.width=Math.round(w); cv.height=Math.round(h);
-      cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
-      document.getElementById('mc-upload-wrap').style.display='none';
-      document.getElementById('mc-canvas-wrap').style.display='block';
-      setupPicker(cv);
-    };
-    img.src=ev.target.result;
-  };
-  reader.readAsDataURL(f);
-}
-function mcClear(){
-  document.getElementById('mc-upload-wrap').style.display='block';
-  document.getElementById('mc-canvas-wrap').style.display='none';
-  const fi=document.getElementById('mc-file'); if(fi) fi.value='';
-}
-function setupPicker(cv){
-  const ctx=cv.getContext('2d');
-  const mag=document.getElementById('ca-mag'),mb=document.getElementById('ca-mag-bg');
-  cv.onmousemove=e=>{
-    const r=cv.getBoundingClientRect(),sx=cv.width/r.width,sy=cv.height/r.height;
-    const x=(e.clientX-r.left)*sx,y=(e.clientY-r.top)*sy;
-    mag.style.display='block'; mag.style.left=e.clientX+'px'; mag.style.top=e.clientY+'px';
-    const off=document.createElement('canvas'); off.width=76; off.height=76;
-    const oc=off.getContext('2d'); oc.imageSmoothingEnabled=false;
-    oc.drawImage(cv,x-76/8,y-76/8,76/4,76/4,0,0,76,76);
-    mb.style.backgroundImage=`url(${off.toDataURL()})`; mb.style.backgroundSize='cover';
-  };
-  cv.onmouseleave=()=>mag.style.display='none';
-  cv.onclick=e=>{
-    const r=cv.getBoundingClientRect(),sx=cv.width/r.width,sy=cv.height/r.height;
-    const x=Math.floor((e.clientX-r.left)*sx),y=Math.floor((e.clientY-r.top)*sy);
-    const px=ctx.getImageData(x,y,1,1).data;
-    setPicked('#'+[px[0],px[1],px[2]].map(v=>v.toString(16).padStart(2,'0')).join(''));
-    mag.style.display='none';
-  };
-}
-
-// ══════════════════════════════════════════════
-// PHOTO TONE SCAN
-// ══════════════════════════════════════════════
-// ══════════════════════════════════════════════
-// PHOTO TONE SCAN — DRAGGABLE MARKERS
-// ══════════════════════════════════════════════
-let scanImageData = null;
-let scanZoomLevel = 1; // 1 = 100%
-const ZOOM_STEPS = [0.75, 1, 1.4, 1.9, 2.6, 3.4];
-
-function scanZoom(dir) {
-  const idx = ZOOM_STEPS.indexOf(scanZoomLevel);
-  const next = Math.max(0, Math.min(ZOOM_STEPS.length - 1, idx + dir));
-  scanZoomLevel = ZOOM_STEPS[next];
-  const inner = document.getElementById('scan-zoom-inner');
-  inner.style.transform = `scale(${scanZoomLevel})`;
-  document.getElementById('szoom-level').textContent = Math.round(scanZoomLevel * 100) + '%';
-}
-
-// Zone positions as % of overlay (0–100). Default guesses for a centred portrait.
-const zonePos = {
-  skin: { x: 50, y: 62 },
-  hair: { x: 50, y: 14 },
-  eye:  { x: 50, y: 44 }
-};
-
-function initDraggableZones() {
-  ['skin','hair','eye'].forEach(zone => {
-    const el = document.getElementById('zone-' + zone);
-    positionZoneHandle(el, zonePos[zone]);
-    makeDraggable(el, zone);
-  });
-}
-
-function positionZoneHandle(el, pos) {
-  el.style.left = pos.x + '%';
-  el.style.top  = pos.y + '%';
-}
-
-function makeDraggable(el, zone) {
-  let startX, startY, startLeft, startTop;
-  const overlay = document.getElementById('scan-zones-overlay');
-
-  const onDown = e => {
-    e.preventDefault();
-    el.classList.add('dragging');
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    const rect = overlay.getBoundingClientRect();
-    startX = clientX;
-    startY = clientY;
-    startLeft = zonePos[zone].x;
-    startTop  = zonePos[zone].y;
-
-    const onMove = ev => {
-      const cx = ev.touches ? ev.touches[0].clientX : ev.clientX;
-      const cy = ev.touches ? ev.touches[0].clientY : ev.clientY;
-      // Divide delta by zoom so marker tracks correctly at any zoom level
-      const dx = ((cx - startX) / rect.width)  * 100 / scanZoomLevel;
-      const dy = ((cy - startY) / rect.height) * 100 / scanZoomLevel;
-      zonePos[zone].x = Math.max(2, Math.min(98, startLeft + dx));
-      zonePos[zone].y = Math.max(2, Math.min(98, startTop  + dy));
-      positionZoneHandle(el, zonePos[zone]);
-    };
-    const onUp = () => {
-      el.classList.remove('dragging');
-      document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseup', onUp);
-      document.removeEventListener('touchmove', onMove);
-      document.removeEventListener('touchend', onUp);
-    };
-    document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseup', onUp);
-    document.addEventListener('touchmove', onMove, {passive:false});
-    document.addEventListener('touchend', onUp);
-  };
-
-  el.addEventListener('mousedown', onDown);
-  el.addEventListener('touchstart', onDown, {passive:false});
-}
-
-function scanLoadImage(e) {
-  const f = e.target.files[0]; if (!f) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    const img = new Image();
-    img.onload = () => {
-      const maxW = 500, maxH = 640;
-      let w = img.width, h = img.height;
-      if (w > maxW) { h = h*(maxW/w); w = maxW; }
-      if (h > maxH) { w = w*(maxH/h); h = maxH; }
-      const cv = document.getElementById('scan-canvas');
-      cv.width = Math.round(w); cv.height = Math.round(h);
-      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
-      scanImageData = cv.getContext('2d').getImageData(0, 0, cv.width, cv.height);
-      document.getElementById('scan-upload-zone').style.display = 'none';
-      document.getElementById('scan-preview-wrap').style.display = 'block';
-      document.getElementById('scan-zoom-bar').style.display = 'flex';
-      document.getElementById('scan-btn').disabled = false;
-      initDraggableZones();
-      document.getElementById('scan-results-panel').innerHTML = `
-        <div class="scan-empty">
-          <div class="scan-empty-icon" style="opacity:0.12">
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><path d="M22 4L25.4 17.6L39 22L25.4 26.4L22 40L18.6 26.4L5 22L18.6 17.6L22 4Z" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="scan-empty-text">Drag the markers to align<br>with your features, then click<br><strong style="color:var(--gold-light)">Analyse My Tones</strong></div>
-        </div>`;
-    };
-    img.src = ev.target.result;
-  };
-  reader.readAsDataURL(f);
-}
-
-function scanClear() {
-  scanImageData = null;
-  scanZoomLevel = 1;
-  const inner = document.getElementById('scan-zoom-inner');
-  if (inner) inner.style.transform = 'scale(1)';
-  const zbar = document.getElementById('scan-zoom-bar');
-  if (zbar) zbar.style.display = 'none';
-  const zlevel = document.getElementById('szoom-level');
-  if (zlevel) zlevel.textContent = '100%';
-  // Reset zone positions
-  zonePos.skin = { x: 50, y: 62 };
-  zonePos.hair = { x: 50, y: 14 };
-  zonePos.eye  = { x: 50, y: 44 };
-  document.getElementById('scan-upload-zone').style.display = 'flex';
-  document.getElementById('scan-preview-wrap').style.display = 'none';
-  document.getElementById('scan-btn').disabled = true;
-  document.getElementById('scan-file-input').value = '';
-  document.getElementById('scan-results-panel').innerHTML = `
-    <div class="scan-empty">
-      <div class="scan-empty-icon" style="opacity:0.12">
-        <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><path d="M22 4L25.4 17.6L39 22L25.4 26.4L22 40L18.6 26.4L5 22L18.6 17.6L22 4Z" stroke="#c9a84c" stroke-width="1.2" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="scan-empty-text">Upload a photo to begin your<br>tone analysis</div>
-    </div>`;
-}
-
-function sampleAtZonePos(data, w, h, zx, zy, radiusPct=0.07, samples=120) {
-  // zx, zy are percentages (0–100) relative to the image
-  const cx = Math.floor(w * zx / 100);
-  const cy = Math.floor(h * zy / 100);
-  const radius = Math.floor(Math.min(w, h) * radiusPct);
-  let r=0,g=0,b=0,count=0;
-  for (let i = 0; i < samples; i++) {
-    const angle = Math.random() * Math.PI * 2;
-    const dist  = Math.random() * radius;
-    const x = Math.round(cx + Math.cos(angle) * dist);
-    const y = Math.round(cy + Math.sin(angle) * dist);
-    if (x < 0 || x >= w || y < 0 || y >= h) continue;
-    const idx = (y * w + x) * 4;
-    r += data[idx]; g += data[idx+1]; b += data[idx+2]; count++;
-  }
-  if (!count) return '#888888';
-  return '#'+[Math.round(r/count),Math.round(g/count),Math.round(b/count)].map(v=>v.toString(16).padStart(2,'0')).join('');
-}
-
-function hexToRgb(h) {
-  return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
-}
-
-function getUndertone(skinHex) {
-  const [r,g,b] = hexToRgb(skinHex);
-  const warmScore = (r - b) + (r - g)*0.5;
-  const pinkScore = (r-g) - (r-b)*0.3;
-  if (warmScore > 20) return {tone:'Warm', desc:'Golden or olive undertones — you suit earthy, warm palettes.', col:'#C9A84C'};
-  if (pinkScore > 8) return {tone:'Cool', desc:'Pink or bluish undertones — cool, clear palettes work best.', col:'#7A9EC8'};
-  return {tone:'Neutral', desc:'A balance of warm and cool — you can work across multiple families.', col:'#9A9A7A'};
-}
-
-function analyseHairTone(hairHex) {
-  const [r,g,b] = hexToRgb(hairHex);
-  const lum = 0.299*r+0.587*g+0.114*b;
-  const warm = r - b;
-  if (lum > 180) return 'Light / Blonde';
-  if (lum > 120 && warm > 20) return 'Golden Brown';
-  if (lum > 120) return 'Ash Brown';
-  if (lum > 60 && warm > 15) return 'Dark Warm Brown';
-  if (lum > 60) return 'Dark Cool Brown';
-  return 'Very Dark / Black';
-}
-
-function analyseEyeDesc(eyeHex) {
-  const [r,g,b] = hexToRgb(eyeHex);
-  const lum = 0.299*r+0.587*g+0.114*b;
-  const warm = r - b;
-  if (b > r && b > g) return 'Blue';
-  if (g > r && g > b) return 'Green';
-  if (warm > 40 && lum < 120) return 'Dark Brown (warm)';
-  if (lum < 100) return 'Dark Brown';
-  return 'Hazel / Mixed';
-}
-
-function suggestSeasonFromScan(undertone, hair, eyeDesc) {
-  const t = undertone.tone;
-  if (t === 'Warm') {
-    if (hair === 'Light / Blonde' || hair === 'Golden Brown') return 'light_spring';
-    if (hair === 'Dark Warm Brown') return 'true_autumn';
-    return 'true_spring';
-  }
-  if (t === 'Cool') {
-    if (hair === 'Very Dark / Black' || hair === 'Dark Cool Brown') return 'deep_winter';
-    if (hair === 'Light / Blonde' || hair === 'Ash Brown') return 'light_summer';
-    return 'true_summer';
-  }
-  if (hair === 'Light / Blonde' || hair === 'Golden Brown') return 'soft_autumn';
-  if (hair === 'Very Dark / Black') return 'deep_autumn';
-  return 'soft_summer';
-}
-
-function runScanAnalysis() {
-  if (!scanImageData) return;
-  document.getElementById('scan-results-panel').innerHTML = `
-    <div class="scan-loading">
-      <div class="scan-spinner"></div>
-      <div class="scan-loading-text">Sampling tones…</div>
-    </div>`;
-
-  setTimeout(() => {
-    const {data, width: w, height: h} = scanImageData;
-
-    // Sample from wherever user placed the markers
-    const skinHex  = sampleAtZonePos(data, w, h, zonePos.skin.x, zonePos.skin.y, 0.08);
-    const skinHex2 = sampleAtZonePos(data, w, h, zonePos.skin.x + 5, zonePos.skin.y + 5, 0.06);
-    const hairHex  = sampleAtZonePos(data, w, h, zonePos.hair.x, zonePos.hair.y, 0.10);
-    const eyeHex   = sampleAtZonePos(data, w, h, zonePos.eye.x,  zonePos.eye.y,  0.02);
-
-    const undertone = getUndertone(skinHex);
-    const hairDesc  = analyseHairTone(hairHex);
-    const eyeDesc   = analyseEyeDesc(eyeHex);
-    const seasonKey = suggestSeasonFromScan(undertone, hairDesc, eyeDesc);
-    const season    = S[seasonKey];
-    const ut2 = getUndertone(skinHex2);
-    const confidence = ut2.tone === undertone.tone ? 82 : 65;
-
-    document.getElementById('scan-results-panel').innerHTML = `
-      <div class="scan-result-card">
-        <div class="src-label">Skin Undertone</div>
-        <div class="src-swatches-wrap">
-          <div class="src-swatches">
-            <div class="src-swatch" style="background:${skinHex}"><div class="src-sw-hex">${skinHex.toUpperCase()}</div></div>
-            <div class="src-swatch" style="background:${skinHex2}"><div class="src-sw-hex">${skinHex2.toUpperCase()}</div></div>
-          </div>
-        </div>
-        <div class="scan-undertone-badge" style="background:${undertone.col}22;color:${undertone.col};border:1px solid ${undertone.col}44;">
-          <span>◆</span> ${undertone.tone} Undertone
-        </div>
-        <div class="src-analysis">${undertone.desc}</div>
-        <div class="conf-bar-wrap">
-          <div class="conf-label"><span>Confidence</span><span>${confidence}%</span></div>
-          <div class="conf-bar"><div class="conf-fill" style="width:0%" data-target="${confidence}"></div></div>
-        </div>
-      </div>
-      <div class="scan-result-card">
-        <div class="src-label">Hair Colour</div>
-        <div class="src-swatches-wrap">
-          <div class="src-swatches">
-            <div class="src-swatch" style="background:${hairHex}"><div class="src-sw-hex">${hairHex.toUpperCase()}</div></div>
-          </div>
-        </div>
-        <div class="src-analysis"><strong>${hairDesc}</strong><br>
-        ${hairDesc.includes('Warm') || hairDesc.includes('Golden') ? 'Warm-toned hair signals an affinity for golden and earthy palettes.' : hairDesc.includes('Ash') || hairDesc.includes('Cool') ? 'Cool-toned hair suggests cool palette families will harmonise best.' : 'Your hair tone works across palette families.'}
-        </div>
-      </div>
-      <div class="scan-result-card">
-        <div class="src-label">Eye Colour</div>
-        <div class="src-swatches-wrap">
-          <div class="src-swatches">
-            <div class="src-swatch" style="background:${eyeHex}"><div class="src-sw-hex">${eyeHex.toUpperCase()}</div></div>
-          </div>
-        </div>
-        <div class="src-analysis"><strong>${eyeDesc}</strong><br>
-        ${eyeDesc.includes('Blue') ? 'Blue eyes are typically associated with cool seasons — Spring and Summer families.' : eyeDesc.includes('Green') ? 'Green eyes appear across Spring and Autumn families, often with a warm-neutral undertone.' : eyeDesc.includes('warm') ? 'Dark warm eyes are classic Autumn — rich depth and golden warmth.' : 'Dark eyes appear in all seasons but especially signal contrast in Winter types.'}
-        </div>
-      </div>
-      <div class="scan-season-suggest">
-        <div class="sss-title">Suggested Season</div>
-        <div class="sss-name"><em>${season.name.split(' ')[0]}</em> ${season.name.split(' ').slice(1).join(' ')}</div>
-        <div class="sss-strip">${season.strip.map(c=>`<div style="background:${c}"></div>`).join('')}</div>
-        <p>Based on your ${undertone.tone.toLowerCase()} undertone, ${hairDesc.toLowerCase()} hair and ${eyeDesc.toLowerCase()} eyes — ${season.about.desc.toLowerCase()}.</p>
-        <br>
-        <button class="sss-btn" onclick="loadGuide('${seasonKey}')">See My Full Guide →</button>
-      </div>`;
-
-    setTimeout(() => {
-      document.querySelectorAll('.conf-fill[data-target]').forEach(el => {
-        el.style.width = el.dataset.target + '%';
-      });
-    }, 100);
-  }, 900);
-}
-
-// ══════════════════════════════════════════════
-// AI STYLIST CHATBOT
-// ══════════════════════════════════════════════
-let chatOpen = false;
-let chatHistory = [];
-let chatInitialised = false;
-
-function toggleChat() {
-  chatOpen = !chatOpen;
-  document.getElementById('chat-window').classList.toggle('open', chatOpen);
-  if (chatOpen && !chatInitialised) {
-    chatInitialised = true;
-    addChatMessage('assistant', `Hello — I'm Amba's AI Colour Stylist.\n\nI'm here to help with everything colour analysis: your season, palette questions, what to wear, makeup choices, or how to shop for your colours. What would you like to explore?`);
-  }
-  if (chatOpen) {
-    setTimeout(() => document.getElementById('chat-input').focus(), 300);
-  }
-}
-
-function addChatMessage(role, text, isTyping=false) {
-  const msgs = document.getElementById('chat-messages');
-  const div = document.createElement('div');
-  div.className = 'chat-msg' + (role==='user'?' user':'');
-  const avatarSvg = role === 'user'
-    ? `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="5" r="2.5" stroke="rgba(250,250,248,0.6)" stroke-width="1"/><path d="M2 12c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="rgba(250,250,248,0.6)" stroke-width="1" stroke-linecap="round"/></svg>`
-    : `<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L7.9 5.7L12.5 6.5L7.9 8.3L6.5 13L5.1 8.3L0.5 6.5L5.1 4.7L6.5 1Z" fill="#c9a84c" stroke="#c9a84c" stroke-width="0.3" stroke-linejoin="round"/></svg>`;
-  const bubble = isTyping
-    ? `<div class="chat-bubble"><div class="chat-typing"><span></span><span></span><span></span></div></div>`
-    : `<div class="chat-bubble">${formatChatText(text)}</div>`;
-  div.innerHTML = `<div class="chat-msg-avatar">${avatarSvg}</div>${bubble}`;
-  div.id = isTyping ? 'chat-typing-indicator' : '';
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-  return div;
-}
-
-function formatChatText(text) {
-  // Bold **text**, line breaks, colour chips for hex codes, season tags
-  return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/#([0-9A-Fa-f]{6})/g, (m,h) => `<span class="chat-colour-chip"><span class="chat-colour-chip-dot" style="background:#${h}"></span>#${h.toUpperCase()}</span>`)
-    .replace(/\n/g, '<br>');
-}
-
-function buildSystemPrompt() {
-  let ctx = `You are an expert colour analyst and personal stylist assistant for Amba Haverly, a luxury personal styling brand based in Chelsea, London. Your name is Amba's AI Colour Stylist.
-
-You are knowledgeable about the 12-season colour analysis system (True Spring, Light Spring, Bright Spring, True Summer, Light Summer, Soft Summer, True Autumn, Soft Autumn, Deep Autumn, True Winter, Cool Winter, Deep Winter).
-
-You give warm, authoritative, concise advice. You use British English spelling. You are not sycophantic — give direct, confident answers. When relevant, suggest the user take the quiz or view their season guide on the page.
-
-Current context:`;
-  
-  if (curSeason) {
-    const s = S[curSeason];
-    ctx += `\nThe user has selected or been assigned the season: ${s.name}. Family: ${s.family}. Key characteristics: ${s.about.desc}. Their best neutrals: ${s.about.neutral}.`;
-  } else {
-    ctx += `\nThe user has not yet been assigned a season.`;
-  }
-  
-  ctx += `\n\nKeep responses concise — 2-4 short paragraphs max. Use **bold** for key terms. You may mention hex colours like #C9A84C when helpful.`;
-  return ctx;
-}
-
-async function sendChat() {
-  const input = document.getElementById('chat-input');
-  const text = input.value.trim();
-  if (!text) return;
-  
-  input.value = '';
-  input.style.height = 'auto';
-  document.getElementById('chat-send-btn').disabled = true;
-  document.getElementById('chat-suggestions').style.display = 'none';
-  
-  addChatMessage('user', text);
-  chatHistory.push({role:'user', content: text});
-  
-  const typingEl = addChatMessage('assistant', '', true);
-  
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: buildSystemPrompt(),
-        messages: chatHistory
-      })
-    });
-    const data = await response.json();
-    const reply = data.content?.[0]?.text || 'I apologise — something went wrong. Please try again.';
-    
-    typingEl.remove();
-    addChatMessage('assistant', reply);
-    chatHistory.push({role:'assistant', content: reply});
-    
-    // Keep history manageable
-    if (chatHistory.length > 20) chatHistory = chatHistory.slice(-18);
-    
-  } catch(err) {
-    typingEl.remove();
-    addChatMessage('assistant', 'I\'m having a moment — please try again.');
-  }
-  
-  document.getElementById('chat-send-btn').disabled = false;
-}
-
-function sendSuggestion(btn) {
-  document.getElementById('chat-input').value = btn.textContent;
-  sendChat();
-}
-
-function chatKeydown(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendChat();
-  }
-}
-
-function autoResizeChat(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
-}
-
-// ══════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════
-initLanding();
 </script>
 </body>
 </html>

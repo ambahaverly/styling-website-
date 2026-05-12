@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Colour Analysis | Amber Haverly</title>
+
+<!-- Uploadcare v1 file uploader -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@1/web/uc-file-uploader-regular.min.css">
+<script type="module">
+  import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@1/web/uc-file-uploader-regular.min.js';
+  UC.defineComponents(UC);
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ivory: #FAF8F4;
+    --warm-white: #F5F2EC;
+    --sand: #E8E0D4;
+    --taupe: #B8A898;
+    --deep: #2C2420;
+    --accent: #8B6E5A;
+    --gold: #C4A882;
+    --success-green: #4A7C59;
+  }
+
+  body {
+    background: var(--ivory);
+    color: var(--deep);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* top stripe */
+  .top-bar {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--accent) 50%, var(--gold) 100%);
+  }
+
+  header {
+    text-align: center;
+    padding: 3rem 2rem 0;
+    width: 100%;
+    max-width: 680px;
+  }
+
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2.5rem;
+  }
+
+  .check-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    animation: fadeIn 0.6s ease both;
+  }
+
+  .check-circle svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--gold);
+    stroke-width: 1.5;
+    fill: none;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: drawCheck 0.5s 0.3s ease forwards;
+  }
+
+  @keyframes drawCheck {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: var(--deep);
+    margin-bottom: 0.75rem;
+    animation: slideUp 0.6s 0.15s ease both;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--taupe);
+    animation: slideUp 0.6s 0.25s ease both;
+  }
+
+  /* divider */
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 2rem auto;
+    animation: slideUp 0.6s 0.3s ease both;
+  }
+
+  main {
+    width: 100%;
+    max-width: 680px;
+    padding: 0 2rem 4rem;
+    animation: slideUp 0.6s 0.35s ease both;
+  }
+
+  /* steps */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 2.5rem;
+  }
+
+  .step {
+    display: flex;
+    gap: 1.25rem;
+    position: relative;
+    padding-bottom: 1.75rem;
+  }
+
+  .step:last-child { padding-bottom: 0; }
+
+  .step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--accent);
+    flex-shrink: 0;
+    background: var(--ivory);
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-line {
+    width: 1px;
+    flex: 1;
+    background: var(--sand);
+    margin-top: 6px;
+  }
+
+  .step:last-child .step-line { display: none; }
+
+  .step-content { padding-top: 5px; }
+
+  .step-title {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--deep);
+    margin-bottom: 0.35rem;
+    font-weight: 400;
+  }
+
+  .step-desc {
+    font-size: 13.5px;
+    color: var(--taupe);
+    line-height: 1.65;
+  }
+
+  /* upload section */
+  .upload-card {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 2px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .upload-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .upload-sub {
+    font-size: 13px;
+    color: var(--taupe);
+    margin-bottom: 1.75rem;
+    line-height: 1.6;
+  }
+
+  /* photo requirements */
+  .requirements {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1.75rem;
+  }
+
+  .req-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: white;
+    border: 1px solid var(--sand);
+    border-radius: 2px;
+    padding: 0.75rem;
+  }
+
+  .req-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .req-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--gold);
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  .req-text {
+    font-size: 12.5px;
+    color: var(--deep);
+    line-height: 1.5;
+  }
+
+  /* Uploadcare v1 theming via CSS custom properties */
+  uc-file-uploader-regular {
+    --uc-font-family: 'Jost', sans-serif;
+    --uc-radius: 2px;
+    --uc-radius-lg: 2px;
+    --uc-clr-btn-primary-background: #2C2420;
+    --uc-clr-btn-primary-text: #FAF8F4;
+    --uc-clr-btn-primary-background--hover: #8B6E5A;
+    --uc-clr-background-light: #FAF8F4;
+    --uc-clr-background-lightest: #F5F2EC;
+    --uc-clr-border: #E8E0D4;
+    --uc-clr-text-primary: #2C2420;
+    --uc-clr-text-muted: #B8A898;
+    --uc-clr-accent: #C4A882;
+    font-weight: 300;
+    width: 100%;
+    display: block;
+  }
+
+  /* success state (shown after upload) */
+  .upload-success {
+    display: none;
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid #C8DDD1;
+    background: #F4FAF6;
+    border-radius: 2px;
+    margin-top: 1rem;
+  }
+
+  .upload-success.visible { display: block; }
+
+  .upload-success p {
+    font-size: 13.5px;
+    color: var(--success-green);
+    line-height: 1.6;
+  }
+
+  .upload-success strong {
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+
+  /* note */
+  .note {
+    font-size: 12px;
+    color: var(--taupe);
+    text-align: center;
+    line-height: 1.7;
+    margin-top: 1rem;
+  }
+
+  footer {
+    border-top: 1px solid var(--sand);
+    width: 100%;
+    padding: 1.5rem 2rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    color: var(--taupe);
+  }
+
+  @media (max-width: 480px) {
+    .requirements { grid-template-columns: 1fr; }
+    h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<header>
+  <p class="brand">Amba Haverly</p>
+
+  <div class="check-circle">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <polyline points="4 13 9 18 20 7"></polyline>
+    </svg>
+  </div>
+
+  <h1>Your journey begins</h1>
+  <p class="subtitle">Colour Analysis · Payment confirmed</p>
+  <div class="divider"></div>
+</header>
+
+<main>
+
+  <!-- what happens next -->
+  <div class="steps">
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <p class="step-title">Upload your photos below</p>
+        <p class="step-desc">4 photos required with natural daylight, no makeup, white or neutral top. Takes just a minute.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <p class="step-title">Receive your Personal Colour report</p>
+        <p class="step-desc">Within 48 hours Amba will send your full personalised colour analysis report by email.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <p class="step-title">Book your 15-minute consultation</p>
+        <p class="step-desc">A Calendly link will be included in your report email so you can choose a time that suits you to discuss your results.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- upload card -->
+  <div class="upload-card">
+    <h2 class="upload-heading">Upload your photos</h2>
+    <p class="upload-sub">Please submit all 4 photos at once. You'll receive a backup link by email shortly in case you need to return to this later.</p>
+
+    <div class="requirements">
+      <div class="req-item">
+        <div class="req-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <span class="req-text">Natural daylight only with no artificial or ring light</span>
+      </div>
+      <div class="req-item">
+        <div class="req-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <span class="req-text">No makeup, no filter we want to see your natural skin tone</span>
+      </div>
+      <div class="req-item">
+        <div class="req-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <span class="req-text">White or light neutral top for accurate draping results is ideal</span>
+      </div>
+      <div class="req-item">
+        <div class="req-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <span class="req-text">4 photos total front, left, right profile + full face close-up</span>
+      </div>
+    </div>
+
+    <!-- Uploadcare v1 web components — real credentials -->
+    <uc-config
+      ctx-name="amber-uploader"
+      source-list="local, camera, facebook, gdrive"
+      cdn-cname="https://jybveltuj6.ucarecd.net/"
+      pubkey="34beabada2ba5738c5f0"
+      multiple="true"
+      multiple-max="4"
+      multiple-min="4"
+      img-only="true"
+    ></uc-config>
+
+    <uc-file-uploader-regular
+      ctx-name="amber-uploader"
+      class="uc-light uc-gray"
+    ></uc-file-uploader-regular>
+
+    <uc-upload-ctx-provider
+      ctx-name="amber-uploader"
+      id="amber-uploader-ctx"
+    ></uc-upload-ctx-provider>
+
+    <div class="upload-success" id="upload-success">
+      <p>✓ &nbsp;<strong>Photos received.</strong> Thanks so much! — Amba will begin your analysis and send your colour report within 48 hours. Keep an eye on your inbox.</p>
+    </div>
+  </div>
+
+  <p class="note">A confirmation email with a backup upload link has been sent to your inbox.<br>If you have any questions email <a href="mailto:stylist@amberhaverly.co.uk" style="color:var(--accent); text-decoration:none;">stylist@amberhaverly.co.uk</a></p>
+
+</main>
+
+<footer>
+  <p>© Amba Haverly Styling· ambahaverly.co.uk</p>
+</footer>
+
+<script type="module">
+  // Wait for the custom element to be defined, then listen for upload complete
+  const ctx = document.getElementById('amber-uploader-ctx');
+
+  ctx.addEventListener('done-flow', (e) => {
+    // Show the success message
+    document.getElementById('upload-success').classList.add('visible');
+    // Scroll success message into view gently
+    document.getElementById('upload-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Log the uploaded file group info (useful for debugging)
+    console.log('Upload complete:', e.detail);
+
+    // Optional: notify your backend with the CDN URLs
+    // const urls = e.detail.successEntries.map(f => f.cdnUrl);
+    // fetch('/notify-upload', { method: 'POST', body: JSON.stringify({ files: urls }) });
+  });
+</script>
+
+</body>
+</html>
