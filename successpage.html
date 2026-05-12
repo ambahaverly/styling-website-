@@ -3,14 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Colour Analysis | Amber Haverly</title>
+<title>Your Colour Analysis | Amba Haverly</title>
 
 <!-- Uploadcare v1 file uploader -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@1/web/uc-file-uploader-regular.min.css">
-<script type="module">
-  import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@1/web/uc-file-uploader-regular.min.js';
-  UC.defineComponents(UC);
-</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
@@ -365,7 +361,7 @@
 <div class="top-bar"></div>
 
 <header>
-  <p class="brand">Amber Haverly</p>
+  <p class="brand">Amba Haverly</p>
 
   <div class="check-circle">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -399,7 +395,7 @@
       </div>
       <div class="step-content">
         <p class="step-title">Receive your colour report</p>
-        <p class="step-desc">Within 48 hours Amber will send your full personalised colour analysis report by email.</p>
+        <p class="step-desc">Within 48 hours Amba will send your full personalised colour analysis report by email.</p>
       </div>
     </div>
     <div class="step">
@@ -475,41 +471,43 @@
         </svg>
       </div>
       <h3>Photos received — thank you</h3>
-      <p>Your photos are safely with Amber.<br>Your personalised colour report will land in your inbox <strong>within 48 hours</strong>.<br>Keep an eye out — it will include a link to book your free 15-minute consultation.</p>
+      <p>Your photos are safely with Amba.<br>Your personalised colour report will land in your inbox <strong>within 48 hours</strong>.<br>Keep an eye out — it will include a link to book your free 15-minute consultation.</p>
     </div>
   </div>
 
-  <p class="note">A confirmation email with a backup upload link has been sent to your inbox.<br>If you have any questions email <a href="mailto:hello@amberhaverly.co.uk" style="color:var(--accent); text-decoration:none;">hello@amberhaverly.co.uk</a></p>
+  <p class="note">A confirmation email with a backup upload link has been sent to your inbox.<br>If you have any questions email <a href="mailto:stylist@ambahaverly.co.uk" style="color:var(--accent); text-decoration:none;">stylist@ambahaverly.co.uk</a></p>
 
 </main>
 
 <footer>
-  <p>© Amber Haverly · amberhaverly.co.uk</p>
+  <p>© Amba Haverly · ambahaverly.co.uk</p>
 </footer>
 
 <script type="module">
+  // 1. Import and register Uploadcare components
+  import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@1/web/uc-file-uploader-regular.min.js';
+  UC.defineComponents(UC);
+
+  // 2. Wire up the success message — runs in same module so timing is guaranteed
   function showSuccess() {
     const msg = document.getElementById('upload-success');
+    const uploader = document.querySelector('uc-file-uploader-regular');
     msg.classList.add('visible');
     msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // Hide the uploader so they can't re-upload
-    document.querySelector('uc-file-uploader-regular').style.display = 'none';
+    if (uploader) uploader.style.display = 'none';
   }
 
-  // Wait for the uc-upload-ctx-provider custom element to be ready
-  customElements.whenDefined('uc-upload-ctx-provider').then(() => {
-    const ctx = document.getElementById('amber-uploader-ctx');
+  const ctx = document.getElementById('amber-uploader-ctx');
 
-    // 'done-flow' fires when user clicks the final confirm/done button
-    ctx.addEventListener('done-flow', () => showSuccess());
+  // 'done-flow' = user clicked the Done button after all uploads complete
+  ctx.addEventListener('done-flow', () => showSuccess());
 
-    // Belt-and-braces: also catch individual file success in case done-flow
-    // doesn't fire in all browser/widget configurations
-    ctx.addEventListener('file-upload-success', () => {
-      // Count how many files have succeeded
-      const successCount = ctx.getOutputData?.()?.successEntries?.length ?? 0;
-      if (successCount >= 4) showSuccess();
-    });
+  // Backup: 'change' fires on every state update — check if all 4 are done
+  ctx.addEventListener('change', (e) => {
+    if (!e.detail) return;
+    const allEntries = e.detail.allEntries || [];
+    const successCount = allEntries.filter(f => f.status === 'success').length;
+    if (successCount >= 4) showSuccess();
   });
 </script>
 
