@@ -287,24 +287,49 @@
   .upload-success {
     display: none;
     text-align: center;
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
     border: 1px solid #C8DDD1;
     background: #F4FAF6;
     border-radius: 2px;
-    margin-top: 1rem;
+    margin-top: 1.25rem;
   }
 
-  .upload-success.visible { display: block; }
+  .upload-success.visible { display: block; animation: slideUp 0.4s ease both; }
+
+  .upload-success .tick {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid #4A7C59;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+  }
+
+  .upload-success .tick svg {
+    width: 22px;
+    height: 22px;
+    stroke: #4A7C59;
+    stroke-width: 1.5;
+    fill: none;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: drawCheck 0.4s 0.2s ease forwards;
+  }
+
+  .upload-success h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: #2C2420;
+    margin-bottom: 0.5rem;
+  }
 
   .upload-success p {
     font-size: 13.5px;
-    color: var(--success-green);
-    line-height: 1.6;
-  }
-
-  .upload-success strong {
-    font-weight: 400;
-    letter-spacing: 0.04em;
+    color: #4A7C59;
+    line-height: 1.7;
   }
 
   /* note */
@@ -340,7 +365,7 @@
 <div class="top-bar"></div>
 
 <header>
-  <p class="brand">Amba Haverly</p>
+  <p class="brand">Amber Haverly</p>
 
   <div class="check-circle">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -364,7 +389,7 @@
       </div>
       <div class="step-content">
         <p class="step-title">Upload your photos below</p>
-        <p class="step-desc">4 photos required with natural daylight, no makeup, white or neutral top. Takes just a minute.</p>
+        <p class="step-desc">4 photos required — natural daylight, no makeup, white or neutral top. Takes just a minute.</p>
       </div>
     </div>
     <div class="step">
@@ -373,8 +398,8 @@
         <div class="step-line"></div>
       </div>
       <div class="step-content">
-        <p class="step-title">Receive your Personal Colour report</p>
-        <p class="step-desc">Within 48 hours Amba will send your full personalised colour analysis report by email.</p>
+        <p class="step-title">Receive your colour report</p>
+        <p class="step-desc">Within 48 hours Amber will send your full personalised colour analysis report by email.</p>
       </div>
     </div>
     <div class="step">
@@ -399,25 +424,25 @@
         <div class="req-icon">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
-        <span class="req-text">Natural daylight only with no artificial or ring light</span>
+        <span class="req-text">Natural daylight only — no artificial or ring-light</span>
       </div>
       <div class="req-item">
         <div class="req-icon">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
-        <span class="req-text">No makeup, no filter we want to see your natural skin tone</span>
+        <span class="req-text">No makeup, no filter — your natural skin tone</span>
       </div>
       <div class="req-item">
         <div class="req-icon">
           <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
-        <span class="req-text">White or light neutral top for accurate draping results is ideal</span>
+        <span class="req-text">White or light neutral top for accurate draping results</span>
       </div>
       <div class="req-item">
         <div class="req-icon">
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         </div>
-        <span class="req-text">4 photos total front, left, right profile + full face close-up</span>
+        <span class="req-text">4 photos total — front, left, right profile + full face close-up</span>
       </div>
     </div>
 
@@ -444,34 +469,47 @@
     ></uc-upload-ctx-provider>
 
     <div class="upload-success" id="upload-success">
-      <p>✓ &nbsp;<strong>Photos received.</strong> Thanks so much! — Amba will begin your analysis and send your colour report within 48 hours. Keep an eye on your inbox.</p>
+      <div class="tick">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="4 13 9 18 20 7"></polyline>
+        </svg>
+      </div>
+      <h3>Photos received — thank you</h3>
+      <p>Your photos are safely with Amber.<br>Your personalised colour report will land in your inbox <strong>within 48 hours</strong>.<br>Keep an eye out — it will include a link to book your free 15-minute consultation.</p>
     </div>
   </div>
 
-  <p class="note">A confirmation email with a backup upload link has been sent to your inbox.<br>If you have any questions email <a href="mailto:stylist@amberhaverly.co.uk" style="color:var(--accent); text-decoration:none;">stylist@amberhaverly.co.uk</a></p>
+  <p class="note">A confirmation email with a backup upload link has been sent to your inbox.<br>If you have any questions email <a href="mailto:hello@amberhaverly.co.uk" style="color:var(--accent); text-decoration:none;">hello@amberhaverly.co.uk</a></p>
 
 </main>
 
 <footer>
-  <p>© Amba Haverly Styling· ambahaverly.co.uk</p>
+  <p>© Amber Haverly · amberhaverly.co.uk</p>
 </footer>
 
 <script type="module">
-  // Wait for the custom element to be defined, then listen for upload complete
-  const ctx = document.getElementById('amber-uploader-ctx');
+  function showSuccess() {
+    const msg = document.getElementById('upload-success');
+    msg.classList.add('visible');
+    msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Hide the uploader so they can't re-upload
+    document.querySelector('uc-file-uploader-regular').style.display = 'none';
+  }
 
-  ctx.addEventListener('done-flow', (e) => {
-    // Show the success message
-    document.getElementById('upload-success').classList.add('visible');
-    // Scroll success message into view gently
-    document.getElementById('upload-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // Wait for the uc-upload-ctx-provider custom element to be ready
+  customElements.whenDefined('uc-upload-ctx-provider').then(() => {
+    const ctx = document.getElementById('amber-uploader-ctx');
 
-    // Log the uploaded file group info (useful for debugging)
-    console.log('Upload complete:', e.detail);
+    // 'done-flow' fires when user clicks the final confirm/done button
+    ctx.addEventListener('done-flow', () => showSuccess());
 
-    // Optional: notify your backend with the CDN URLs
-    // const urls = e.detail.successEntries.map(f => f.cdnUrl);
-    // fetch('/notify-upload', { method: 'POST', body: JSON.stringify({ files: urls }) });
+    // Belt-and-braces: also catch individual file success in case done-flow
+    // doesn't fire in all browser/widget configurations
+    ctx.addEventListener('file-upload-success', () => {
+      // Count how many files have succeeded
+      const successCount = ctx.getOutputData?.()?.successEntries?.length ?? 0;
+      if (successCount >= 4) showSuccess();
+    });
   });
 </script>
 
