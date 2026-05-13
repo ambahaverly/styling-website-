@@ -25,7 +25,7 @@
     html { scroll-behavior: smooth; }
     body { background: var(--white); color: var(--black); font-family: var(--font-body); overflow-x: hidden; }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -49,185 +49,99 @@
     .nav-cta:hover { background: var(--gold-light) !important; }
     .nav-cta::after { display: none !important; }
 
-    /* ── PAGE HERO ── */
+    /* PAGE HERO */
     .page-hero {
       position: relative; height: 60vh; min-height: 480px;
-      display: flex; align-items: flex-end;
-      overflow: hidden;
+      display: flex; align-items: flex-end; overflow: hidden;
+      background: linear-gradient(135deg, #0a0a0a 0%, #111008 50%, #0a0a0a 100%);
     }
-    .page-hero-bg { position: absolute; inset: 0; }
-    .page-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
     .page-hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.2) 100%);
+      background: radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.07) 0%, transparent 65%);
+      pointer-events: none;
     }
-    .page-hero-content {
-      position: relative; z-index: 2;
-      padding: 0 80px 72px;
-      max-width: 800px;
-    }
+    .page-hero-content { position: relative; z-index: 2; padding: 0 80px 72px; max-width: 800px; }
     .page-eyebrow {
       font-size: 9px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 16px;
-      display: flex; align-items: center; gap: 12px;
+      color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
     }
     .page-eyebrow::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold); }
-    .page-title {
-      font-family: var(--font-display); font-size: clamp(44px, 6vw, 88px);
-      font-weight: 300; line-height: 1.05; color: var(--white);
-    }
+    .page-title { font-family: var(--font-display); font-size: clamp(44px, 6vw, 88px); font-weight: 300; line-height: 1.05; color: var(--white); }
     .page-title em { font-style: italic; color: var(--gold-light); }
 
-    /* ── INTRO BAR ── */
+    /* INTRO BAR */
     .intro-bar {
-      background: var(--black);
-      padding: 48px 80px;
+      background: var(--black); padding: 48px 80px;
       display: flex; align-items: center; justify-content: space-between; gap: 60px;
       border-bottom: 1px solid rgba(201,168,76,0.15);
     }
-    .intro-bar-text {
-      font-size: 13px; font-weight: 300; line-height: 2;
-      color: rgba(250,250,248,0.65); max-width: 700px; letter-spacing: 0.04em;
-    }
+    .intro-bar-text { font-size: 13px; font-weight: 300; line-height: 2; color: rgba(250,250,248,0.65); max-width: 700px; letter-spacing: 0.04em; }
     .intro-bar-text em { font-style: italic; color: var(--gold-light); font-family: var(--font-display); font-size: 16px; }
-    .intro-bar-badge {
-      flex-shrink: 0; text-align: center;
-      border: 1px solid rgba(201,168,76,0.3); padding: 24px 32px;
-    }
-    .intro-bar-badge span {
-      display: block; font-family: var(--font-display); font-size: 13px; font-style: italic;
-      color: var(--gold-light); letter-spacing: 0.06em; white-space: nowrap;
-    }
+    .intro-bar-badge { flex-shrink: 0; text-align: center; border: 1px solid rgba(201,168,76,0.3); padding: 24px 32px; }
+    .intro-bar-badge span { display: block; font-family: var(--font-display); font-size: 13px; font-style: italic; color: var(--gold-light); letter-spacing: 0.06em; white-space: nowrap; }
 
-    /* ── SECTION SHARED ── */
-    .section-label {
-      font-size: 9px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 20px;
-      display: flex; align-items: center; gap: 12px;
-    }
+    /* SECTION SHARED */
+    .section-label { font-size: 9px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
     .section-label::before { content: ''; display: inline-block; width: 30px; height: 1px; background: var(--gold); }
-    .section-title {
-      font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 52px);
-      font-weight: 300; line-height: 1.15; color: var(--black); margin-bottom: 20px;
-    }
+    .section-title { font-family: var(--font-display); font-size: clamp(32px, 3.5vw, 52px); font-weight: 300; line-height: 1.15; color: var(--black); margin-bottom: 20px; }
     .section-title em { font-style: italic; color: var(--gold-dark); }
     .section-title.light { color: var(--white); }
     .section-title.light em { color: var(--gold-light); }
+    .service-desc { font-size: 12px; font-weight: 300; line-height: 2; color: var(--grey); margin-bottom: 16px; letter-spacing: 0.03em; }
+    .service-includes { margin: 28px 0; border-top: 1px solid rgba(201,168,76,0.3); padding-top: 28px; }
+    .service-includes h4 { font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--black); margin-bottom: 16px; }
+    .include-item { display: flex; align-items: flex-start; gap: 12px; font-size: 11px; font-weight: 300; color: var(--grey); letter-spacing: 0.03em; line-height: 1.7; margin-bottom: 10px; }
+    .include-item::before { content: '✦'; color: var(--gold); font-size: 8px; flex-shrink: 0; margin-top: 3px; }
 
-    /* ── COLOUR ANALYSIS ── */
-    .service-featured {
-      display: grid; grid-template-columns: 1fr 1fr;
-    }
-    .service-featured-img {
-      position: relative; overflow: hidden; min-height: 600px;
-    }
-    .service-featured-img img {
-      width: 100%; height: 100%; object-fit: cover; object-position: top;
-      transition: transform 0.8s ease;
-    }
-    .service-featured-img:hover img { transform: scale(1.04); }
-    .signature-badge {
-      position: absolute; top: 40px; left: 40px;
-      background: var(--gold); padding: 8px 18px;
-      font-size: 8px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--black);
-    }
-    .service-featured-content {
-      background: var(--light-grey);
-      padding: 80px 72px;
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    .service-desc {
-      font-size: 12px; font-weight: 300; line-height: 2;
-      color: var(--grey); margin-bottom: 16px; letter-spacing: 0.03em;
-    }
-    .service-includes {
-      margin: 28px 0; border-top: 1px solid rgba(201,168,76,0.3); padding-top: 28px;
-    }
-    .service-includes h4 {
-      font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--black); margin-bottom: 16px;
-    }
-    .include-item {
-      display: flex; align-items: flex-start; gap: 12px;
-      font-size: 11px; font-weight: 300; color: var(--grey);
-      letter-spacing: 0.03em; line-height: 1.7; margin-bottom: 10px;
-    }
-    .include-item::before {
-      content: '✦'; color: var(--gold); font-size: 8px; flex-shrink: 0; margin-top: 3px;
-    }
+    /* FROM PRICE BLOCK */
+    .from-price-block { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; background: var(--black); border-left: 2px solid var(--gold); margin-top: 28px; }
+    .from-price-block-left { display: flex; flex-direction: column; gap: 4px; }
+    .from-price-block-name { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: var(--white); text-transform: uppercase; }
+    .from-price-block-detail { font-size: 10px; font-weight: 300; color: rgba(250,250,248,0.5); letter-spacing: 0.04em; }
+    .from-price-tag { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--gold); white-space: nowrap; }
 
     /* PRICING CARDS */
-    .pricing-cards {
-      display: flex; flex-direction: column; gap: 10px; margin-top: 28px;
-    }
-    .price-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 20px; background: var(--white);
-      border-left: 2px solid transparent;
-      transition: border-color 0.3s, background 0.3s;
-      cursor: default;
-    }
-    .price-row:hover { border-color: var(--gold); background: #fff; }
-    .price-row.featured-price {
-      background: var(--black); border-left: 2px solid var(--gold);
-    }
+    .pricing-cards { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+    .price-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--white); border-left: 2px solid transparent; transition: border-color 0.3s; }
+    .price-row:hover { border-color: var(--gold); }
+    .price-row.featured-price { background: var(--black); border-left: 2px solid var(--gold); }
     .price-row-left { display: flex; flex-direction: column; gap: 4px; }
-    .price-row-name {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
-      color: var(--black); text-transform: uppercase;
-    }
+    .price-row-name { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: var(--black); text-transform: uppercase; }
     .price-row.featured-price .price-row-name { color: var(--white); }
-    .price-row-detail {
-      font-size: 10px; font-weight: 300; color: var(--grey); letter-spacing: 0.04em;
-    }
+    .price-row-detail { font-size: 10px; font-weight: 300; color: var(--grey); letter-spacing: 0.04em; }
     .price-row.featured-price .price-row-detail { color: rgba(250,250,248,0.5); }
-    .price-tag {
-      font-family: var(--font-display); font-size: 26px; font-weight: 400;
-      color: var(--gold); white-space: nowrap;
-    }
-    .price-tag.enquiry {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.15em;
-      text-transform: uppercase; font-family: var(--font-body);
-    }
-    .online-tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 8px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); border: 1px solid rgba(201,168,76,0.4);
-      padding: 4px 10px; margin-top: 4px; width: fit-content;
-    }
+    .price-tag { font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--gold); white-space: nowrap; }
+    .price-tag.enquiry { font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; font-family: var(--font-body); }
+
+    .online-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 8px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.4); padding: 4px 10px; margin-top: 4px; width: fit-content; }
     .online-tag::before { content: '◉'; font-size: 7px; }
 
-    .btn-primary {
-      display: inline-block; font-size: 9px; font-weight: 600;
-      letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--black); background: var(--gold);
-      padding: 16px 36px; text-decoration: none; transition: all 0.3s;
-      margin-top: 32px; align-self: flex-start;
-    }
+    /* BUTTONS */
+    .btn-primary { display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 16px 36px; text-decoration: none; transition: all 0.3s; margin-top: 32px; align-self: flex-start; }
     .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-    .btn-ghost {
-      display: inline-block; font-size: 9px; font-weight: 500;
-      letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--black); border: 1px solid var(--black);
-      padding: 15px 36px; text-decoration: none; transition: all 0.3s;
-      margin-top: 32px; margin-left: 12px;
-    }
-    .btn-ghost:hover { background: var(--black); color: var(--white); }
-    .btn-ghost.light { color: var(--white); border-color: rgba(250,250,248,0.4); }
-    .btn-ghost.light:hover { background: rgba(250,250,248,0.1); }
+    .btn-dark { display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--white); background: var(--black); padding: 16px 36px; text-decoration: none; transition: all 0.3s; white-space: nowrap; flex-shrink: 0; }
+    .btn-dark:hover { background: #1a1a1a; transform: translateY(-1px); }
 
-    /* ── WARDROBE EDIT ── */
-    .service-split {
-      display: grid; grid-template-columns: 1fr 1fr;
-    }
-    .service-split.reverse { direction: rtl; }
-    .service-split.reverse > * { direction: ltr; }
-    .service-split-content {
-      padding: 80px 72px;
-      display: flex; flex-direction: column; justify-content: center;
-      background: var(--white);
-    }
+    /* IN-STORE */
+    .instore-section { background: var(--black); padding: 100px 80px; }
+    .instore-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-bottom: 64px; }
+    .instore-images { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+    .instore-images img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; transition: transform 0.6s ease; filter: brightness(0.9); }
+    .instore-images img:first-child { aspect-ratio: 2/3; grid-row: span 2; }
+    .instore-images img:hover { transform: scale(1.03); filter: brightness(1); }
+    .locations-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0; }
+    .location-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.35); padding: 8px 16px; }
+    .tier-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    .tier-card { background: rgba(255,255,255,0.04); padding: 28px 24px; border-top: 2px solid transparent; transition: border-color 0.3s, background 0.3s; }
+    .tier-card:hover { border-color: var(--gold); background: rgba(255,255,255,0.07); }
+    .tier-card.highlight { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+    .tier-name { font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .tier-duration { font-family: var(--font-display); font-size: 20px; font-weight: 300; color: var(--white); margin-bottom: 8px; }
+    .tier-desc { font-size: 10px; font-weight: 300; line-height: 1.8; color: rgba(250,250,248,0.45); letter-spacing: 0.03em; }
+
+    /* WARDROBE */
+    .service-split { display: grid; grid-template-columns: 1fr 1fr; }
+    .service-split-content { padding: 80px 72px; display: flex; flex-direction: column; justify-content: center; background: var(--white); }
     .service-split-content.dark { background: var(--black); }
     .service-split-content.dark .section-title { color: var(--white); }
     .service-split-content.dark .section-title em { color: var(--gold-light); }
@@ -235,181 +149,60 @@
     .service-split-content.dark .service-includes { border-color: rgba(201,168,76,0.2); }
     .service-split-content.dark .service-includes h4 { color: var(--white); }
     .service-split-content.dark .include-item { color: rgba(250,250,248,0.6); }
-    .service-split-content.dark .price-row { background: rgba(255,255,255,0.04); }
-    .service-split-content.dark .price-row:hover { background: rgba(255,255,255,0.08); border-color: var(--gold); }
-    .service-split-content.dark .price-row.featured-price { background: rgba(201,168,76,0.12); }
-    .service-split-content.dark .price-row-name { color: var(--white); }
-    .service-split-content.dark .price-row-detail { color: rgba(250,250,248,0.45); }
-    .service-split-img {
-      position: relative; overflow: hidden; min-height: 580px;
-    }
-    .service-split-img img {
-      width: 100%; height: 100%; object-fit: cover; object-position: top;
-      transition: transform 0.8s ease;
-    }
+    .service-split-img { position: relative; overflow: hidden; min-height: 580px; }
+    .service-split-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.8s ease; }
     .service-split-img:hover img { transform: scale(1.04); }
 
-    /* ── IN STORE ── */
-    .instore-section {
-      background: var(--black);
-      padding: 100px 80px;
-    }
-    .instore-header {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-      align-items: start; margin-bottom: 64px;
-    }
-    .instore-images {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
-    }
-    .instore-images img {
-      width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top;
-      transition: transform 0.6s ease; filter: brightness(0.9);
-    }
-    .instore-images img:first-child { aspect-ratio: 2/3; grid-row: span 2; object-position: top; }
-    .instore-images img:hover { transform: scale(1.03); filter: brightness(1); }
-    .locations-row {
-      display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0;
-    }
-    .location-tag {
-      font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); border: 1px solid rgba(201,168,76,0.35);
-      padding: 8px 16px;
-    }
-    .tier-cards {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
-    }
-    .tier-card {
-      background: rgba(255,255,255,0.04);
-      padding: 28px 24px;
-      border-top: 2px solid transparent;
-      transition: border-color 0.3s, background 0.3s;
-    }
-    .tier-card:hover { border-color: var(--gold); background: rgba(255,255,255,0.07); }
-    .tier-card.highlight { background: rgba(201,168,76,0.1); border-color: var(--gold); }
-    .tier-name {
-      font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 6px;
-    }
-    .tier-duration {
-      font-family: var(--font-display); font-size: 20px; font-weight: 300;
-      color: var(--white); margin-bottom: 8px;
-    }
-    .tier-price {
-      font-family: var(--font-display); font-size: 32px; font-weight: 400;
-      color: var(--gold); margin-bottom: 12px;
-    }
-    .tier-price.enquiry {
-      font-size: 13px; font-weight: 500; letter-spacing: 0.15em;
-      text-transform: uppercase; font-family: var(--font-body); padding-top: 8px; display: block;
-    }
-    .tier-desc {
-      font-size: 10px; font-weight: 300; line-height: 1.8;
-      color: rgba(250,250,248,0.45); letter-spacing: 0.03em;
-    }
+    /* ONLINE */
+    .online-section { display: grid; grid-template-columns: 1fr 1fr; }
+    .online-visual { background: var(--light-grey); padding: 80px 72px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .online-icon { font-size: 56px; margin-bottom: 24px; opacity: 0.6; }
+    .online-highlight { font-family: var(--font-display); font-size: 18px; font-style: italic; color: var(--gold-dark); line-height: 1.6; margin-top: 28px; border-top: 1px solid var(--gold-light); padding-top: 24px; max-width: 340px; }
+    .online-content { padding: 80px 72px; background: var(--white); display: flex; flex-direction: column; justify-content: center; }
 
-    /* ── ONLINE CONSULTATION ── */
-    .online-section {
-      display: grid; grid-template-columns: 1fr 1fr;
-    }
-    .online-visual {
-      background: var(--light-grey);
-      padding: 80px 72px;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      text-align: center;
-    }
-    .online-icon {
-      font-size: 56px; margin-bottom: 24px; opacity: 0.6;
-    }
-    .online-highlight {
-      font-family: var(--font-display); font-size: 18px; font-style: italic;
-      color: var(--gold-dark); line-height: 1.6; margin-top: 28px;
-      border-top: 1px solid var(--gold-light); padding-top: 24px;
-      max-width: 340px;
-    }
-    .online-content {
-      padding: 80px 72px;
-      background: var(--white);
-      display: flex; flex-direction: column; justify-content: center;
-    }
-
-    /* ── EDITORIAL ── */
-    .editorial-section {
-      position: relative; overflow: hidden;
-      min-height: 520px;
-      display: flex; align-items: center;
-    }
+    /* EDITORIAL */
+    .editorial-section { position: relative; overflow: hidden; min-height: 520px; display: flex; align-items: center; }
     .editorial-bg { position: absolute; inset: 0; }
     .editorial-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
-    .editorial-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.5) 60%, rgba(10,10,10,0.1) 100%);
-    }
-    .editorial-content {
-      position: relative; z-index: 2;
-      padding: 80px 80px; max-width: 580px;
-    }
+    .editorial-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.5) 60%, rgba(10,10,10,0.1) 100%); }
+    .editorial-content { position: relative; z-index: 2; padding: 80px 80px; max-width: 580px; }
     .editorial-content .section-title { color: var(--white); }
     .editorial-content .section-title em { color: var(--gold-light); }
     .editorial-content .service-desc { color: rgba(250,250,248,0.6); }
-    .editorial-credits {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;
-    }
-    .credit-tag {
-      font-size: 9px; font-weight: 400; letter-spacing: 0.15em;
-      color: rgba(250,250,248,0.5); border: 1px solid rgba(255,255,255,0.15);
-      padding: 6px 14px;
-    }
+    .editorial-credits { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .credit-tag { font-size: 9px; font-weight: 400; letter-spacing: 0.15em; color: rgba(250,250,248,0.5); border: 1px solid rgba(255,255,255,0.15); padding: 6px 14px; }
 
-    /* ── CTA STRIP ── */
-    .cta-strip {
-      background: var(--gold);
-      padding: 56px 80px;
-      display: flex; align-items: center; justify-content: space-between; gap: 40px;
-    }
-    .cta-strip-text h3 {
-      font-family: var(--font-display); font-size: 36px; font-weight: 300;
-      color: var(--black); margin-bottom: 8px;
-    }
+    /* CTA STRIP */
+    .cta-strip { background: var(--gold); padding: 56px 80px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+    .cta-strip-text h3 { font-family: var(--font-display); font-size: 36px; font-weight: 300; color: var(--black); margin-bottom: 8px; }
     .cta-strip-text h3 em { font-style: italic; }
-    .cta-strip-text p {
-      font-size: 11px; font-weight: 300; color: rgba(10,10,10,0.65);
-      letter-spacing: 0.04em;
-    }
-    .btn-dark {
-      display: inline-block; font-size: 9px; font-weight: 600;
-      letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--white); background: var(--black);
-      padding: 16px 36px; text-decoration: none; transition: all 0.3s;
-      white-space: nowrap; flex-shrink: 0;
-    }
-    .btn-dark:hover { background: #1a1a1a; transform: translateY(-1px); }
+    .cta-strip-text p { font-size: 11px; font-weight: 300; color: rgba(10,10,10,0.65); letter-spacing: 0.04em; }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--black); padding: 64px 80px 40px;
-      border-top: 1px solid rgba(201,168,76,0.2);
-    }
-    .footer-top {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px;
-    }
+    /* FOOTER */
+    footer { background: var(--black); padding: 64px 80px 40px; border-top: 1px solid rgba(201,168,76,0.2); }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
     .footer-brand p { font-size: 11px; font-weight: 300; line-height: 1.9; color: rgba(250,250,248,0.45); max-width: 280px; }
     .footer-col h4 { font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
     .footer-col a, .footer-col p { display: block; font-size: 11px; font-weight: 300; color: rgba(250,250,248,0.5); text-decoration: none; margin-bottom: 10px; transition: color 0.3s; letter-spacing: 0.03em; }
     .footer-col a:hover { color: var(--gold-light); }
+    .footer-socials { display: flex; gap: 16px; margin-top: 20px; }
+    .footer-social-link { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 1px solid rgba(201,168,76,0.3); border-radius: 50%; color: rgba(201,168,76,0.7); text-decoration: none; transition: all 0.3s; margin-bottom: 0 !important; }
+    .footer-social-link:hover { border-color: var(--gold); color: var(--gold) !important; background: rgba(201,168,76,0.08); }
+    .footer-social-link svg { width: 14px; height: 14px; fill: currentColor; }
     .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.07); }
     .footer-bottom p { font-size: 10px; color: rgba(250,250,248,0.3); letter-spacing: 0.08em; }
     .footer-bottom-logo img { width: 36px; height: 36px; border-radius: 50%; opacity: 0.6; }
 
-    /* ── RESPONSIVE ── */
+    /* RESPONSIVE */
     @media (max-width: 900px) {
       nav { padding: 18px 24px; }
       .nav-links { display: none; }
       .page-hero-content { padding: 0 32px 56px; }
       .intro-bar { flex-direction: column; padding: 48px 32px; gap: 32px; }
       .intro-bar-badge { width: 100%; }
-      .service-featured, .service-split, .online-section { grid-template-columns: 1fr; }
-      .service-featured-img, .service-split-img { min-height: 50vw; }
-      .service-featured-content, .service-split-content, .online-content, .online-visual { padding: 60px 32px; }
+      .service-split, .online-section { grid-template-columns: 1fr; }
+      .service-split-img { min-height: 50vw; }
+      .service-split-content, .online-content, .online-visual { padding: 60px 32px; }
       .instore-section { padding: 80px 32px; }
       .instore-header { grid-template-columns: 1fr; gap: 40px; }
       .tier-cards { grid-template-columns: 1fr 1fr; }
@@ -436,15 +229,12 @@
       <li><a href="services.html" class="active">Services</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="colour-analysis.html">Colour Analysis</a></li>
-      <li><a href="contact.html" class="nav-cta">Book a Consultation</a></li>
+      <li><a href="contact.html" class="nav-cta">Enquire Now</a></li>
     </ul>
   </nav>
 
   <!-- PAGE HERO -->
   <section class="page-hero">
-    <div class="page-hero-bg">
-      <img src="" alt="Amba Haverly Services" />
-    </div>
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <p class="page-eyebrow">What I Offer</p>
@@ -454,8 +244,8 @@
 
   <!-- INTRO BAR -->
   <div class="intro-bar">
-    <p class="intro-text">
-      Every service I offer is built around one belief — that style is deeply personal. Whether you join me in person at a luxury styling lounge in Chelsea or connect with me online from anywhere in the world, <em>every experience is crafted with the same level of care, expertise and bespoke attention.</em>
+    <p class="intro-bar-text">
+      Every service I offer is built around one belief, that style is deeply personal. Whether you join me in person at a luxury styling lounge in Chelsea or connect with me online from anywhere in the world, <em>every experience is crafted with the same expertise, intention and personal touch.</em>
     </p>
     <div class="intro-bar-badge">
       <span>In-Person &amp; Online</span>
@@ -463,123 +253,17 @@
     </div>
   </div>
 
-  <!-- 01 COLOUR ANALYSIS -->
-  <section class="service-featured" id="colour-analysis">
-    <div class="service-featured-img">
-      <img src="5EE3AE9F-97DA-4D0A-8402-A1A412E35937.PNG" alt="Colour Analysis" />
-      <div class="signature-badge">Signature Service</div>
-    </div>
-    <div class="service-featured-content">
-      <p class="section-label">01 — Colour &amp; Image</p>
-      <h2 class="section-title">Colour Analysis &amp;<br><em>Image Consultation</em></h2>
-      <p class="service-desc">
-        Using professional colour drapes, I identify your unique sub-season from the 14 colour theory sub-seasons the precise palette that makes your complexion luminous, your eyes vivid and your whole presence elevated. This can be conducted in person or via Zoom using digital drapes.
-      </p>
-      <p class="service-desc">
-        Paired with a full body type analysis, you'll leave with a complete picture of your personal style blueprint — and a detailed written report to guide every future purchase.
-      </p>
-
-      <div class="service-includes">
-        <h4>What's Included</h4>
-        <div class="include-item">Seasonal colour analysis using professional or digital drapes</div>
-        <div class="include-item">Identification of your unique sub-season from 14 colour theory sub-seasons</div>
-        <div class="include-item">Full body type analysis (included in the combined package)</div>
-        <div class="include-item">In-depth written report of all findings</div>
-        <div class="include-item">Available in-person in Central London or online via Zoom</div>
-      </div>
-
-      <div class="online-tag">Available Online &amp; In-Person</div>
-
-      <div class="pricing-cards" style="margin-top: 24px;">
-        <div class="price-row">
-          <div class="price-row-left">
-            <span class="price-row-name">Colour Analysis</span>
-            <span class="price-row-detail">Standalone session — colour season &amp; palette report</span>
-          </div>
-          <span class="price-tag">£125</span>
-        </div>
-        <div class="price-row featured-price">
-          <div class="price-row-left">
-            <span class="price-row-name">Colour + Image Consultation</span>
-            <span class="price-row-detail">Full package — colour, body analysis &amp; written report</span>
-          </div>
-          <span class="price-tag">£200</span>
-        </div>
-      </div>
-
-      <a href="contact.html" class="btn-primary">Book This Service</a>
-    </div>
-  </section>
-
-  <!-- 02 WARDROBE EDIT -->
-  <section class="service-split" id="wardrobe-edit">
-    <div class="service-split-content dark">
-      <p class="section-label">02 — Wardrobe</p>
-      <h2 class="section-title light">Wardrobe<br><em>Cleanse &amp; Edit</em></h2>
-      <p class="service-desc">
-        I come to your home and we work through your wardrobe together — thoughtfully decluttering what no longer serves you, building effortless outfit combinations from what remains, and identifying the key gaps for future investment pieces.
-      </p>
-      <p class="service-desc">
-        This is a transformative, hands-on experience that leaves your wardrobe feeling intentional, curated and entirely yours. Multi-day packages are available as a bespoke arrangement.
-      </p>
-
-      <div class="service-includes">
-        <h4>What's Included</h4>
-        <div class="include-item">Full wardrobe declutter — keeping only what serves you</div>
-        <div class="include-item">Outfit building from your existing pieces</div>
-        <div class="include-item">Gap analysis — a curated list of pieces to invest in</div>
-        <div class="include-item">Multi-day bespoke packages available on request</div>
-      </div>
-
-      <div class="pricing-cards" style="margin-top: 24px;">
-        <div class="price-row">
-          <div class="price-row-left">
-            <span class="price-row-name">2-Hour Session</span>
-            <span class="price-row-detail">Perfect for a focused wardrobe refresh</span>
-          </div>
-          <span class="price-tag">£250</span>
-        </div>
-        <div class="price-row featured-price">
-          <div class="price-row-left">
-            <span class="price-row-name">3-Hour Session</span>
-            <span class="price-row-detail">Most popular — thorough edit &amp; outfit build</span>
-          </div>
-          <span class="price-tag">£350</span>
-        </div>
-        <div class="price-row">
-          <div class="price-row-left">
-            <span class="price-row-name">4-Hour Session</span>
-            <span class="price-row-detail">Deep dive — full edit, combinations &amp; gap list</span>
-          </div>
-          <span class="price-tag">£475</span>
-        </div>
-        <div class="price-row">
-          <div class="price-row-left">
-            <span class="price-row-name">5+ Hours / Multi-Day</span>
-            <span class="price-row-detail">Bespoke package — contact for details</span>
-          </div>
-          <span class="price-tag enquiry">On Request</span>
-        </div>
-      </div>
-
-      <a href="contact.html" class="btn-primary">Book This Service</a>
-    </div>
-    <div class="service-split-img">
-      <img src="IMG_5952.jpeg" alt="Wardrobe Edit" />
-    </div>
-  </section>
-
-  <!-- 03 IN-STORE STYLING -->
+  <!-- 01 IN-STORE STYLING -->
   <section class="instore-section" id="instore-styling">
     <div class="instore-header">
       <div>
-        <p class="section-label" style="color:var(--gold);">03 — In-Store</p>
+        <p class="section-label" style="color:var(--gold);">01 — In-Store</p>
         <h2 class="section-title light">Luxury In-Store<br><em>Styling Experience</em></h2>
         <p class="service-desc" style="color:rgba(250,250,248,0.6);">
-          A fully curated, private styling experience at some of London's most prestigious luxury styling lounges. I pre-select pieces aligned with your colour season and body type before you arrive — so every fitting is purposeful, refined and deeply personal.
+          A fully curated, private styling experience at some of London's most prestigious luxury styling lounges. I pre-select pieces aligned with your colour season and body type before you arrive so every fitting is purposeful, refined and deeply personal.
         </p>
-        <p class="service-desc" style="color:rgba(250,250,248,0.6); margin-top: 0;">
-          Can't make it in person? I offer the same elevated service online — you receive a bespoke virtual lookbook with clickable links, so you can shop your curated edit from anywhere in the world.
+        <p class="service-desc" style="color:rgba(250,250,248,0.6);">
+          Can't make it in person? I offer the same elevated service online. You receive a bespoke virtual lookbook with clickable links so you can shop your curated edit from anywhere in the world.
         </p>
 
         <div style="margin: 20px 0 8px;">
@@ -594,7 +278,15 @@
 
         <div class="online-tag" style="margin-top: 8px;">Also Available Online — Virtual Lookbook</div>
 
-        <a href="contact.html" class="btn-primary" style="margin-top: 36px;">Book This Service</a>
+        <div class="from-price-block" style="margin-top: 32px;">
+          <div class="from-price-block-left">
+            <span class="from-price-block-name">In-Store Styling Sessions</span>
+            <span class="from-price-block-detail">Full-day and bespoke experiences available. Enquire for details.</span>
+          </div>
+          <span class="from-price-tag">from £150</span>
+        </div>
+
+        <a href="contact.html" class="btn-primary" style="margin-top: 36px;">Enquire Now</a>
       </div>
       <div class="instore-images">
         <img src="SAT_STYLE.JPG" alt="In-Store Styling" />
@@ -605,55 +297,77 @@
 
     <div class="tier-cards">
       <div class="tier-card">
-        <div class="tier-name">Speed Styling</div>
-        <div class="tier-duration">1 Hour</div>
-        <div class="tier-price">£115</div>
-        <p class="tier-desc">A swift, focused session — perfect for a single occasion or key piece.</p>
-      </div>
-      <div class="tier-card">
-        <div class="tier-name">Style Blitz</div>
-        <div class="tier-duration">2 Hours</div>
-        <div class="tier-price">£230</div>
-        <p class="tier-desc">A curated session with time to explore, try and refine your selections.</p>
+        <div class="tier-name">In-Store Experience</div>
+        <div class="tier-duration">London — Harvey Nichols, Harrods, Selfridges</div>
+        <p class="tier-desc" style="margin-top: 12px;">A private, curated session at London's most prestigious luxury lounges. Every piece pre-selected for your colour season and body type before you arrive.</p>
       </div>
       <div class="tier-card highlight">
-        <div class="tier-name">Full Session</div>
-        <div class="tier-duration">3–4 Hours</div>
-        <div class="tier-price">£345–£460</div>
-        <p class="tier-desc">The complete experience — pre-selected edits, fittings and full styling.</p>
-      </div>
-      <div class="tier-card">
-        <div class="tier-name">All-Day Experience</div>
-        <div class="tier-duration">Full Day</div>
-        <div class="tier-price enquiry">Pricing on Request</div>
-        <p class="tier-desc">An immersive, full-day luxury styling journey across multiple locations.</p>
+        <div class="tier-name">Virtual Lookbook</div>
+        <div class="tier-duration">Available Worldwide</div>
+        <p class="tier-desc" style="margin-top: 12px;">The same elevated curation delivered online. A bespoke, clickable lookbook built entirely around you, wherever you are in the world.</p>
       </div>
     </div>
   </section>
 
-  <!-- 04 ONLINE CONSULTATION -->
+  <!-- 02 WARDROBE EDIT -->
+  <section class="service-split" id="wardrobe-edit">
+    <div class="service-split-content dark">
+      <p class="section-label">02 — Wardrobe</p>
+      <h2 class="section-title light">Wardrobe<br><em>Cleanse &amp; Edit</em></h2>
+      <p class="service-desc">
+        I come to your home and we work through your wardrobe together. We thoughtfully declutter what no longer serves you, build effortless outfit combinations from what remains and identify the key gaps for future investment pieces.
+      </p>
+      <p class="service-desc">
+        This is a transformative, hands-on experience that leaves your wardrobe feeling intentional, curated and entirely yours. Multi-day packages are available as a bespoke arrangement.
+      </p>
+
+      <div class="service-includes">
+        <h4>What's Included</h4>
+        <div class="include-item">Full wardrobe declutter, keeping only what serves you</div>
+        <div class="include-item">Outfit building from your existing pieces</div>
+        <div class="include-item">Physical Lookbook of your curated outfits</div>
+        <div class="include-item">Gap analysis, a curated list of pieces to invest in</div>
+        <div class="include-item">Multi-day bespoke packages available on request</div>
+      </div>
+
+      <div class="from-price-block">
+        <div class="from-price-block-left">
+          <span class="from-price-block-name">Wardrobe Edit Sessions</span>
+          <span class="from-price-block-detail">Bespoke packages available. Enquire for full details.</span>
+        </div>
+        <span class="from-price-tag">from £299</span>
+      </div>
+
+      <a href="contact.html" class="btn-primary">Enquire Now</a>
+    </div>
+    <div class="service-split-img">
+      <img src="IMG_5952.jpeg" alt="Wardrobe Edit" />
+    </div>
+  </section>
+
+  <!-- 03 ONLINE CONSULTATION -->
   <section class="online-section" id="online-consultation">
     <div class="online-visual">
       <div class="online-icon">◎</div>
-      <p class="section-label" style="justify-content:center;">04 — Online</p>
+      <p class="section-label" style="justify-content:center;">03 — Online</p>
       <h2 class="section-title" style="font-size: clamp(28px,3vw,44px);">Virtual Style<br><em>Consultation</em></h2>
       <div class="online-highlight">
-        "Style guidance, wherever you are in the world — with the same personal touch."
+        "Style guidance, wherever you are in the world, with the same personal touch."
       </div>
     </div>
     <div class="online-content">
       <p class="service-desc">
-        A focused one-hour Zoom consultation designed to bring clarity and direction to your personal style — no matter where you're located. We explore your current wardrobe together on camera, discuss your style goals and challenges, and I provide tailored, actionable recommendations.
+        A focused one-hour Zoom consultation designed to bring clarity and direction to your personal style, no matter where you're located. We explore your current wardrobe together on camera, discuss your style goals and challenges, and I provide tailored, actionable recommendations.
       </p>
       <p class="service-desc">
-        Following the session, you receive a personalised written report with everything we discussed — your style direction, key pieces to invest in, and the foundations for building a wardrobe that works for you.
+        Following the session, you receive a personalised written report covering your style direction, key pieces to invest in and the foundations for building a wardrobe that works for you.
       </p>
 
       <div class="service-includes" style="border-top: 1px solid rgba(201,168,76,0.25);">
         <h4>What's Included</h4>
         <div class="include-item">1-hour Zoom consultation</div>
         <div class="include-item">Live wardrobe review on camera</div>
-        <div class="include-item">Discussion of your style goals, lifestyle &amp; challenges</div>
+        <div class="include-item">Discussion of your style goals, lifestyle and challenges</div>
         <div class="include-item">Personalised follow-up written report with recommendations</div>
       </div>
 
@@ -661,30 +375,30 @@
         <div class="price-row featured-price">
           <div class="price-row-left">
             <span class="price-row-name">Online Style Consultation</span>
-            <span class="price-row-detail">1 hour Zoom — includes written follow-up report</span>
+            <span class="price-row-detail">1 hour Zoom, includes written follow-up report</span>
           </div>
-          <span class="price-tag">£95</span>
+          <span class="price-tag">£99</span>
         </div>
       </div>
 
-      <a href="contact.html" class="btn-primary">Book This Service</a>
+      <a href="contact.html" class="btn-primary">Enquire Now</a>
     </div>
   </section>
 
-  <!-- 05 EDITORIAL -->
+  <!-- 04 EDITORIAL -->
   <section class="editorial-section" id="editorial">
     <div class="editorial-bg">
       <img src="B0BA3F1B-84CA-4A87-852B-4D280F25A464.JPG" alt="Editorial Styling" />
     </div>
     <div class="editorial-overlay"></div>
     <div class="editorial-content">
-      <p class="section-label">05 — Editorial</p>
+      <p class="section-label">04 — Editorial</p>
       <h2 class="section-title">Editorial<br><em>Styling</em></h2>
       <p class="service-desc">
-        With experience styling shoots for musical artists and fashion editorial, I bring the same meticulous, concept-driven approach to every creative project — whether an intimate artist shoot or a full editorial production.
+        With experience styling shoots for musical artists and fashion editorial, I bring the same meticulous, concept-driven approach to every creative project, whether an intimate artist shoot or a full editorial production.
       </p>
       <p class="service-desc">
-        Every editorial project is unique in scale and vision. Pricing is tailored accordingly — get in touch to discuss your project and we'll create something extraordinary together.
+        Every editorial project is unique in scale and vision. Pricing is tailored accordingly. Get in touch to discuss your project and we'll create something extraordinary together.
       </p>
 
       <div class="editorial-credits">
@@ -698,7 +412,7 @@
         <div class="price-row" style="background: rgba(255,255,255,0.06); border-color: rgba(201,168,76,0.4);">
           <div class="price-row-left">
             <span class="price-row-name" style="color:var(--white);">Editorial Projects</span>
-            <span class="price-row-detail" style="color:rgba(250,250,248,0.5);">All scales welcome — from intimate shoots to full productions</span>
+            <span class="price-row-detail" style="color:rgba(250,250,248,0.5);">All scales welcome, from intimate shoots to full productions</span>
           </div>
           <span class="price-tag enquiry" style="color:var(--gold);">On Enquiry</span>
         </div>
@@ -714,7 +428,7 @@
       <h3>Not sure which service is right <em>for you?</em></h3>
       <p>Get in touch and we'll find the perfect starting point for your style journey.</p>
     </div>
-    <a href="contact.html" class="btn-dark">Get in Touch</a>
+    <a href="contact.html" class="btn-dark">Enquire Now</a>
   </div>
 
   <!-- FOOTER -->
@@ -724,6 +438,17 @@
         <span style="font-family:'Cormorant Garamond',serif; color:#fafaf8; font-size:20px; display:block; margin-bottom:4px;">Amba Haverly</span>
         <span style="font-size:9px; font-weight:300; color:#c9a84c; letter-spacing:0.25em; text-transform:uppercase; display:block; margin-bottom:20px;">Bespoke Personal Styling</span>
         <p>Helping individuals discover their true style identity through colour, form and a deeply personal approach to dressing.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/ambahaverly" class="footer-social-link" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://wa.me/447823555467" class="footer-social-link" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/18Rd8nCFpe/?mibextid=wwXIfr" class="footer-social-link" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
       </div>
       <div class="footer-col">
         <h4>Navigate</h4>
@@ -735,9 +460,8 @@
       </div>
       <div class="footer-col">
         <h4>Services</h4>
-        <a href="#colour-analysis">Colour Analysis</a>
-        <a href="#wardrobe-edit">Wardrobe Edit</a>
         <a href="#instore-styling">In-Store Styling</a>
+        <a href="#wardrobe-edit">Wardrobe Edit</a>
         <a href="#online-consultation">Online Consultation</a>
         <a href="#editorial">Editorial</a>
       </div>
